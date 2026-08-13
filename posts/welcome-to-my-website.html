@@ -18,8 +18,9 @@
       --ink: #14151a;
       --ink-muted: #5c616b;
       --border: rgba(20, 21, 26, 0.08);
-      --accent: #0f766e;
-      --accent-hover: #0d5f59;
+      --accent: #89CFF0;
+      --accent-hover: #6eb8e3;
+      --accent-text: #14151a;
       --store: #14151a;
       --store-hover: #2a2c35;
       --radius-pill: 999px;
@@ -188,11 +189,12 @@
 
     .article-cta .primary {
       background: var(--accent);
-      color: #fff;
+      color: var(--accent-text);
     }
 
     .article-cta .primary:hover {
       background: var(--accent-hover);
+      color: var(--accent-text);
       transform: translateY(-1px);
     }
 

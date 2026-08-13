@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Gloria+Hallelujah&display=swap" rel="stylesheet" />
   <!-- Mailchimp embed base styles (overridden below to match site) -->
   <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css" />
   <style>
@@ -33,7 +33,7 @@
       --radius-pill: 999px;
       --header-h: 68px;
       --shadow-soft: 0 10px 30px rgba(20, 21, 26, 0.06);
-      --font-display: "Syne", sans-serif;
+      --font-display: "Gloria Hallelujah", cursive;
       --font-body: "DM Sans", sans-serif;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -296,6 +296,7 @@
       box-shadow: var(--shadow-soft);
       visibility: hidden;
       pointer-events: none;
+      font-family: var(--font-display);
     }
 
     .mobile-nav.is-open {
@@ -329,6 +330,92 @@
     .mobile-nav a:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
+    }
+
+    /* Home dropdown inside hamburger */
+    .nav-dropdown {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .nav-dropdown-header {
+      display: flex;
+      align-items: stretch;
+      gap: 0.35rem;
+    }
+
+    .nav-dropdown-header .nav-home-link {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-dropdown-toggle {
+      flex: 0 0 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--ink);
+      cursor: pointer;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .nav-dropdown-toggle:hover {
+      background: var(--bg-soft);
+    }
+
+    .nav-dropdown-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .nav-dropdown-toggle .chevron {
+      width: 8.55px;
+      height: 8.55px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.3s var(--ease);
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] .chevron {
+      transform: rotate(225deg) translateY(-1px);
+    }
+
+    .nav-submenu {
+      list-style: none;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease);
+      padding-left: 0.5rem;
+      margin: 0;
+      gap: 0.2rem;
+    }
+
+    .nav-submenu.is-open {
+      grid-template-rows: 1fr;
+    }
+
+    .nav-submenu-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-height: 0;
+    }
+
+    .nav-submenu a {
+      font-size: 0.98rem;
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      color: var(--ink-muted);
+    }
+
+    .nav-submenu a:hover {
+      color: var(--accent);
     }
 
     /* ---------- Main / Hero ---------- */
@@ -714,18 +801,37 @@
   <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
   <nav class="mobile-nav" id="mobileNav" aria-label="Main menu" aria-hidden="true">
     <ul>
-      <li>
-        <a href="https://iamchrispaezjrstore.com/supporters/pricing" target="_blank" rel="noopener noreferrer">
-          Members
-        </a>
-      </li>
-      <li>
-        <a href="https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG" target="_blank" rel="noopener noreferrer">
-          Donate
-        </a>
-      </li>
-      <li>
-        <a href="mailto:contactme@iamchrispaezjr.com">Contact Me</a>
+      <li class="nav-dropdown">
+        <div class="nav-dropdown-header">
+          <a class="nav-home-link" href="https://www.iamchrispaezjr.com">Home</a>
+          <button
+            type="button"
+            class="nav-dropdown-toggle"
+            id="homeDropdownToggle"
+            aria-expanded="false"
+            aria-controls="homeSubmenu"
+            aria-label="Show more Home links"
+          >
+            <span class="chevron" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="nav-submenu" id="homeSubmenu">
+          <ul class="nav-submenu-inner">
+            <li>
+              <a href="https://iamchrispaezjrstore.com/supporters/pricing" target="_blank" rel="noopener noreferrer">
+                Members
+              </a>
+            </li>
+            <li>
+              <a href="https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG" target="_blank" rel="noopener noreferrer">
+                Donate
+              </a>
+            </li>
+            <li>
+              <a href="mailto:contactme@iamchrispaezjr.com">Contact Me</a>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
   </nav>
@@ -826,10 +932,22 @@
       var toggle = document.getElementById("menuToggle");
       var nav = document.getElementById("mobileNav");
       var backdrop = document.getElementById("navBackdrop");
+      var homeDropdownToggle = document.getElementById("homeDropdownToggle");
+      var homeSubmenu = document.getElementById("homeSubmenu");
       var year = document.getElementById("year");
 
       if (year) {
         year.textContent = String(new Date().getFullYear());
+      }
+
+      function setHomeDropdownOpen(open) {
+        if (!homeDropdownToggle || !homeSubmenu) return;
+        homeDropdownToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        homeDropdownToggle.setAttribute(
+          "aria-label",
+          open ? "Hide more Home links" : "Show more Home links"
+        );
+        homeSubmenu.classList.toggle("is-open", open);
       }
 
       function setMenuOpen(open) {
@@ -840,6 +958,9 @@
         nav.setAttribute("aria-hidden", open ? "false" : "true");
         backdrop.setAttribute("aria-hidden", open ? "false" : "true");
         document.body.classList.toggle("menu-open", open);
+        if (!open) {
+          setHomeDropdownOpen(false);
+        }
       }
 
       function closeMenu() {
@@ -850,6 +971,13 @@
         var isOpen = toggle.getAttribute("aria-expanded") === "true";
         setMenuOpen(!isOpen);
       });
+
+      if (homeDropdownToggle) {
+        homeDropdownToggle.addEventListener("click", function () {
+          var isOpen = homeDropdownToggle.getAttribute("aria-expanded") === "true";
+          setHomeDropdownOpen(!isOpen);
+        });
+      }
 
       backdrop.addEventListener("click", closeMenu);
 

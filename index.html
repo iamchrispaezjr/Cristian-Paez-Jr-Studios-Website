@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Mailchimp embed base styles (overridden below to match site) -->
+  <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css" />
   <style>
     /* ============================================
        Cristian Paez Jr Studios — Single Page
@@ -436,67 +438,132 @@
       font-size: 1rem;
     }
 
-    /*
-      ============================================
-      MAILCHIMP — update these later
-      1. Replace form action="" with your Mailchimp
-         subscribe post URL
-      2. Replace the honeypot input name
-         (b_XXXXX_XXXXX) with your list’s value
-      ============================================
-    */
-    #mc_embed_signup form {
+    /* ---------- Mailchimp embed (site-matched overrides) ---------- */
+    #mc_embed_shell {
       width: 100%;
     }
 
-    .mc-field-group {
+    #mc_embed_signup {
+      background: transparent !important;
+      clear: none !important;
+      font: inherit !important;
+      width: 100% !important;
+      max-width: 100%;
+    }
+
+    #mc_embed_signup form {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #mc_embed_signup h2,
+    #mc_embed_signup .indicates-required,
+    #mc_embed_signup .refferal_badge,
+    #mc_embed_signup .optionalParent .foot > p {
+      display: none !important;
+    }
+
+    #mc_embed_signup .mc-field-group {
       display: flex;
       flex-wrap: wrap;
       gap: 0.65rem;
       align-items: stretch;
+      width: 100%;
+      padding-bottom: 0;
+      min-height: 0;
     }
 
-    .mc-field-group .email {
+    #mc_embed_signup .mc-field-group label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #mc_embed_signup input.email,
+    #mc_embed_signup input[type="email"] {
       flex: 1 1 200px;
       min-width: 0;
-      padding: 0.85rem 1.15rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      background: var(--bg);
-      color: var(--ink);
+      width: auto !important;
+      padding: 0.85rem 1.15rem !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius-pill) !important;
+      background: var(--bg) !important;
+      color: var(--ink) !important;
+      font: inherit !important;
       outline: none;
+      text-indent: 0 !important;
       transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
 
-    .mc-field-group .email::placeholder {
+    #mc_embed_signup input.email::placeholder {
       color: #8b909a;
     }
 
-    .mc-field-group .email:focus {
-      border-color: rgba(15, 118, 110, 0.45);
+    #mc_embed_signup input.email:focus {
+      border-color: rgba(15, 118, 110, 0.45) !important;
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
     }
 
-    .mc-field-group .button {
+    #mc_embed_signup .optionalParent,
+    #mc_embed_signup .optionalParent .clear.foot {
+      display: contents;
+    }
+
+    #mc_embed_signup #mc-embedded-subscribe,
+    #mc_embed_signup input.button {
       flex: 0 0 auto;
-      padding: 0.85rem 1.5rem;
-      border: none;
-      border-radius: var(--radius-pill);
-      background: var(--store);
-      color: #fff;
-      font-weight: 600;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0.85rem 1.5rem !important;
+      border: none !important;
+      border-radius: var(--radius-pill) !important;
+      background: var(--store) !important;
+      color: #fff !important;
+      font: inherit !important;
+      font-weight: 600 !important;
+      line-height: 1.5 !important;
       cursor: pointer;
       transition: background 0.25s var(--ease), transform 0.25s var(--ease);
     }
 
-    .mc-field-group .button:hover {
-      background: var(--store-hover);
+    #mc_embed_signup #mc-embedded-subscribe:hover {
+      background: var(--store-hover) !important;
       transform: translateY(-1px);
     }
 
-    .mc-field-group .button:focus-visible {
+    #mc_embed_signup #mc-embedded-subscribe:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
+    }
+
+    #mc_embed_signup #mce-responses {
+      margin: 0.75rem 0 0;
+      width: 100%;
+    }
+
+    #mc_embed_signup .response {
+      font-size: 0.9rem;
+      margin: 0 !important;
+      padding: 0.65rem 0.85rem !important;
+      border-radius: 12px;
+    }
+
+    #mc_embed_signup #mce-success-response {
+      color: #0d5f59;
+      background: rgba(15, 118, 110, 0.1);
+    }
+
+    #mc_embed_signup #mce-error-response {
+      color: #8a1f1f;
+      background: rgba(180, 40, 40, 0.08);
     }
 
     .privacy-text {
@@ -563,8 +630,8 @@
         font-size: 0.85rem;
       }
 
-      .mc-field-group .button {
-        width: 100%;
+      #mc_embed_signup #mc-embedded-subscribe {
+        width: 100% !important;
       }
     }
 
@@ -685,57 +752,62 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <h2 class="newsletter-heading">Stay updated</h2>
-      <p class="newsletter-desc">Get occasional updates and new drops.</p>
+      <p class="newsletter-desc">Get content updates, project updates, product updates and more!</p>
 
-      <!--
-        MAILCHIMP FORM
-        TODO: Replace action URL and honeypot field name with your Mailchimp embed values.
-      -->
-      <div id="mc_embed_signup">
-        <form
-          action="https://xxxxx.usX.list-manage.com/subscribe/post?u=XXXX&amp;id=XXXX"
-          method="post"
-          id="mc-embedded-subscribe-form"
-          name="mc-embedded-subscribe-form"
-          class="validate"
-          target="_blank"
-          novalidate
-        >
-          <div id="mc_embed_signup_scroll">
-            <div class="mc-field-group">
-              <label class="visually-hidden" for="mce-EMAIL" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
-                Email address
-              </label>
-              <input
-                type="email"
-                value=""
-                name="EMAIL"
-                class="email"
-                id="mce-EMAIL"
-                placeholder="Your email"
-                required
-              />
+      <!-- Mailchimp embedded signup form -->
+      <div id="mc_embed_shell">
+        <div id="mc_embed_signup">
+          <form
+            action="https://iamchrispaezjr.us17.list-manage.com/subscribe/post?u=d13807e0586a331cb449d7e34&amp;id=f24d6c9a01&amp;f_id=002dc2e1f0"
+            method="post"
+            id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form"
+            class="validate"
+            target="_blank"
+            novalidate
+          >
+            <div id="mc_embed_signup_scroll">
+              <div class="mc-field-group">
+                <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                <input
+                  type="email"
+                  name="EMAIL"
+                  class="required email"
+                  id="mce-EMAIL"
+                  placeholder="Your email"
+                  required
+                  value=""
+                />
+                <div class="optionalParent">
+                  <div class="clear foot">
+                    <input
+                      type="submit"
+                      name="subscribe"
+                      id="mc-embedded-subscribe"
+                      class="button"
+                      value="Subscribe"
+                    />
+                  </div>
+                </div>
+              </div>
 
-              <!-- Honeypot: real visitors leave this empty. Update name=b_XXXX_XXXX from Mailchimp. -->
-              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <div id="mce-responses" class="clear foot">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+              </div>
+
+              <!-- real people should not fill this in and expect good things - do not remove -->
+              <div aria-hidden="true" style="position: absolute; left: -5000px;">
                 <input
                   type="text"
-                  name="b_XXXX_XXXX"
+                  name="b_d13807e0586a331cb449d7e34_f24d6c9a01"
                   tabindex="-1"
                   value=""
                 />
               </div>
-
-              <input
-                type="submit"
-                value="Subscribe"
-                name="subscribe"
-                id="mc-embedded-subscribe"
-                class="button"
-              />
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
 
       <p class="privacy-text">
@@ -744,7 +816,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>&copy; <span id="year"></span> Cristian Paez Jr Studios</span>
+      <span>&copy; <span id="year"></span> Cristian Paez Jr &amp; Co.</span>
       <a href="mailto:contactme@iamchrispaezjr.com">contactme@iamchrispaezjr.com</a>
     </div>
   </footer>
@@ -791,6 +863,30 @@
         }
       });
     })();
+  </script>
+
+  <!-- Mailchimp form validation (loads jQuery) -->
+  <script src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+  <script>
+    (function ($) {
+      window.fnames = new Array();
+      window.ftypes = new Array();
+      fnames[0] = "EMAIL";
+      ftypes[0] = "email";
+      fnames[1] = "FNAME";
+      ftypes[1] = "text";
+      fnames[2] = "LNAME";
+      ftypes[2] = "text";
+      fnames[3] = "ADDRESS";
+      ftypes[3] = "address";
+      fnames[4] = "PHONE";
+      ftypes[4] = "phone";
+      fnames[5] = "BIRTHDAY";
+      ftypes[5] = "birthday";
+      fnames[6] = "COMPANY";
+      ftypes[6] = "text";
+    })(jQuery);
+    var $mcj = jQuery.noConflict(true);
   </script>
 </body>
 </html>

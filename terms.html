@@ -60,9 +60,16 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .logo-img {
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.35rem;
+      line-height: 28px;
       height: 28px;
-      width: auto;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       max-width: min(280px, 55vw);
       display: block;
     }
@@ -144,8 +151,8 @@
 </head>
 <body>
   <header class="site-header">
-    <a href="index.html" aria-label="Cristian Paez Jr Studios home">
-      <img class="logo-img" src="logo.png" alt="Cristian Paez Jr Studios" width="256" height="28" />
+    <a href="index.html" aria-label="Cristian Paez Jr home">
+      <span class="logo-text">Cristian Paez Jr</span>
     </a>
     <a class="back-link" href="index.html">Back to Home</a>
   </header>

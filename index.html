@@ -170,7 +170,7 @@
 
     /*
       ============================================
-      LOGO — wordmark PNG (logo.png)
+      LOGO — text wordmark
       ============================================
     */
     .logo {
@@ -179,12 +179,17 @@
       min-width: 0;
     }
 
-    .logo-img {
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.35rem;
+      line-height: 28px;
       height: 28px;
-      width: auto;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       max-width: min(280px, 42vw);
-      object-fit: contain;
-      display: block;
     }
 
     .header-right {
@@ -724,7 +729,9 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      .logo-img {
+      .logo-text {
+        font-size: 1.1rem;
+        line-height: 22px;
         height: 22px;
         max-width: min(200px, 36vw);
       }
@@ -798,9 +805,9 @@
         </span>
       </button>
 
-      <!-- LOGO: wordmark PNG -->
-      <a class="logo" href="#" aria-label="Cristian Paez Jr Studios home">
-        <img class="logo-img" src="logo.png?v=3" alt="Cristian Paez Jr Studios" width="256" height="28" />
+      <!-- LOGO: text wordmark -->
+      <a class="logo" href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
+        <span class="logo-text">Cristian Paez Jr</span>
       </a>
     </div>
 
@@ -914,7 +921,7 @@
   <main>
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-inner">
-        <h1 class="hero-brand" id="hero-heading">Cristian Paez Jr Studios</h1>
+        <h1 class="hero-brand" id="hero-heading">Cristian Paez Jr</h1>
         <p class="hero-lead">Creative work, drops, and updates — all in one place.</p>
         <a
           class="hero-cta"

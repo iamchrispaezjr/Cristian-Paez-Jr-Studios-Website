@@ -19,6 +19,14 @@
       --border: rgba(20, 21, 26, 0.08);
       --font-display: "Gloria Hallelujah", cursive;
       --font-body: "DM Sans", sans-serif;
+      --header-h: 68px;
+      --bg-soft: #e8eaee;
+      --accent: #89CFF0;
+      --store: #14151a;
+      --store-hover: #2a2c35;
+      --radius-pill: 999px;
+      --shadow-soft: 0 10px 30px rgba(20, 21, 26, 0.06);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     *,
@@ -43,45 +51,6 @@
     a {
       color: inherit;
       text-decoration: none;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.9rem 1.25rem;
-      background: rgba(247, 248, 250, 0.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo-text {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 1.35rem;
-      line-height: 28px;
-      height: 28px;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: min(280px, 55vw);
-      display: block;
-    }
-
-    .back-link {
-      font-weight: 600;
-      font-size: 0.925rem;
-      color: var(--ink-muted);
-    }
-
-    .back-link:hover {
-      color: var(--ink);
     }
 
     main {
@@ -148,14 +117,134 @@
       color: var(--ink);
     }
   </style>
+  <link rel="stylesheet" href="site-nav.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" aria-label="Cristian Paez Jr home">
+<header class="site-header">
+  <div class="header-left">
+    <button
+      class="menu-toggle"
+      type="button"
+      id="menuToggle"
+      aria-label="Open menu"
+      aria-controls="mobileNav"
+      aria-expanded="false"
+    >
+      <span class="hamburger" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+    <a class="logo" href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
       <span class="logo-text">Cristian Paez Jr</span>
     </a>
-    <a class="back-link" href="index.html">Back to Home</a>
-  </header>
+  </div>
+  <div class="header-right">
+    <nav class="social-links" aria-label="Social media">
+      <a href="https://www.youtube.com/channel/UCWYtgKKmHAml5dol4--5GJQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <img src="icons/youtube.png?v=4" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.instagram.com/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <img src="icons/instagram.png?v=3" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.threads.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+        <img src="icons/threads.png?v=3" alt="" width="18" height="18" />
+      </a>
+      <a href="https://x.com/iamchrispjr" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <img src="icons/x.png?v=3" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.tiktok.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <img src="icons/tiktok.png?v=3" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.snapchat.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+        <img src="icons/snapchat.png?v=4" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.pinterest.com/iamchrispaezjroff/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+        <img src="icons/pinterest.png?v=6" alt="" width="18" height="18" />
+      </a>
+      <a href="https://www.twitch.tv/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+        <img src="icons/twitch.png?v=3" alt="" width="18" height="18" />
+      </a>
+    </nav>
+    <a
+      class="store-btn"
+      href="https://iamchrispaezjrstore.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Store
+    </a>
+  </div>
+</header>
+
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Main menu" aria-hidden="true">
+  <ul>
+    <li class="nav-dropdown">
+      <div class="nav-dropdown-header">
+        <a class="nav-home-link" href="https://www.iamchrispaezjr.com">Home</a>
+        <button
+          type="button"
+          class="nav-dropdown-toggle"
+          id="homeDropdownToggle"
+          aria-expanded="false"
+          aria-controls="homeSubmenu"
+          aria-label="Show more Home links"
+        >
+          <span class="chevron" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="nav-submenu" id="homeSubmenu">
+        <ul class="nav-submenu-inner">
+          <li>
+            <a href="about.html">About Me</a>
+          </li>
+          <li>
+            <a href="https://iamchrispaezjrstore.com/supporters/pricing" target="_blank" rel="noopener noreferrer">
+              Members
+            </a>
+          </li>
+          <li>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG" target="_blank" rel="noopener noreferrer">
+              Donate
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <div class="nav-dropdown-header">
+        <span class="nav-dropdown-label">Web Projects</span>
+        <button
+          type="button"
+          class="nav-dropdown-toggle"
+          id="projectsDropdownToggle"
+          aria-expanded="false"
+          aria-controls="projectsSubmenu"
+          aria-label="Show Web Projects links"
+        >
+          <span class="chevron" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="nav-submenu" id="projectsSubmenu">
+        <ul class="nav-submenu-inner">
+          <li>
+            <a href="https://iamchrispaezjr.github.io/SoundDrop/" target="_blank" rel="noopener noreferrer">
+              Soundrop
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a href="updates.html">Updates</a>
+    </li>
+    <li>
+      <a href="mailto:contactme@iamchrispaezjr.com">Contact Me</a>
+    </li>
+  </ul>
+</nav>
 
   <main>
     <h1>Terms of Service</h1>
@@ -233,5 +322,6 @@
   <script>
     document.getElementById("year").textContent = String(new Date().getFullYear());
   </script>
+  <script src="site-nav.js"></script>
 </body>
 </html>

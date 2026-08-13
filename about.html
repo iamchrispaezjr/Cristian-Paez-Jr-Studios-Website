@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Updates — Cristian Paez Jr Studios</title>
-  <meta name="description" content="Content updates, project notes, and new drops from Cristian Paez Jr Studios." />
+  <title>About Me — Cristian Paez Jr</title>
+  <meta name="description" content="About Cristian Paez Jr — creative work, projects, and the story behind the brand." />
   <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,11 +52,6 @@
     a {
       color: inherit;
       text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
     }
 
     .site-header {
@@ -132,7 +127,8 @@
     }
 
     .page-intro {
-      margin-bottom: 2.25rem;
+      margin-bottom: 0;
+      text-align: center;
     }
 
     .page-intro h1 {
@@ -146,71 +142,55 @@
     .page-intro p {
       color: var(--ink-muted);
       font-size: 1.05rem;
-      max-width: 36ch;
+      max-width: 40ch;
     }
 
     /*
       ============================================
-      UPDATES LIST
-      Add new posts as <li> items below.
-      Individual articles can live in /posts/
+      ADD YOUR ABOUT ME TEXT BELOW
+      Replace the placeholder paragraphs with
+      your full About Me copy.
       ============================================
     */
-    .post-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid var(--border);
+    .about-content {
+      color: var(--ink-muted);
+      font-size: 1.05rem;
     }
 
-    .post-list li {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .post-link {
+    .about-photo {
+      width: 30%;
+      max-width: 220px;
+      min-width: 120px;
+      height: auto;
       display: block;
-      padding: 1.35rem 0.15rem;
-      transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+      margin: 10% auto;
+      border-radius: 12px;
     }
 
-    .post-link:hover {
-      color: var(--accent);
+    .about-content p {
+      margin-bottom: 1.1rem;
+      max-width: 58ch;
     }
 
-    .post-link:hover .post-title {
-      color: var(--accent);
-    }
-
-    .post-date {
-      display: block;
-      font-size: 0.8rem;
+    .about-content .about-lead {
+      color: var(--ink);
       font-weight: 600;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 0.35rem;
+      font-size: 1.12rem;
     }
 
-    .post-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.35rem, 3vw, 1.65rem);
-      font-weight: 400;
-      line-height: 1.25;
-      margin-bottom: 0.4rem;
-      transition: color 0.25s var(--ease);
+    .about-content .about-contact a {
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
     }
 
-    .post-excerpt {
-      color: var(--ink-muted);
-      font-size: 0.98rem;
-      max-width: 48ch;
+    .about-content .about-contact a:hover {
+      color: var(--accent);
     }
 
-    .empty-state {
-      padding: 1.5rem 0;
-      color: var(--ink-muted);
-      border-top: 1px solid var(--border);
+    .about-content p:last-child {
+      margin-bottom: 0;
     }
 
     .site-footer {
@@ -263,30 +243,38 @@
 
   <main>
     <header class="page-intro">
-      <h1>Updates</h1>
-      <p>Content updates, project notes, and new drops.</p>
+      <h1>About Me</h1>
     </header>
 
-    <!--
-      Add new posts as <li> items below.
-      Use class="blog-date" with optional data-published="YYYY-MM-DD".
-      If data-published is empty, today's date is used automatically.
-    -->
-    <ul class="post-list" id="postList">
-      <li>
-        <a class="post-link" href="posts/welcome-to-my-website.html">
-          <time class="post-date blog-date" data-published="2026-08-12" datetime="2026-08-12"></time>
-          <h2 class="post-title">Welcome to My Website</h2>
-          <p class="post-excerpt">
-            Why I left template sites behind and built this hub from scratch — plus what’s coming next.
-          </p>
-        </a>
-      </li>
-    </ul>
-
-    <p class="empty-state" id="emptyState" hidden>
-      First update coming soon. Check back shortly.
-    </p>
+    <div class="about-content">
+      <img
+        class="about-photo"
+        src="about-me.jpg"
+        alt="Cristian Paez Jr"
+        width="878"
+        height="1024"
+      />
+      <p class="about-lead">I'm a Public Figure, Digital Creator &amp; Entrepreneur.</p>
+      <p>
+        I operate with the mindset and ambition of a full-scale media company. I use video editing tools, VFX, animation, and AI to transform a deep appreciation for media and entertainment into originally produced content. I use my experience in working with 2D and 3D animation, visual effects, and full-scale content creation to bring new and original ideas and IP’s to life for social media and other platforms.
+      </p>
+      <p>
+        I'm eventually aiming to dive into full-scale world-building. I'm excited to take on whatever comes next—whether that's short films, animated series, books, comics, apps, games, music, AR/VR, or interactive media. Honestly, it's all about telling damn good stories, building new universes, and escaping the one I'm in right now that makes me love pop-culture, entertainment and media so much.
+      </p>
+      <p>
+        I’m also self-taught in several tools like Procreate, Blender, Adobe After Effects, Toon Boom Animate, and the Adobe Creative Suite, which I use create, animate, edit, and add effects while keeping the story and visuals at the center. Ultimately, I strive to create projects that feel wacky, original, and genuinely fun to consume or interact with.
+      </p>
+      <p>
+        As a big pop-culture fan, some of my biggest inspirations are Star Wars, Indiana Jones, Back To The Future, The Avengers, WandaVision, The Flash, Wizards of (and beyond) Waverly Place, The Last of Us, Star Wars Battlefront 2, Harry Potter, Full Metal Alchemist, and AppleTV's Maximum Pleasure Guaranteed, and my current favorite show, Silo!
+      </p>
+      <p>
+        I’m open to collaborate or freelance with other creatives, teams, or businesses, that have the same interests as I do, or gain long-term meaningful employment.
+      </p>
+      <p class="about-contact">
+        📩
+        <a href="mailto:contactme@iamchrispaezjr.com">contactme@iamchrispaezjr.com</a>
+      </p>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -300,43 +288,7 @@
   </footer>
 
   <script>
-    (function () {
-      function formatBlogDate(isoDate) {
-        var date = isoDate ? new Date(isoDate + "T12:00:00") : new Date();
-        if (Number.isNaN(date.getTime())) date = new Date();
-        return date.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
-        });
-      }
-
-      function toIsoDate(date) {
-        var year = date.getFullYear();
-        var month = String(date.getMonth() + 1).padStart(2, "0");
-        var day = String(date.getDate()).padStart(2, "0");
-        return year + "-" + month + "-" + day;
-      }
-
-      document.querySelectorAll(".blog-date").forEach(function (el) {
-        var published = el.getAttribute("data-published");
-        var iso = published && published.trim() ? published.trim() : toIsoDate(new Date());
-        el.setAttribute("data-published", iso);
-        el.setAttribute("datetime", iso);
-        el.textContent = formatBlogDate(iso);
-      });
-
-      var year = document.getElementById("year");
-      if (year) year.textContent = String(new Date().getFullYear());
-
-      var list = document.getElementById("postList");
-      var empty = document.getElementById("emptyState");
-      if (list && empty) {
-        var hasPosts = list.querySelectorAll("li").length > 0;
-        list.hidden = !hasPosts;
-        empty.hidden = hasPosts;
-      }
-    })();
+    document.getElementById("year").textContent = String(new Date().getFullYear());
   </script>
 </body>
 </html>

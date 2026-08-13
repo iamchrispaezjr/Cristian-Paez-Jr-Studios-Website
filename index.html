@@ -577,6 +577,7 @@
       height: auto;
       color: var(--ink);
       opacity: 0.13;
+      will-change: transform;
     }
 
     .newsletter-doodle svg {
@@ -585,18 +586,22 @@
       height: auto;
     }
 
-    /* Spread around the outer frame so icons stay clear of each other */
+    /* Initial placement before JS drift takes over */
     .newsletter-doodle-coffee {
       top: 2%;
       left: 15%;
-      transform: rotate(-14deg);
+      --doodle-rotate: -14deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
     }
 
     .newsletter-doodle-shades {
       top: 3%;
       right: 20%;
       width: clamp(42px, 7.5vw, 62px);
-      transform: rotate(12deg);
+      --doodle-rotate: 12deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.15;
     }
 
@@ -604,7 +609,9 @@
       top: 34%;
       left: 20%;
       width: clamp(26px, 5vw, 40px);
-      transform: rotate(-18deg);
+      --doodle-rotate: -18deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.14;
     }
 
@@ -612,7 +619,9 @@
       top: 36%;
       right: 15%;
       width: clamp(24px, 4.5vw, 36px);
-      transform: rotate(16deg) scaleX(-1);
+      --doodle-rotate: 16deg;
+      --doodle-flip: -1;
+      transform: rotate(var(--doodle-rotate)) scaleX(var(--doodle-flip));
       opacity: 0.11;
     }
 
@@ -620,7 +629,9 @@
       bottom: 29%;
       left: 3%;
       width: clamp(44px, 7.5vw, 62px);
-      transform: rotate(-8deg);
+      --doodle-rotate: -8deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.12;
     }
 
@@ -628,7 +639,9 @@
       top: 4%;
       right: 1.5%;
       width: clamp(48px, 8vw, 68px);
-      transform: rotate(8deg);
+      --doodle-rotate: 8deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.12;
     }
 
@@ -636,7 +649,9 @@
       bottom: 4%;
       right: 2%;
       width: clamp(36px, 6.5vw, 52px);
-      transform: rotate(-10deg);
+      --doodle-rotate: -10deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.12;
     }
 
@@ -644,7 +659,9 @@
       top: 58%;
       left: 15%;
       width: clamp(30px, 5.5vw, 44px);
-      transform: rotate(14deg);
+      --doodle-rotate: 14deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.12;
     }
 
@@ -652,7 +669,9 @@
       bottom: 38%;
       right: 2%;
       width: clamp(32px, 5.5vw, 46px);
-      transform: rotate(9deg);
+      --doodle-rotate: 9deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.11;
     }
 
@@ -660,7 +679,9 @@
       bottom: 8%;
       left: 25%;
       width: clamp(22px, 4vw, 34px);
-      transform: rotate(-6deg);
+      --doodle-rotate: -6deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.12;
     }
 
@@ -668,7 +689,9 @@
       top: 20%;
       left: 2%;
       width: clamp(28px, 5vw, 40px);
-      transform: rotate(18deg);
+      --doodle-rotate: 18deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.1;
     }
 
@@ -676,8 +699,15 @@
       bottom: 20%;
       right: 20%;
       width: clamp(36px, 6vw, 50px);
-      transform: rotate(-16deg);
+      --doodle-rotate: -16deg;
+      --doodle-flip: 1;
+      transform: rotate(var(--doodle-rotate));
       opacity: 0.1;
+    }
+
+    .newsletter-doodles.is-floating .newsletter-doodle {
+      right: auto;
+      bottom: auto;
     }
 
     @media (max-width: 1100px) {
@@ -1399,6 +1429,248 @@
           closeMenu();
         }
       });
+    })();
+
+    /* Newsletter doodles: slow particle drift that stays clear of the form */
+    (function () {
+      var wrap = document.querySelector(".newsletter-wrap");
+      var inner = wrap && wrap.querySelector(".footer-inner");
+      var layer = wrap && wrap.querySelector(".newsletter-doodles");
+      if (!wrap || !inner || !layer) return;
+
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (reduceMotion.matches) return;
+
+      var MAX_SPEED = 18;
+      var particles = [];
+      var rafId = 0;
+      var lastTs = 0;
+      var running = false;
+      var wrapW = 0;
+      var wrapH = 0;
+      var safe = { left: 0, top: 0, right: 0, bottom: 0 };
+
+      function rand(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function visibleDoodles() {
+        return Array.prototype.slice.call(layer.querySelectorAll(".newsletter-doodle")).filter(function (el) {
+          return window.getComputedStyle(el).display !== "none";
+        });
+      }
+
+      function measureSafe() {
+        var wrapRect = wrap.getBoundingClientRect();
+        var innerRect = inner.getBoundingClientRect();
+        wrapW = wrap.clientWidth;
+        wrapH = wrap.clientHeight;
+        var pad = wrapW < 700 ? 12 : 28;
+        safe = {
+          left: Math.max(0, innerRect.left - wrapRect.left - pad),
+          top: Math.max(0, innerRect.top - wrapRect.top - pad),
+          right: Math.min(wrapW, innerRect.right - wrapRect.left + pad),
+          bottom: Math.min(wrapH, innerRect.bottom - wrapRect.top + pad)
+        };
+      }
+
+      function overlapsSafe(x, y, w, h) {
+        return x < safe.right && x + w > safe.left && y < safe.bottom && y + h > safe.top;
+      }
+
+      function pushOutOfSafe(p) {
+        if (!overlapsSafe(p.x, p.y, p.w, p.h)) return;
+
+        var overlapLeft = p.x + p.w - safe.left;
+        var overlapRight = safe.right - p.x;
+        var overlapTop = p.y + p.h - safe.top;
+        var overlapBottom = safe.bottom - p.y;
+        var min = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+
+        if (min === overlapLeft) {
+          p.x = safe.left - p.w;
+          p.vx = -Math.abs(p.vx) || -rand(6, 12);
+        } else if (min === overlapRight) {
+          p.x = safe.right;
+          p.vx = Math.abs(p.vx) || rand(6, 12);
+        } else if (min === overlapTop) {
+          p.y = safe.top - p.h;
+          p.vy = -Math.abs(p.vy) || -rand(6, 12);
+        } else {
+          p.y = safe.bottom;
+          p.vy = Math.abs(p.vy) || rand(6, 12);
+        }
+      }
+
+      function placeOutsideSafe(p) {
+        var tries = 0;
+        while (tries < 40 && overlapsSafe(p.x, p.y, p.w, p.h)) {
+          var side = Math.floor(rand(0, 4));
+          if (side === 0 && safe.left > p.w + 8) {
+            p.x = rand(4, Math.max(5, safe.left - p.w));
+            p.y = rand(4, Math.max(5, wrapH - p.h - 4));
+          } else if (side === 1 && wrapW - safe.right > p.w + 8) {
+            p.x = rand(safe.right, Math.max(safe.right + 1, wrapW - p.w - 4));
+            p.y = rand(4, Math.max(5, wrapH - p.h - 4));
+          } else if (side === 2 && safe.top > p.h + 8) {
+            p.x = rand(4, Math.max(5, wrapW - p.w - 4));
+            p.y = rand(4, Math.max(5, safe.top - p.h));
+          } else if (wrapH - safe.bottom > p.h + 8) {
+            p.x = rand(4, Math.max(5, wrapW - p.w - 4));
+            p.y = rand(safe.bottom, Math.max(safe.bottom + 1, wrapH - p.h - 4));
+          } else {
+            break;
+          }
+          tries += 1;
+        }
+        pushOutOfSafe(p);
+      }
+
+      function applyStyle(p) {
+        p.el.style.left = p.x + "px";
+        p.el.style.top = p.y + "px";
+        p.el.style.transform =
+          "translate3d(0,0,0) rotate(" + p.rot + "deg) scaleX(" + p.flip + ")";
+      }
+
+      function initParticles() {
+        measureSafe();
+        var wrapRect = wrap.getBoundingClientRect();
+        particles = visibleDoodles().map(function (el) {
+          var rect = el.getBoundingClientRect();
+          var styles = window.getComputedStyle(el);
+          var rot = parseFloat(styles.getPropertyValue("--doodle-rotate")) || 0;
+          var flip = parseFloat(styles.getPropertyValue("--doodle-flip")) || 1;
+          var angle = rand(0, Math.PI * 2);
+          var speed = rand(8, MAX_SPEED);
+          var p = {
+            el: el,
+            x: rect.left - wrapRect.left,
+            y: rect.top - wrapRect.top,
+            w: rect.width,
+            h: rect.height,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            rot: rot,
+            rotV: rand(-8, 8),
+            flip: flip
+          };
+          placeOutsideSafe(p);
+          applyStyle(p);
+          return p;
+        });
+        layer.classList.add("is-floating");
+      }
+
+      function tick(ts) {
+        if (!running) return;
+        var dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016;
+        lastTs = ts;
+
+        particles.forEach(function (p) {
+          p.vx += rand(-6, 6) * dt;
+          p.vy += rand(-6, 6) * dt;
+
+          var speed = Math.hypot(p.vx, p.vy);
+          if (speed > MAX_SPEED) {
+            p.vx = (p.vx / speed) * MAX_SPEED;
+            p.vy = (p.vy / speed) * MAX_SPEED;
+          } else if (speed < 5) {
+            p.vx += rand(-4, 4);
+            p.vy += rand(-4, 4);
+          }
+
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          p.rot += p.rotV * dt;
+
+          if (p.x < 2) {
+            p.x = 2;
+            p.vx = Math.abs(p.vx);
+          } else if (p.x + p.w > wrapW - 2) {
+            p.x = wrapW - p.w - 2;
+            p.vx = -Math.abs(p.vx);
+          }
+
+          if (p.y < 2) {
+            p.y = 2;
+            p.vy = Math.abs(p.vy);
+          } else if (p.y + p.h > wrapH - 2) {
+            p.y = wrapH - p.h - 2;
+            p.vy = -Math.abs(p.vy);
+          }
+
+          pushOutOfSafe(p);
+          applyStyle(p);
+        });
+
+        rafId = window.requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (running || reduceMotion.matches) return;
+        initParticles();
+        if (!particles.length) return;
+        running = true;
+        lastTs = 0;
+        rafId = window.requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        running = false;
+        lastTs = 0;
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      }
+
+      var resizeTimer = 0;
+      window.addEventListener("resize", function () {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(function () {
+          if (!running) return;
+          measureSafe();
+          particles.forEach(function (p) {
+            var rect = p.el.getBoundingClientRect();
+            p.w = rect.width;
+            p.h = rect.height;
+            p.x = Math.min(Math.max(2, p.x), Math.max(2, wrapW - p.w - 2));
+            p.y = Math.min(Math.max(2, p.y), Math.max(2, wrapH - p.h - 2));
+            placeOutsideSafe(p);
+            applyStyle(p);
+          });
+        }, 120);
+      });
+
+      reduceMotion.addEventListener("change", function (e) {
+        if (e.matches) {
+          stop();
+          layer.classList.remove("is-floating");
+          particles.forEach(function (p) {
+            p.el.style.left = "";
+            p.el.style.top = "";
+            p.el.style.transform = "";
+          });
+        } else {
+          start();
+        }
+      });
+
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) start();
+              else stop();
+            });
+          },
+          { rootMargin: "80px" }
+        );
+        io.observe(wrap);
+      } else {
+        start();
+      }
     })();
   </script>
 

@@ -1243,6 +1243,9 @@
 
       var index = 0;
       var dots = [];
+      var AUTO_MS = 10000;
+      var autoTimer = 0;
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
       slides.forEach(function (slide, i) {
         var label = slide.getAttribute("data-slide-label") || "Slide " + (i + 1);
@@ -1252,6 +1255,7 @@
         dot.setAttribute("aria-label", "Go to " + label);
         dot.addEventListener("click", function () {
           goTo(i);
+          restartAutoplay();
         });
         dotsWrap.appendChild(dot);
         dots.push(dot);
@@ -1280,7 +1284,10 @@
 
       function goTo(i) {
         index = (i + slides.length) % slides.length;
-        track.scrollTo({ left: slides[index].offsetLeft, behavior: "smooth" });
+        track.scrollTo({
+          left: slides[index].offsetLeft,
+          behavior: reduceMotion.matches ? "auto" : "smooth"
+        });
         setSlideState(index);
       }
 
@@ -1299,6 +1306,26 @@
         return best;
       }
 
+      function stopAutoplay() {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+          autoTimer = 0;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (reduceMotion.matches || slides.length < 2) return;
+        autoTimer = window.setInterval(function () {
+          if (document.hidden) return;
+          goTo(index + 1);
+        }, AUTO_MS);
+      }
+
+      function restartAutoplay() {
+        startAutoplay();
+      }
+
       var scrollTimer = 0;
       track.addEventListener(
         "scroll",
@@ -1314,19 +1341,41 @@
 
       prevBtn.addEventListener("click", function () {
         goTo(index - 1);
+        restartAutoplay();
       });
       nextBtn.addEventListener("click", function () {
         goTo(index + 1);
+        restartAutoplay();
       });
 
       track.addEventListener("keydown", function (e) {
         if (e.key === "ArrowLeft") {
           e.preventDefault();
           goTo(index - 1);
+          restartAutoplay();
         } else if (e.key === "ArrowRight") {
           e.preventDefault();
           goTo(index + 1);
+          restartAutoplay();
         }
+      });
+
+      track.addEventListener(
+        "pointerdown",
+        function () {
+          restartAutoplay();
+        },
+        { passive: true }
+      );
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stopAutoplay();
+        else startAutoplay();
+      });
+
+      reduceMotion.addEventListener("change", function () {
+        if (reduceMotion.matches) stopAutoplay();
+        else startAutoplay();
       });
 
       window.addEventListener("resize", function () {
@@ -1334,6 +1383,7 @@
       });
 
       setSlideState(0);
+      startAutoplay();
     })();
 
     /* Newsletter doodles: slow particle drift that stays clear of the form */

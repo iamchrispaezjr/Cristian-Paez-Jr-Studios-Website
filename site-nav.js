@@ -14,6 +14,12 @@
       hideLabel: "Hide more Home links"
     },
     {
+      toggle: document.getElementById("productionDropdownToggle"),
+      menu: document.getElementById("productionSubmenu"),
+      showLabel: "Show In Production links",
+      hideLabel: "Hide In Production links"
+    },
+    {
       toggle: document.getElementById("projectsDropdownToggle"),
       menu: document.getElementById("projectsSubmenu"),
       showLabel: "Show Web Projects links",

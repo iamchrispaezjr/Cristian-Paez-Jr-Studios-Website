@@ -207,8 +207,9 @@ body.menu-open {
   left: 0;
   width: min(320px, 88vw);
   height: calc(100vh - var(--header-h, 68px));
-  background: var(--surface);
-  border-right: 1px solid var(--border);
+  background: #14151a;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem 1.25rem;
   transform: translateX(-105%);
   transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
@@ -241,11 +242,12 @@ body.menu-open {
   border-radius: 12px;
   font-weight: 600;
   font-size: 1.05rem;
+  color: #fff;
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
 
 .mobile-nav a:hover {
-  background: var(--bg);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--accent);
 }
 
@@ -279,7 +281,7 @@ body.menu-open {
   font-weight: 600;
   font-size: 1.05rem;
   font-family: inherit;
-  color: inherit;
+  color: #fff;
   background: transparent;
   border: none;
   text-align: left;
@@ -294,17 +296,17 @@ body.menu-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
-  background: var(--bg);
-  color: var(--ink);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   cursor: pointer;
   font: inherit;
   transition: background 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
 .nav-dropdown-toggle:hover {
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .nav-dropdown-toggle:focus-visible {
@@ -356,11 +358,20 @@ body.menu-open {
   font-size: 0.98rem;
   font-weight: 500;
   padding: 0.75rem 1rem;
-  color: var(--ink-muted);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .nav-submenu a:hover {
   color: var(--accent);
+}
+
+.nav-submenu .nav-placeholder {
+  display: block;
+  font-size: 0.98rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: default;
 }
 
 @media (max-width: 900px) {

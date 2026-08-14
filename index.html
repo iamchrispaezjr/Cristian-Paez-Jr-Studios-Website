@@ -200,6 +200,62 @@
       transform: translateY(-2px);
     }
 
+    /* Full-bleed media slide (Soundrop) */
+    .hero-slide--media {
+      position: relative;
+      color: #fff;
+      background: #0a0a0c;
+      align-content: end;
+      padding-bottom: clamp(6rem, 12vh, 8rem);
+    }
+
+    .hero-slide-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-slide--media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(8, 8, 10, 0.82) 0%,
+          rgba(8, 8, 10, 0.55) 42%,
+          rgba(8, 8, 10, 0.18) 72%,
+          rgba(8, 8, 10, 0.08) 100%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(8, 8, 10, 0.72) 0%,
+          rgba(8, 8, 10, 0.15) 38%,
+          transparent 62%
+        );
+    }
+
+    .hero-slide--media .hero-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-slide--media .hero-lead {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .hero-slide--media .hero-cta {
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    }
+
     .hero-slider-nav {
       position: absolute;
       left: 50%;
@@ -826,6 +882,28 @@
           </ul>
         </div>
       </li>
+                <li class="nav-dropdown">
+            <div class="nav-dropdown-header">
+              <span class="nav-dropdown-label">In Production</span>
+              <button
+                type="button"
+                class="nav-dropdown-toggle"
+                id="productionDropdownToggle"
+                aria-expanded="false"
+                aria-controls="productionSubmenu"
+                aria-label="Show In Production links"
+              >
+                <span class="chevron" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="nav-submenu" id="productionSubmenu">
+              <ul class="nav-submenu-inner">
+                <li>
+                  <span class="nav-placeholder">Disease Imagined</span>
+                </li>
+              </ul>
+            </div>
+          </li>
       <li class="nav-dropdown">
         <div class="nav-dropdown-header">
           <span class="nav-dropdown-label">Web Projects</span>
@@ -879,7 +957,15 @@
             </div>
           </article>
 
-          <article class="hero-slide" data-slide-label="Soundrop">
+          <article class="hero-slide hero-slide--media" data-slide-label="Soundrop">
+            <img
+              class="hero-slide-bg"
+              src="soundrop-screenshot.jpg"
+              alt=""
+              width="1440"
+              height="900"
+              decoding="async"
+            />
             <div class="hero-inner">
               <h2 class="hero-brand">Soundrop</h2>
               <p class="hero-lead">A web project drop — explore it and play around.</p>

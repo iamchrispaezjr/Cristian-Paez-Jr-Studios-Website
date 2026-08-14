@@ -325,6 +325,37 @@
       outline-offset: 2px;
     }
 
+    .hero-slider-autoplay {
+      height: 32px;
+      padding: 0 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+
+    .hero-slider-autoplay:hover {
+      background: var(--surface);
+      border-color: rgba(20, 21, 26, 0.16);
+    }
+
+    .hero-slider-autoplay:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .hero-slider-autoplay[aria-pressed="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+
     /* ---------- Footer ---------- */
     .site-footer {
       background: var(--surface);
@@ -1013,6 +1044,15 @@
               <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
+          <button
+            type="button"
+            class="hero-slider-autoplay"
+            id="heroSliderAutoplay"
+            aria-pressed="false"
+            aria-label="Stop auto sliding"
+          >
+            Pause
+          </button>
         </div>
       </div>
     </section>
@@ -1236,7 +1276,8 @@
       var dotsWrap = document.getElementById("heroSliderDots");
       var prevBtn = document.getElementById("heroSliderPrev");
       var nextBtn = document.getElementById("heroSliderNext");
-      if (!root || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+      var autoplayBtn = document.getElementById("heroSliderAutoplay");
+      if (!root || !track || !dotsWrap || !prevBtn || !nextBtn || !autoplayBtn) return;
 
       var slides = Array.prototype.slice.call(track.querySelectorAll(".hero-slide"));
       if (!slides.length) return;
@@ -1245,6 +1286,7 @@
       var dots = [];
       var AUTO_MS = 3000;
       var autoTimer = 0;
+      var autoplayPaused = false;
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
       slides.forEach(function (slide, i) {
@@ -1313,18 +1355,38 @@
         }
       }
 
+      function syncAutoplayButton() {
+        autoplayBtn.setAttribute("aria-pressed", autoplayPaused ? "true" : "false");
+        autoplayBtn.setAttribute(
+          "aria-label",
+          autoplayPaused ? "Resume auto sliding" : "Stop auto sliding"
+        );
+        autoplayBtn.textContent = autoplayPaused ? "Play" : "Pause";
+      }
+
       function startAutoplay() {
         stopAutoplay();
-        if (reduceMotion.matches || slides.length < 2) return;
+        if (autoplayPaused || reduceMotion.matches || slides.length < 2) return;
         autoTimer = window.setInterval(function () {
-          if (document.hidden) return;
+          if (document.hidden || autoplayPaused) return;
           goTo(index + 1);
         }, AUTO_MS);
       }
 
       function restartAutoplay() {
-        startAutoplay();
+        if (!autoplayPaused) startAutoplay();
       }
+
+      function setAutoplayPaused(paused) {
+        autoplayPaused = paused;
+        syncAutoplayButton();
+        if (paused) stopAutoplay();
+        else startAutoplay();
+      }
+
+      autoplayBtn.addEventListener("click", function () {
+        setAutoplayPaused(!autoplayPaused);
+      });
 
       var scrollTimer = 0;
       track.addEventListener(
@@ -1370,12 +1432,12 @@
 
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) stopAutoplay();
-        else startAutoplay();
+        else restartAutoplay();
       });
 
       reduceMotion.addEventListener("change", function () {
         if (reduceMotion.matches) stopAutoplay();
-        else startAutoplay();
+        else restartAutoplay();
       });
 
       window.addEventListener("resize", function () {
@@ -1383,6 +1445,7 @@
       });
 
       setSlideState(0);
+      syncAutoplayButton();
       startAutoplay();
     })();
 

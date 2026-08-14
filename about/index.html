@@ -417,70 +417,34 @@
     (function () {
       var KEY = "cpjr-about-wave-seen";
       var WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-      var playing = false;
 
-      function canAutoPlay() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-        var params = new URLSearchParams(window.location.search);
-        if (params.get("wave") === "1") return true;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      try {
+        var last = Number(localStorage.getItem(KEY) || "0");
+        if (last && Date.now() - last < WEEK_MS) return;
+      } catch (err) {
+        /* private mode / blocked storage — still show once this visit */
+      }
+
+      var el = document.createElement("div");
+      el.className = "wave-hello";
+      el.id = "waveHello";
+      el.setAttribute("aria-hidden", "true");
+      el.innerHTML = '<span class="wave-hello-hand">👋</span>';
+      document.body.appendChild(el);
+
+      window.setTimeout(function () {
+        el.classList.add("is-playing");
+      }, 500);
+
+      el.addEventListener("animationend", function (e) {
+        if (e.animationName !== "wave-hello-fade") return;
         try {
-          var last = Number(localStorage.getItem(KEY) || "0");
-          if (last && Date.now() - last < WEEK_MS) return false;
+          localStorage.setItem(KEY, String(Date.now()));
         } catch (err) {}
-        return true;
-      }
-
-      function playWave(options) {
-        options = options || {};
-        if (playing) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        var existing = document.getElementById("waveHello");
-        if (existing) existing.remove();
-
-        var el = document.createElement("div");
-        el.className = "wave-hello";
-        el.id = "waveHello";
-        el.setAttribute("aria-hidden", "true");
-        el.innerHTML = '<span class="wave-hello-hand">👋</span>';
-        document.body.appendChild(el);
-        playing = true;
-
-        window.setTimeout(function () {
-          el.classList.add("is-playing");
-        }, options.delay || 0);
-
-        el.addEventListener("animationend", function (e) {
-          if (e.animationName !== "wave-hello-fade") return;
-          if (options.save !== false) {
-            try {
-              localStorage.setItem(KEY, String(Date.now()));
-            } catch (err) {}
-          }
-          el.remove();
-          playing = false;
-        });
-      }
-
-      // Replay anytime: press W on the About Me page
-      document.addEventListener("keydown", function (e) {
-        if (e.key !== "w" && e.key !== "W") return;
-        if (e.metaKey || e.ctrlKey || e.altKey) return;
-        var tag = (e.target && e.target.tagName) || "";
-        if (tag === "INPUT" || tag === "TEXTAREA" || (e.target && e.target.isContentEditable)) return;
-        playWave({ delay: 0, save: false });
+        el.remove();
       });
-
-      window.playAboutWave = function () {
-        playWave({ delay: 0, save: false });
-      };
-
-      if (canAutoPlay()) {
-        playWave({ delay: 500, save: true });
-      } else {
-        var leftover = document.getElementById("waveHello");
-        if (leftover) leftover.remove();
-      }
     })();
   </script>
   <script src="../site-nav.js"></script>

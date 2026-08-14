@@ -210,7 +210,7 @@ body.menu-open {
   background: #14151a;
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 1.25rem;
+  padding: 1.5rem 1.25rem 4rem;
   transform: translateX(-105%);
   transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
   z-index: 999;
@@ -253,6 +253,45 @@ body.menu-open {
 
 .mobile-nav a:focus-visible {
   outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Bookmark-style Contact Me — bottom-right corner of menu */
+.mobile-nav a.nav-contact-bookmark {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 7.25rem;
+  height: 2.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: 12px 0 0 0;
+  background: #89cff0;
+  color: #14151a;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: -4px -4px 16px rgba(0, 0, 0, 0.22);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.mobile-nav a.nav-contact-bookmark:hover {
+  background: #9fd8f4;
+  color: #14151a;
+  transform: translateY(-2px);
+}
+
+.mobile-nav a.nav-contact-bookmark:focus-visible {
+  outline: 2px solid #fff;
   outline-offset: 2px;
 }
 

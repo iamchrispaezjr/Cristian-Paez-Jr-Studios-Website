@@ -207,10 +207,11 @@ body.menu-open {
   left: 0;
   width: min(320px, 88vw);
   height: calc(100vh - var(--header-h, 68px));
+  height: calc(100dvh - var(--header-h, 68px));
   background: #14151a;
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 1.25rem 4rem;
+  padding: 1.5rem 1.25rem calc(4rem + env(safe-area-inset-bottom, 0px));
   transform: translateX(-105%);
   transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
   z-index: 999;
@@ -218,6 +219,7 @@ body.menu-open {
   visibility: hidden;
   pointer-events: none;
   font-family: var(--font-display);
+  overflow: hidden;
 }
 
 .mobile-nav.is-open {
@@ -260,7 +262,7 @@ body.menu-open {
 .mobile-nav a.nav-contact-bookmark {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0px);
   z-index: 2;
   box-sizing: border-box;
   width: 7.25rem;
@@ -282,6 +284,7 @@ body.menu-open {
   white-space: nowrap;
   box-shadow: -4px -4px 16px rgba(0, 0, 0, 0.22);
   transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s var(--ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-nav a.nav-contact-bookmark:hover {
@@ -293,6 +296,16 @@ body.menu-open {
 .mobile-nav a.nav-contact-bookmark:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
+}
+
+@media (hover: none) {
+  .mobile-nav a.nav-contact-bookmark:hover {
+    transform: none;
+  }
+
+  .mobile-nav a.nav-contact-bookmark:active {
+    background: #9fd8f4;
+  }
 }
 
 .nav-dropdown {
@@ -454,5 +467,12 @@ body.menu-open {
   .store-btn {
     padding: 0.55rem 1rem;
     font-size: 0.85rem;
+  }
+
+  .mobile-nav a.nav-contact-bookmark {
+    width: 6.85rem;
+    height: 2.75rem;
+    font-size: 0.74rem;
+    padding: 0.4rem 0.65rem;
   }
 }

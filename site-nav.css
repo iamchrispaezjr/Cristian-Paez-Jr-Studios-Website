@@ -262,7 +262,7 @@ body.menu-open {
   outline-offset: 2px;
 }
 
-/* Contact Me — sits under the last menu link; new links push it down */
+/* Contact Me — under last menu link, flush to the right edge like a bookmark */
 .mobile-nav a.nav-contact-bookmark {
   position: static;
   align-self: flex-end;
@@ -271,11 +271,12 @@ body.menu-open {
   width: 7.25rem;
   height: 2.85rem;
   margin-top: 0.85rem;
+  margin-right: -1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.45rem 0.75rem;
-  border-radius: 12px;
+  border-radius: 12px 0 0 12px;
   background: #89cff0;
   color: #14151a;
   font-family: var(--font-display);

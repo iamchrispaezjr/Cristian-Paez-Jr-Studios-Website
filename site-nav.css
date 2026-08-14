@@ -208,10 +208,12 @@ body.menu-open {
   width: min(320px, 88vw);
   height: calc(100vh - var(--header-h, 68px));
   height: calc(100dvh - var(--header-h, 68px));
+  display: flex;
+  flex-direction: column;
   background: #14151a;
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 1.25rem calc(4rem + env(safe-area-inset-bottom, 0px));
+  padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   transform: translateX(-105%);
   transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
   z-index: 999;
@@ -219,7 +221,9 @@ body.menu-open {
   visibility: hidden;
   pointer-events: none;
   font-family: var(--font-display);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.is-open {
@@ -258,20 +262,20 @@ body.menu-open {
   outline-offset: 2px;
 }
 
-/* Bookmark-style Contact Me — bottom-right corner of menu */
+/* Contact Me — sits under the last menu link; new links push it down */
 .mobile-nav a.nav-contact-bookmark {
-  position: absolute;
-  right: 0;
-  bottom: env(safe-area-inset-bottom, 0px);
-  z-index: 2;
+  position: static;
+  align-self: flex-end;
+  flex-shrink: 0;
   box-sizing: border-box;
   width: 7.25rem;
   height: 2.85rem;
+  margin-top: 0.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.45rem 0.75rem;
-  border-radius: 12px 0 0 0;
+  border-radius: 12px;
   background: #89cff0;
   color: #14151a;
   font-family: var(--font-display);
@@ -282,7 +286,7 @@ body.menu-open {
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: -4px -4px 16px rgba(0, 0, 0, 0.22);
+  box-shadow: none;
   transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s var(--ease);
   -webkit-tap-highlight-color: transparent;
 }

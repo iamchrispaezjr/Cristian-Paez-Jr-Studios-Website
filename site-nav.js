@@ -154,3 +154,37 @@
     }
   });
 })();
+
+/* Header pill: Store at top → Members after scroll */
+(function () {
+  var btn = document.querySelector(".header-right .store-btn");
+  if (!btn) return;
+
+  var STORE_HREF = "https://www.iamchrispaezjrstore.com";
+  var STORE_LABEL = "Store";
+  var MEMBERS_HREF = "https://www.google.com";
+  var MEMBERS_LABEL = "Members";
+  var THRESHOLD = 72;
+  var showingMembers = null;
+
+  function setMembersMode(on) {
+    if (showingMembers === on) return;
+    showingMembers = on;
+    if (on) {
+      btn.href = MEMBERS_HREF;
+      btn.textContent = MEMBERS_LABEL;
+      btn.setAttribute("aria-label", "Members");
+    } else {
+      btn.href = STORE_HREF;
+      btn.textContent = STORE_LABEL;
+      btn.setAttribute("aria-label", "Store");
+    }
+  }
+
+  function sync() {
+    setMembersMode(window.scrollY > THRESHOLD);
+  }
+
+  window.addEventListener("scroll", sync, { passive: true });
+  sync();
+})();

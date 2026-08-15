@@ -333,30 +333,10 @@
     </header>
 
     <!--
-      Add new posts as <li> items below.
-      Use class="blog-date" with optional data-published="YYYY-MM-DD".
-      If data-published is empty, today's date is used automatically.
+      Post list is filled from ../posts-data.js
+      Add new posts there (top of CPJR_POSTS) when you publish.
     -->
-    <ul class="post-list" id="postList">
-      <li>
-        <a class="post-link" href="../posts/why-i-created-sounddrop/">
-          <time class="post-date blog-date" data-published="2026-08-14" datetime="2026-08-14"></time>
-          <h2 class="post-title">Why I Created SoundDrop (Official Name TBD)</h2>
-          <p class="post-excerpt">
-            Boredom, memes, and a hate of complicated UIs — how my first web project soundboard came to life.
-          </p>
-        </a>
-      </li>
-      <li>
-        <a class="post-link" href="../posts/welcome-to-my-website/">
-          <time class="post-date blog-date" data-published="2026-08-12" datetime="2026-08-12"></time>
-          <h2 class="post-title">Welcome to My Website</h2>
-          <p class="post-excerpt">
-            Why I left template sites behind and built this hub from scratch — plus what’s coming next.
-          </p>
-        </a>
-      </li>
-    </ul>
+    <ul class="post-list" id="postList"></ul>
 
     <p class="empty-state" id="emptyState" hidden>
       First update coming soon. Check back shortly.
@@ -373,43 +353,55 @@
     </nav>
   </footer>
 
+  <script src="../posts-data.js"></script>
   <script>
     (function () {
-      function formatBlogDate(isoDate) {
-        var date = isoDate ? new Date(isoDate + "T12:00:00") : new Date();
-        if (Number.isNaN(date.getTime())) date = new Date();
-        return date.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric"
-        });
-      }
-
-      function toIsoDate(date) {
-        var year = date.getFullYear();
-        var month = String(date.getMonth() + 1).padStart(2, "0");
-        var day = String(date.getDate()).padStart(2, "0");
-        return year + "-" + month + "-" + day;
-      }
-
-      document.querySelectorAll(".blog-date").forEach(function (el) {
-        var published = el.getAttribute("data-published");
-        var iso = published && published.trim() ? published.trim() : toIsoDate(new Date());
-        el.setAttribute("data-published", iso);
-        el.setAttribute("datetime", iso);
-        el.textContent = formatBlogDate(iso);
-      });
-
       var year = document.getElementById("year");
       if (year) year.textContent = String(new Date().getFullYear());
 
       var list = document.getElementById("postList");
       var empty = document.getElementById("emptyState");
-      if (list && empty) {
-        var hasPosts = list.querySelectorAll("li").length > 0;
-        list.hidden = !hasPosts;
-        empty.hidden = hasPosts;
+      if (!list) return;
+
+      var posts = typeof window.CPJR_sortedPosts === "function"
+        ? window.CPJR_sortedPosts()
+        : [];
+
+      if (!posts.length) {
+        list.hidden = true;
+        if (empty) empty.hidden = false;
+        return;
       }
+
+      list.hidden = false;
+      if (empty) empty.hidden = true;
+      list.innerHTML = "";
+
+      posts.forEach(function (post) {
+        var li = document.createElement("li");
+        var link = document.createElement("a");
+        link.className = "post-link";
+        link.href = window.CPJR_postHref(post.slug, "../");
+
+        var time = document.createElement("time");
+        time.className = "post-date";
+        time.setAttribute("datetime", post.date || "");
+        time.textContent = window.CPJR_formatPostDate(post.date);
+
+        var title = document.createElement("h2");
+        title.className = "post-title";
+        title.textContent = post.title || "Untitled";
+
+        var excerpt = document.createElement("p");
+        excerpt.className = "post-excerpt";
+        excerpt.textContent = post.excerpt || "";
+
+        link.appendChild(time);
+        link.appendChild(title);
+        link.appendChild(excerpt);
+        li.appendChild(link);
+        list.appendChild(li);
+      });
     })();
   </script>
   <script src="../site-nav.js"></script>

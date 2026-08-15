@@ -513,3 +513,30 @@ body.menu-open {
     padding: 0.4rem 0.65rem;
   }
 }
+
+/* Footer day/night — night from 5pm–8am America/New_York (EST/EDT) */
+.site-footer {
+  transition: background 0.45s var(--ease, ease), color 0.45s var(--ease, ease), border-color 0.45s var(--ease, ease);
+}
+
+.site-footer.footer-night {
+  background: #14151a;
+  color: rgba(255, 255, 255, 0.72);
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.site-footer.footer-night a {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.site-footer.footer-night a:hover {
+  color: #89cff0;
+}
+
+.site-footer.footer-night .social-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-footer.footer-night .social-links img {
+  filter: invert(1) brightness(1.05);
+}

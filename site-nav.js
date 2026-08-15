@@ -89,3 +89,68 @@
     }
   });
 })();
+
+/* Footer light 8am–5pm America/New_York; night 5pm–8am */
+(function () {
+  var TZ = "America/New_York";
+  var timer = 0;
+
+  function getNyHourMinute(date) {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: TZ,
+      hour: "numeric",
+      minute: "numeric",
+      hourCycle: "h23"
+    }).formatToParts(date);
+
+    var hour = 0;
+    var minute = 0;
+    parts.forEach(function (part) {
+      if (part.type === "hour") hour = parseInt(part.value, 10);
+      if (part.type === "minute") minute = parseInt(part.value, 10);
+    });
+    if (hour === 24) hour = 0;
+    return { hour: hour, minute: minute };
+  }
+
+  function isFooterDayMode(date) {
+    var hm = getNyHourMinute(date || new Date());
+    return hm.hour >= 8 && hm.hour < 17;
+  }
+
+  function msUntilNextFooterSwitch(date) {
+    var now = date || new Date();
+    var hm = getNyHourMinute(now);
+    var minutesNow = hm.hour * 60 + hm.minute;
+    var targetMinutes = isFooterDayMode(now) ? 17 * 60 : 8 * 60;
+    var deltaMinutes = targetMinutes - minutesNow;
+    if (deltaMinutes <= 0) deltaMinutes += 24 * 60;
+    return deltaMinutes * 60 * 1000;
+  }
+
+  function applyFooterTheme() {
+    var night = !isFooterDayMode(new Date());
+    document.querySelectorAll(".site-footer").forEach(function (footer) {
+      footer.classList.toggle("footer-night", night);
+      footer.setAttribute("data-footer-theme", night ? "night" : "day");
+    });
+  }
+
+  function scheduleNextSwitch() {
+    if (timer) window.clearTimeout(timer);
+    var wait = Math.min(msUntilNextFooterSwitch(new Date()), 6 * 60 * 60 * 1000);
+    timer = window.setTimeout(function () {
+      applyFooterTheme();
+      scheduleNextSwitch();
+    }, wait + 250);
+  }
+
+  applyFooterTheme();
+  scheduleNextSwitch();
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+      applyFooterTheme();
+      scheduleNextSwitch();
+    }
+  });
+})();

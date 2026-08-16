@@ -188,3 +188,49 @@
   window.addEventListener("scroll", sync, { passive: true });
   sync();
 })();
+
+/* Header social row: left/right peek fades based on scroll position (desktop) */
+(function () {
+  var desktopQuery = window.matchMedia("(min-width: 901px)");
+
+  function syncFade(el) {
+    if (!desktopQuery.matches) {
+      el.classList.remove("social-fade-left", "social-fade-right");
+      return;
+    }
+
+    var maxScroll = el.scrollWidth - el.clientWidth;
+    var left = el.scrollLeft;
+    var eps = 2;
+    var canScroll = maxScroll > eps;
+
+    el.classList.toggle("social-fade-left", canScroll && left > eps);
+    el.classList.toggle("social-fade-right", canScroll && left < maxScroll - eps);
+  }
+
+  document.querySelectorAll(".header-right .social-links").forEach(function (el) {
+    function sync() {
+      syncFade(el);
+    }
+
+    el.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+
+    if (typeof ResizeObserver !== "undefined") {
+      new ResizeObserver(sync).observe(el);
+    }
+
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener("change", sync);
+    } else if (desktopQuery.addListener) {
+      desktopQuery.addListener(sync);
+    }
+
+    // Icons may load late and change scrollWidth
+    el.querySelectorAll("img").forEach(function (img) {
+      if (!img.complete) img.addEventListener("load", sync);
+    });
+
+    sync();
+  });
+})();

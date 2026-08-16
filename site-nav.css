@@ -115,14 +115,14 @@ body.menu-open {
   min-width: 0;
 }
 
-/* Header only: desktop fade so overflow icons peek (~halfway) */
+/* Header only: desktop scroll fades on both ends (toggled by JS) */
 .header-right .social-links {
   position: relative;
   max-width: min(100%, 300px);
 }
 
 @media (min-width: 901px) {
-  .header-right .social-links {
+  .header-right .social-links.social-fade-right {
     -webkit-mask-image: linear-gradient(
       to right,
       #000 0%,
@@ -133,6 +133,44 @@ body.menu-open {
     mask-image: linear-gradient(
       to right,
       #000 0%,
+      #000 calc(100% - 18px),
+      rgba(0, 0, 0, 0.45) calc(100% - 8px),
+      transparent 100%
+    );
+  }
+
+  .header-right .social-links.social-fade-left {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.45) 8px,
+      #000 18px,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.45) 8px,
+      #000 18px,
+      #000 100%
+    );
+  }
+
+  .header-right .social-links.social-fade-left.social-fade-right {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.45) 8px,
+      #000 18px,
+      #000 calc(100% - 18px),
+      rgba(0, 0, 0, 0.45) calc(100% - 8px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.45) 8px,
+      #000 18px,
       #000 calc(100% - 18px),
       rgba(0, 0, 0, 0.45) calc(100% - 8px),
       transparent 100%

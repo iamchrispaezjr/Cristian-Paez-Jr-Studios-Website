@@ -602,4 +602,34 @@ body.menu-open {
 
 .site-footer.footer-night .social-links img {
   filter: invert(1) brightness(1.05);
+  animation: footer-social-soft-glow 2.6s ease-in-out infinite;
+}
+
+@keyframes footer-social-soft-glow {
+  0%,
+  100% {
+    filter:
+      invert(1)
+      brightness(1.05)
+      drop-shadow(0 0 3px rgba(255, 255, 255, 0.45))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
+  }
+  50% {
+    filter:
+      invert(1)
+      brightness(1.08)
+      drop-shadow(0 0 5px rgba(255, 255, 255, 0.75))
+      drop-shadow(0 0 14px rgba(255, 255, 255, 0.4));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer.footer-night .social-links img {
+    animation: none;
+    filter:
+      invert(1)
+      brightness(1.05)
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55))
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  }
 }

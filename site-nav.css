@@ -115,6 +115,26 @@ body.menu-open {
   min-width: 0;
 }
 
+/* Header only: fade the trailing edge so overflow icons peek (~halfway) */
+.header-right .social-links {
+  position: relative;
+  max-width: min(100%, 300px);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 18px),
+    rgba(0, 0, 0, 0.45) calc(100% - 8px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 18px),
+    rgba(0, 0, 0, 0.45) calc(100% - 8px),
+    transparent 100%
+  );
+}
+
 .social-links {
   display: flex;
   align-items: center;
@@ -472,7 +492,21 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: min(42vw, 200px);
+    max-width: min(44vw, 210px);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 14px),
+      rgba(0, 0, 0, 0.4) calc(100% - 6px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 14px),
+      rgba(0, 0, 0, 0.4) calc(100% - 6px),
+      transparent 100%
+    );
   }
 
   .header-right .social-links a {
@@ -497,8 +531,22 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: 38vw;
+    max-width: 40vw;
     gap: 0;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 12px),
+      rgba(0, 0, 0, 0.35) calc(100% - 5px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 calc(100% - 12px),
+      rgba(0, 0, 0, 0.35) calc(100% - 5px),
+      transparent 100%
+    );
   }
 
   .store-btn {

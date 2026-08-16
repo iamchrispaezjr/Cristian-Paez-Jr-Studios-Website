@@ -188,14 +188,3 @@
   window.addEventListener("scroll", sync, { passive: true });
   sync();
 })();
-
-/* Header social row: fade cue so overflow icons peek on desktop + mobile */
-(function () {
-  document.querySelectorAll(".header-right .social-links").forEach(function (social) {
-    if (social.querySelector(".social-scroll-fade")) return;
-    var fade = document.createElement("span");
-    fade.className = "social-scroll-fade";
-    fade.setAttribute("aria-hidden", "true");
-    social.appendChild(fade);
-  });
-})();

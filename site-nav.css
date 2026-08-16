@@ -115,23 +115,31 @@ body.menu-open {
   min-width: 0;
 }
 
-/* Header only: fade the trailing edge so overflow icons peek (~halfway) */
+/* Header only: trailing fade so overflow icons peek (~halfway) */
 .header-right .social-links {
   position: relative;
   max-width: min(100%, 300px);
-  -webkit-mask-image: linear-gradient(
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+}
+
+.header-right .social-scroll-fade {
+  position: sticky;
+  right: 0;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 34px;
+  margin-left: -18px;
+  align-self: center;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
     to right,
-    #000 0%,
-    #000 calc(100% - 18px),
-    rgba(0, 0, 0, 0.45) calc(100% - 8px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    #000 0%,
-    #000 calc(100% - 18px),
-    rgba(0, 0, 0, 0.45) calc(100% - 8px),
-    transparent 100%
+    rgba(247, 248, 250, 0) 0%,
+    rgba(247, 248, 250, 0.55) 40%,
+    rgba(247, 248, 250, 0.96) 100%
   );
 }
 
@@ -492,21 +500,14 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: min(44vw, 210px);
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 calc(100% - 14px),
-      rgba(0, 0, 0, 0.4) calc(100% - 6px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 calc(100% - 14px),
-      rgba(0, 0, 0, 0.4) calc(100% - 6px),
-      transparent 100%
-    );
+    max-width: min(46vw, 220px);
+  }
+
+  .header-right .social-scroll-fade {
+    flex-basis: 16px;
+    width: 16px;
+    height: 30px;
+    margin-left: -16px;
   }
 
   .header-right .social-links a {
@@ -531,21 +532,20 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: 40vw;
+    max-width: min(42vw, 160px);
     gap: 0;
-    -webkit-mask-image: linear-gradient(
+  }
+
+  .header-right .social-scroll-fade {
+    flex-basis: 14px;
+    width: 14px;
+    height: 28px;
+    margin-left: -14px;
+    background: linear-gradient(
       to right,
-      #000 0%,
-      #000 calc(100% - 12px),
-      rgba(0, 0, 0, 0.35) calc(100% - 5px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 calc(100% - 12px),
-      rgba(0, 0, 0, 0.35) calc(100% - 5px),
-      transparent 100%
+      rgba(247, 248, 250, 0) 0%,
+      rgba(247, 248, 250, 0.5) 35%,
+      rgba(247, 248, 250, 0.98) 100%
     );
   }
 

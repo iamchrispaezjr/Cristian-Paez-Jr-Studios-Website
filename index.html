@@ -221,6 +221,14 @@
       user-select: none;
     }
 
+    .hero-slide-bg--youtube {
+      object-position: 30% center;
+    }
+
+    .hero-slide-bg--blog {
+      object-position: 30% center;
+    }
+
     .hero-slide--media::after {
       content: "";
       position: absolute;
@@ -1191,17 +1199,26 @@
     <section class="hero" aria-roledescription="carousel" aria-label="Featured highlights">
       <div class="hero-slider" id="heroSlider">
         <div class="hero-slider-track" id="heroSliderTrack" tabindex="0">
-          <article class="hero-slide" data-slide-label="Cristian Paez Jr">
+          <article class="hero-slide hero-slide--media" data-slide-label="Cristian Paez Jr">
+            <img
+              class="hero-slide-bg hero-slide-bg--youtube"
+              src="youtube-slide-screenshot.jpg"
+              alt=""
+              width="1440"
+              height="900"
+              decoding="async"
+              fetchpriority="high"
+            />
             <div class="hero-inner">
               <h1 class="hero-brand" id="hero-heading">Cristian Paez Jr</h1>
               <p class="hero-lead">Creative work, drops, and updates — all in one place.</p>
               <a
                 class="hero-cta"
-                href="https://iamchrispaezjrstore.com"
+                href="https://www.youtube.com/@iamchrispaezjr"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Visit the Store
+                Visit YouTube
               </a>
             </div>
           </article>
@@ -1229,12 +1246,20 @@
             </div>
           </article>
 
-          <article class="hero-slide" data-slide-label="Updates">
+          <article class="hero-slide hero-slide--media" data-slide-label="Updates">
+            <img
+              class="hero-slide-bg hero-slide-bg--blog"
+              src="blog-slide-screenshot.jpg"
+              alt=""
+              width="1440"
+              height="900"
+              decoding="async"
+            />
             <div class="hero-inner">
               <h2 class="hero-brand">Updates</h2>
               <p class="hero-lead">Notes, launches, and what’s new from Cristian Paez Jr.</p>
-              <a class="hero-cta" href="updates/">
-                Latest Updates
+              <a class="hero-cta" href="posts/why-i-created-sounddrop/">
+                Read Latest Post
               </a>
             </div>
           </article>

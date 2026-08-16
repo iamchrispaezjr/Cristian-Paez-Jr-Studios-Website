@@ -502,6 +502,20 @@
       }
     }
 
+    /* ---------- Elfsight social feed ---------- */
+    .home-social-feed {
+      position: relative;
+      z-index: 1;
+      padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(3.5rem, 8vw, 5.5rem);
+      border-top: 1px solid var(--border);
+    }
+
+    .home-social-feed-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: clamp(2.25rem, 5vw, 3.25rem);
+    }
+
     /* ---------- Footer ---------- */
     .site-footer {
       background: var(--surface);
@@ -1279,6 +1293,13 @@
         </div>
       </div>
     </section>
+
+    <section class="home-social-feed" id="homeSocialFeed" aria-label="Social feed">
+      <div class="home-social-feed-inner">
+        <!-- Elfsight Social Feed | Social Feed (script injected only when near viewport) -->
+        <div class="elfsight-app-517aaf83-7ff8-413b-898e-9fc725bbd05b" data-elfsight-app-lazy></div>
+      </div>
+    </section>
   </main>
 
   <!-- ========== FOOTER ========== -->
@@ -1497,6 +1518,54 @@
 
   <script src="site-nav.js"></script>
   <script src="posts-data.js"></script>
+
+  <script>
+    /* Load Elfsight only when the social feed is near the viewport */
+    (function () {
+      var section = document.getElementById("homeSocialFeed");
+      if (!section) return;
+
+      var loaded = false;
+
+      function loadElfsight() {
+        if (loaded) return;
+        loaded = true;
+        var script = document.createElement("script");
+        script.src = "https://elfsightcdn.com/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+
+      function loadWhenIdle() {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadElfsight, { timeout: 2000 });
+        } else {
+          window.setTimeout(loadElfsight, 1);
+        }
+      }
+
+      if (!("IntersectionObserver" in window)) {
+        loadWhenIdle();
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            loadWhenIdle();
+          });
+        },
+        {
+          rootMargin: "400px 0px",
+          threshold: 0.01
+        }
+      );
+
+      observer.observe(section);
+    })();
+  </script>
 
   <script>
     /* Latest posts under the hero — pulls from posts-data.js */

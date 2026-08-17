@@ -110,15 +110,24 @@ body.menu-open {
 .header-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.65rem;
   margin-left: auto;
   min-width: 0;
+  flex: 1 1 auto;
 }
 
-/* Header only: desktop scroll fades on both ends (toggled by JS) */
+/* Header social: fixed footprint so Store pill stays put; extra icons scroll */
 .header-right .social-links {
   position: relative;
-  max-width: min(100%, 300px);
+  min-width: 0;
+  flex: 0 1 260px;
+  width: 260px;
+  max-width: min(100%, 260px);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 
 @media (min-width: 901px) {
@@ -535,7 +544,9 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: min(42vw, 200px);
+    flex-basis: min(42vw, 180px);
+    width: min(42vw, 180px);
+    max-width: min(42vw, 180px);
   }
 
   .header-right .social-links a {
@@ -560,7 +571,9 @@ body.menu-open {
   }
 
   .header-right .social-links {
-    max-width: 38vw;
+    flex-basis: min(34vw, 140px);
+    width: min(34vw, 140px);
+    max-width: min(34vw, 140px);
     gap: 0;
   }
 

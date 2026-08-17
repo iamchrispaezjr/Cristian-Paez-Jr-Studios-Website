@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me — Cristian Paez Jr</title>
-  <meta name="description" content="About Cristian Paez Jr — creative work, projects, and the story behind the brand." />
+  <title>Contact Me — Cristian Paez Jr</title>
+  <meta name="description" content="Get in touch with Cristian Paez Jr — collaborations, freelance, and general inquiries." />
   <link rel="icon" href="../favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="../favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -59,13 +59,13 @@
     main {
       flex: 1;
       width: 100%;
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
       padding: clamp(2.75rem, 7vw, 4.5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
     }
 
     .page-intro {
-      margin-bottom: 0;
+      margin-bottom: 1.75rem;
       text-align: center;
     }
 
@@ -80,114 +80,33 @@
     .page-intro p {
       color: var(--ink-muted);
       font-size: 1.05rem;
-      max-width: 40ch;
+      max-width: 42ch;
+      margin: 0 auto;
     }
 
-    /*
-      ============================================
-      ADD YOUR ABOUT ME TEXT BELOW
-      Replace the placeholder paragraphs with
-      your full About Me copy.
-      ============================================
-    */
-    .about-content {
+    .contact-form-wrap {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      min-height: 280px;
+    }
+
+    .contact-email {
+      margin-top: 1.75rem;
+      text-align: center;
+      font-size: 0.95rem;
       color: var(--ink-muted);
-      font-size: 1.05rem;
     }
 
-    .about-photo {
-      width: 30%;
-      max-width: 220px;
-      min-width: 120px;
-      height: auto;
-      display: block;
-      margin: 10% auto;
-      border-radius: 12px;
-    }
-
-    .about-content p {
-      margin-bottom: 1.1rem;
-      max-width: 58ch;
-    }
-
-    .about-content .about-lead {
-      color: var(--ink);
-      font-weight: 600;
-      font-size: 1.12rem;
-    }
-
-    .about-content .about-contact a {
+    .contact-email a {
       color: var(--ink);
       font-weight: 600;
       text-decoration: underline;
-      text-underline-offset: 0.15em;
+      text-underline-offset: 2px;
     }
 
-    .about-content .about-contact a:hover {
+    .contact-email a:hover {
       color: var(--accent);
-    }
-
-    .about-content p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Waving hello — below header, top-right (desktop); soft placement on mobile */
-    .wave-hello {
-      position: fixed;
-      top: calc(var(--header-h) + 0.85rem);
-      right: clamp(0.85rem, 3vw, 1.75rem);
-      z-index: 40;
-      font-size: clamp(2.35rem, 4vw, 3.15rem);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      opacity: 0;
-      will-change: opacity, transform;
-    }
-
-    .wave-hello-hand {
-      display: inline-block;
-      transform-origin: 70% 70%;
-      will-change: transform;
-    }
-
-    .wave-hello.is-playing {
-      animation: wave-hello-fade 3.2s var(--ease) both;
-    }
-
-    .wave-hello.is-playing .wave-hello-hand {
-      animation: wave-hello-wiggle 0.45s ease-in-out 0.45s 5;
-    }
-
-    @keyframes wave-hello-fade {
-      0% { opacity: 0; transform: translateY(8px) scale(0.92); }
-      12% { opacity: 1; transform: translateY(0) scale(1); }
-      78% { opacity: 1; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-6px) scale(0.96); }
-    }
-
-    @keyframes wave-hello-wiggle {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(18deg); }
-      50% { transform: rotate(-8deg); }
-      75% { transform: rotate(16deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    @media (max-width: 700px) {
-      .wave-hello {
-        top: calc(var(--header-h) + 0.55rem);
-        right: 0.75rem;
-        font-size: 1.7rem;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .wave-hello,
-      .wave-hello.is-playing {
-        display: none !important;
-        animation: none !important;
-      }
     }
 
     .site-footer {
@@ -368,38 +287,19 @@
 
   <main>
     <header class="page-intro">
-      <h1>About Me</h1>
+      <h1>Contact Me</h1>
+      <p>Collaborations, freelance, or just saying hello — drop a message below.</p>
     </header>
 
-    <div class="about-content">
-      <img
-        class="about-photo"
-        src="../about-me.jpg"
-        alt="Cristian Paez Jr"
-        width="878"
-        height="1024"
-      />
-      <p class="about-lead">I'm a Public Figure, Digital Creator &amp; Entrepreneur.</p>
-      <p>
-        I operate with the mindset and ambition of a full-scale media company. I use video editing tools, VFX, animation, and AI to transform a deep appreciation for media and entertainment into originally produced content. I use my experience in working with 2D and 3D animation, visual effects, and full-scale content creation to bring new and original ideas and IP’s to life for social media and other platforms.
-      </p>
-      <p>
-        I'm eventually aiming to dive into full-scale world-building. I'm excited to take on whatever comes next—whether that's short films, animated series, books, comics, apps, games, music, AR/VR, or interactive media. Honestly, it's all about telling damn good stories, building new universes, and escaping the one I'm in right now that makes me love pop-culture, entertainment and media so much.
-      </p>
-      <p>
-        I’m also self-taught in several tools like Procreate, Blender, Adobe After Effects, Toon Boom Animate, and the Adobe Creative Suite, which I use create, animate, edit, and add effects while keeping the story and visuals at the center. Ultimately, I strive to create projects that feel wacky, original, and genuinely fun to consume or interact with.
-      </p>
-      <p>
-        As a big pop-culture fan, some of my biggest inspirations are Star Wars, Indiana Jones, Back To The Future, The Avengers, WandaVision, The Flash, Wizards of (and beyond) Waverly Place, The Last of Us, Star Wars Battlefront 2, Harry Potter, Full Metal Alchemist, and AppleTV's Maximum Pleasure Guaranteed, and my current favorite show, Silo!
-      </p>
-      <p>
-        I’m open to collaborate or freelance with other creatives, teams, or businesses, that have the same interests as I do, or gain long-term meaningful employment.
-      </p>
-      <p class="about-contact">
-        📩
-        <a href="mailto:contactme@iamchrispaezjr.com">contactme@iamchrispaezjr.com</a>
-      </p>
+    <div class="contact-form-wrap" id="contactForm">
+      <!-- Elfsight Contact Form | Untitled Contact Form (script injected only when near viewport) -->
+      <div class="elfsight-app-f564c552-0651-495f-ab7e-969f84db638a" data-elfsight-app-lazy></div>
     </div>
+
+    <p class="contact-email">
+      Or email me at
+      <a href="mailto:contactme@iamchrispaezjr.com">contactme@iamchrispaezjr.com</a>
+    </p>
   </main>
 
   <footer class="site-footer">
@@ -414,40 +314,54 @@
 
   <script>
     document.getElementById("year").textContent = String(new Date().getFullYear());
-
-    (function () {
-      var KEY = "cpjr-about-wave-seen";
-      var WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      try {
-        var last = Number(localStorage.getItem(KEY) || "0");
-        if (last && Date.now() - last < WEEK_MS) return;
-      } catch (err) {
-        /* private mode / blocked storage — still show once this visit */
-      }
-
-      var el = document.createElement("div");
-      el.className = "wave-hello";
-      el.id = "waveHello";
-      el.setAttribute("aria-hidden", "true");
-      el.innerHTML = '<span class="wave-hello-hand">👋</span>';
-      document.body.appendChild(el);
-
-      window.setTimeout(function () {
-        el.classList.add("is-playing");
-      }, 500);
-
-      el.addEventListener("animationend", function (e) {
-        if (e.animationName !== "wave-hello-fade") return;
-        try {
-          localStorage.setItem(KEY, String(Date.now()));
-        } catch (err) {}
-        el.remove();
-      });
-    })();
   </script>
   <script src="../site-nav.js"></script>
+  <script>
+    /* Load Elfsight only when the contact form is near the viewport */
+    (function () {
+      var section = document.getElementById("contactForm");
+      if (!section) return;
+
+      var loaded = false;
+
+      function loadElfsight() {
+        if (loaded) return;
+        loaded = true;
+        var script = document.createElement("script");
+        script.src = "https://elfsightcdn.com/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+
+      function loadWhenIdle() {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadElfsight, { timeout: 2000 });
+        } else {
+          window.setTimeout(loadElfsight, 1);
+        }
+      }
+
+      if (!("IntersectionObserver" in window)) {
+        loadWhenIdle();
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            loadWhenIdle();
+          });
+        },
+        {
+          rootMargin: "400px 0px",
+          threshold: 0.01
+        }
+      );
+
+      observer.observe(section);
+    })();
+  </script>
 </body>
 </html>

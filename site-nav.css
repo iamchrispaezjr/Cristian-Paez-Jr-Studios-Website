@@ -14,7 +14,7 @@ body.menu-open {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0 1.25rem;
-  background: rgba(247, 248, 250, 0.82);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -42,7 +42,7 @@ body.menu-open {
   justify-content: center;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--surface);
+  background: #ffffff;
   color: var(--ink);
   cursor: pointer;
   font: inherit;
@@ -50,7 +50,7 @@ body.menu-open {
 }
 
 .menu-toggle:hover {
-  background: var(--bg-soft);
+  background: #ffffff;
 }
 
 .menu-toggle:focus-visible {
@@ -341,7 +341,7 @@ body.menu-open {
   height: calc(100dvh - var(--header-h, 68px));
   display: flex;
   flex-direction: column;
-  background: #e8eaee;
+  background: #ffffff;
   color: #14151a;
   border-right: 1px solid rgba(20, 21, 26, 0.1);
   padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));

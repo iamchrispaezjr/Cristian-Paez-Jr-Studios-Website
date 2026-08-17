@@ -387,3 +387,218 @@
 
   observer.observe(footer);
 })();
+
+/* Bottom-right announcement toast: after scroll + 3s */
+(function () {
+  var STORAGE_KEY = "cpjr-announce-state";
+  var LEGACY_KEY = "cpjr-announce-dismissed";
+  var ANNOUNCE_ID = "sounddrop-2026";
+  var DELAY_MS = 3000;
+  var SCROLL_PX = 120;
+  var RESHOW_MS = 5 * 60 * 60 * 1000;
+  var SOUND_COOLDOWN_MS = 10 * 60 * 60 * 1000;
+
+  var announcement = {
+    id: ANNOUNCE_ID,
+    href: "https://iamchrispaezjr.github.io/SoundDrop/",
+    eyebrow: "🚨 New Project!",
+    title: "SoundDrop",
+    description: "A clean soundboard for memes and iconic effects — try it out.",
+    cta: "Open project →",
+    image: "soundrop-screenshot.jpg",
+    imageAlt: "SoundDrop project screenshot"
+  };
+
+  function defaultState() {
+    return { id: announcement.id, dismissedAt: 0, soundAt: 0 };
+  }
+
+  function readState() {
+    var state = defaultState();
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.id === announcement.id) {
+          state.dismissedAt = Number(parsed.dismissedAt) || 0;
+          state.soundAt = Number(parsed.soundAt) || 0;
+        }
+      } else if (localStorage.getItem(LEGACY_KEY) === announcement.id) {
+        state.dismissedAt = Date.now();
+        writeState(state);
+        localStorage.removeItem(LEGACY_KEY);
+      }
+    } catch (err) {}
+    return state;
+  }
+
+  function writeState(state) {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          id: announcement.id,
+          dismissedAt: state.dismissedAt || 0,
+          soundAt: state.soundAt || 0
+        })
+      );
+    } catch (err) {}
+  }
+
+  function isHidden() {
+    var state = readState();
+    if (!state.dismissedAt) return false;
+    return Date.now() - state.dismissedAt < RESHOW_MS;
+  }
+
+  function canPlaySound() {
+    var state = readState();
+    if (!state.soundAt) return true;
+    return Date.now() - state.soundAt >= SOUND_COOLDOWN_MS;
+  }
+
+  function markDismissed() {
+    var state = readState();
+    state.dismissedAt = Date.now();
+    writeState(state);
+  }
+
+  function markSoundPlayed() {
+    var state = readState();
+    state.soundAt = Date.now();
+    writeState(state);
+  }
+
+  function assetBase() {
+    var script = document.querySelector('script[src*="site-nav.js"]');
+    var src = script && script.getAttribute("src");
+    if (src) return src.replace(/site-nav\.js.*$/, "");
+    return "";
+  }
+
+  if (isHidden()) return;
+
+  var hasScrolled = window.scrollY > SCROLL_PX;
+  var hasWaited = false;
+  var shown = false;
+  var toast = null;
+
+  function playAnnounceSound() {
+    if (!canPlaySound()) return;
+    try {
+      var audio = new Audio(assetBase() + "sounds/peter-griffin-laugh.mp3");
+      audio.preload = "auto";
+      var playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise
+          .then(function () {
+            markSoundPlayed();
+          })
+          .catch(function () {});
+      } else {
+        markSoundPlayed();
+      }
+    } catch (err) {}
+  }
+
+  function showToast() {
+    if (shown || !hasScrolled || !hasWaited || isHidden()) return;
+    shown = true;
+    if (!toast) toast = buildToast();
+    document.body.appendChild(toast);
+    window.requestAnimationFrame(function () {
+      toast.classList.add("is-visible");
+      playAnnounceSound();
+    });
+  }
+
+  function hideToast() {
+    if (!toast) return;
+    markDismissed();
+    toast.classList.remove("is-visible");
+    window.setTimeout(function () {
+      if (toast && toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 480);
+  }
+
+  function buildToast() {
+    var el = document.createElement("aside");
+    el.className = "announce-toast";
+    el.setAttribute("role", "complementary");
+    el.setAttribute("aria-label", "Project announcement");
+
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "announce-toast-close";
+    close.setAttribute("aria-label", "Dismiss announcement");
+    close.innerHTML = "&times;";
+    close.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      hideToast();
+    });
+
+    var link = document.createElement("a");
+    link.className = "announce-toast-link";
+    link.href = announcement.href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    var media = document.createElement("div");
+    media.className = "announce-toast-media";
+    var img = document.createElement("img");
+    img.src = assetBase() + announcement.image;
+    img.alt = announcement.imageAlt;
+    img.width = 184;
+    img.height = 184;
+    img.loading = "lazy";
+    img.decoding = "async";
+    media.appendChild(img);
+
+    var copy = document.createElement("div");
+    copy.className = "announce-toast-copy";
+
+    var eyebrow = document.createElement("p");
+    eyebrow.className = "announce-toast-eyebrow";
+    eyebrow.textContent = announcement.eyebrow;
+
+    var title = document.createElement("p");
+    title.className = "announce-toast-title";
+    title.textContent = announcement.title;
+
+    var desc = document.createElement("p");
+    desc.className = "announce-toast-desc";
+    desc.textContent = announcement.description;
+
+    var cta = document.createElement("p");
+    cta.className = "announce-toast-cta";
+    cta.textContent = announcement.cta;
+
+    copy.appendChild(eyebrow);
+    copy.appendChild(title);
+    copy.appendChild(desc);
+    copy.appendChild(cta);
+
+    link.appendChild(media);
+    link.appendChild(copy);
+    el.appendChild(close);
+    el.appendChild(link);
+    return el;
+  }
+
+  function onScroll() {
+    if (window.scrollY > SCROLL_PX) {
+      hasScrolled = true;
+      showToast();
+      window.removeEventListener("scroll", onScroll);
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  window.setTimeout(function () {
+    hasWaited = true;
+    showToast();
+  }, DELAY_MS);
+})();

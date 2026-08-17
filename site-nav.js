@@ -8,12 +8,6 @@
   var year = document.getElementById("year");
   var dropdowns = [
     {
-      toggle: document.getElementById("homeDropdownToggle"),
-      menu: document.getElementById("homeSubmenu"),
-      showLabel: "Show more Home links",
-      hideLabel: "Hide more Home links"
-    },
-    {
       toggle: document.getElementById("productionDropdownToggle"),
       menu: document.getElementById("productionSubmenu"),
       showLabel: "Show In Production links",
@@ -189,12 +183,13 @@
   sync();
 })();
 
-/* Header social row: left/right peek fades based on scroll position (desktop) */
+/* Social row fades: header on desktop, footer on mobile */
 (function () {
   var desktopQuery = window.matchMedia("(min-width: 901px)");
+  var mobileQuery = window.matchMedia("(max-width: 900px)");
 
-  function syncFade(el) {
-    if (!desktopQuery.matches) {
+  function syncFade(el, enabled) {
+    if (!enabled) {
       el.classList.remove("social-fade-left", "social-fade-right");
       return;
     }
@@ -208,30 +203,51 @@
     el.classList.toggle("social-fade-right", canScroll && left < maxScroll - eps);
   }
 
-  document.querySelectorAll(".header-right .social-links").forEach(function (el) {
-    function sync() {
-      syncFade(el);
-    }
+  function bindSocialFade(selector, isEnabled) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      function sync() {
+        syncFade(el, isEnabled());
+      }
 
-    el.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", sync);
+      el.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync);
 
-    if (typeof ResizeObserver !== "undefined") {
-      new ResizeObserver(sync).observe(el);
-    }
+      if (typeof ResizeObserver !== "undefined") {
+        new ResizeObserver(sync).observe(el);
+      }
 
-    if (desktopQuery.addEventListener) {
-      desktopQuery.addEventListener("change", sync);
-    } else if (desktopQuery.addListener) {
-      desktopQuery.addListener(sync);
-    }
+      el.querySelectorAll("img").forEach(function (img) {
+        if (!img.complete) img.addEventListener("load", sync);
+      });
 
-    // Icons may load late and change scrollWidth
-    el.querySelectorAll("img").forEach(function (img) {
-      if (!img.complete) img.addEventListener("load", sync);
+      sync();
     });
+  }
 
-    sync();
+  function onBreakpointChange(query, syncAll) {
+    if (query.addEventListener) {
+      query.addEventListener("change", syncAll);
+    } else if (query.addListener) {
+      query.addListener(syncAll);
+    }
+  }
+
+  bindSocialFade(".header-right .social-links", function () {
+    return desktopQuery.matches;
+  });
+  bindSocialFade(".site-footer .social-links", function () {
+    return mobileQuery.matches;
+  });
+
+  onBreakpointChange(desktopQuery, function () {
+    document.querySelectorAll(".header-right .social-links").forEach(function (el) {
+      syncFade(el, desktopQuery.matches);
+    });
+  });
+  onBreakpointChange(mobileQuery, function () {
+    document.querySelectorAll(".site-footer .social-links").forEach(function (el) {
+      syncFade(el, mobileQuery.matches);
+    });
   });
 })();
 

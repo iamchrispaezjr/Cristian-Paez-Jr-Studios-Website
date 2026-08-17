@@ -84,66 +84,67 @@
   });
 })();
 
-/* Footer light 8am–5pm America/New_York; night 5pm–8am */
+/* Site chrome light 8am–5pm local time; night 5pm–8am */
 (function () {
-  var TZ = "America/New_York";
   var timer = 0;
 
-  function getNyHourMinute(date) {
-    var parts = new Intl.DateTimeFormat("en-US", {
-      timeZone: TZ,
-      hour: "numeric",
-      minute: "numeric",
-      hourCycle: "h23"
-    }).formatToParts(date);
-
-    var hour = 0;
-    var minute = 0;
-    parts.forEach(function (part) {
-      if (part.type === "hour") hour = parseInt(part.value, 10);
-      if (part.type === "minute") minute = parseInt(part.value, 10);
-    });
-    if (hour === 24) hour = 0;
-    return { hour: hour, minute: minute };
+  function getLocalHourMinute(date) {
+    var d = date || new Date();
+    return { hour: d.getHours(), minute: d.getMinutes() };
   }
 
-  function isFooterDayMode(date) {
-    var hm = getNyHourMinute(date || new Date());
+  function isDayMode(date) {
+    var hm = getLocalHourMinute(date || new Date());
     return hm.hour >= 8 && hm.hour < 17;
   }
 
-  function msUntilNextFooterSwitch(date) {
+  function msUntilNextSwitch(date) {
     var now = date || new Date();
-    var hm = getNyHourMinute(now);
+    var hm = getLocalHourMinute(now);
     var minutesNow = hm.hour * 60 + hm.minute;
-    var targetMinutes = isFooterDayMode(now) ? 17 * 60 : 8 * 60;
+    var targetMinutes = isDayMode(now) ? 17 * 60 : 8 * 60;
     var deltaMinutes = targetMinutes - minutesNow;
     if (deltaMinutes <= 0) deltaMinutes += 24 * 60;
     return deltaMinutes * 60 * 1000;
   }
 
-  function applyFooterTheme() {
-    var night = !isFooterDayMode(new Date());
+  function applySiteTheme() {
+    var night = !isDayMode(new Date());
+    var theme = night ? "night" : "day";
+
     document.querySelectorAll(".site-footer").forEach(function (footer) {
       footer.classList.toggle("footer-night", night);
-      footer.setAttribute("data-footer-theme", night ? "night" : "day");
+      footer.setAttribute("data-footer-theme", theme);
     });
+
+    document.querySelectorAll(".site-header").forEach(function (header) {
+      header.classList.toggle("header-night", night);
+      header.setAttribute("data-header-theme", theme);
+    });
+
+    document.querySelectorAll(".mobile-nav").forEach(function (nav) {
+      nav.classList.toggle("nav-night", night);
+      nav.setAttribute("data-nav-theme", theme);
+    });
+
+    document.documentElement.classList.toggle("site-night", night);
+    document.documentElement.setAttribute("data-site-theme", theme);
   }
 
   function scheduleNextSwitch() {
     if (timer) window.clearTimeout(timer);
-    var wait = Math.min(msUntilNextFooterSwitch(new Date()), 6 * 60 * 60 * 1000);
+    var wait = Math.min(msUntilNextSwitch(new Date()), 6 * 60 * 60 * 1000);
     timer = window.setTimeout(function () {
-      applyFooterTheme();
+      applySiteTheme();
       scheduleNextSwitch();
     }, wait + 250);
   }
 
-  applyFooterTheme();
+  applySiteTheme();
   scheduleNextSwitch();
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden) {
-      applyFooterTheme();
+      applySiteTheme();
       scheduleNextSwitch();
     }
   });
@@ -251,9 +252,8 @@
   });
 })();
 
-/* Night moon: once per night shift, swims through footer when it comes into view */
+/* Night moon: once per local night shift, swims through footer when it comes into view */
 (function () {
-  var TZ = "America/New_York";
   var STORAGE_KEY = "cpjr-moon-night";
   var playedThisVisit = false;
 
@@ -261,45 +261,34 @@
     return String(n).padStart(2, "0");
   }
 
-  function getNyParts(date) {
-    var parts = new Intl.DateTimeFormat("en-US", {
-      timeZone: TZ,
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      hourCycle: "h23"
-    }).formatToParts(date || new Date());
-
-    var out = { year: 0, month: 0, day: 0, hour: 0 };
-    parts.forEach(function (part) {
-      if (part.type === "year") out.year = parseInt(part.value, 10);
-      if (part.type === "month") out.month = parseInt(part.value, 10);
-      if (part.type === "day") out.day = parseInt(part.value, 10);
-      if (part.type === "hour") out.hour = parseInt(part.value, 10);
-    });
-    if (out.hour === 24) out.hour = 0;
-    return out;
+  function getLocalParts(date) {
+    var d = date || new Date();
+    return {
+      year: d.getFullYear(),
+      month: d.getMonth() + 1,
+      day: d.getDate(),
+      hour: d.getHours()
+    };
   }
 
   function isNightTime(date) {
-    var hour = getNyParts(date).hour;
+    var hour = getLocalParts(date).hour;
     return hour >= 17 || hour < 8;
   }
 
   function getNightShiftKey(date) {
-    var p = getNyParts(date || new Date());
+    var p = getLocalParts(date || new Date());
     if (!(p.hour >= 17 || p.hour < 8)) return null;
 
     if (p.hour < 8) {
-      var prev = new Date(Date.UTC(p.year, p.month - 1, p.day, 12, 0, 0));
-      prev.setUTCDate(prev.getUTCDate() - 1);
+      var prev = new Date(p.year, p.month - 1, p.day);
+      prev.setDate(prev.getDate() - 1);
       return (
-        prev.getUTCFullYear() +
+        prev.getFullYear() +
         "-" +
-        pad(prev.getUTCMonth() + 1) +
+        pad(prev.getMonth() + 1) +
         "-" +
-        pad(prev.getUTCDate())
+        pad(prev.getDate())
       );
     }
 

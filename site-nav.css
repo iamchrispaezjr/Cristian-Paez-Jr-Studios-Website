@@ -18,6 +18,11 @@ body.menu-open {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
+  color: var(--ink, #14151a);
+  transition:
+    background 0.45s var(--ease, ease),
+    color 0.45s var(--ease, ease),
+    border-color 0.45s var(--ease, ease);
 }
 
 .header-left {
@@ -258,6 +263,60 @@ body.menu-open {
   outline-offset: 3px;
 }
 
+/* Header night shift — same schedule as footer (5pm–8am local time) */
+.site-header.header-night {
+  background: rgba(20, 21, 26, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.site-header.header-night .logo-text {
+  color: #fff;
+}
+
+.site-header.header-night .menu-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.site-header.header-night .menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header.header-night .hamburger span {
+  background: #fff;
+}
+
+.site-header.header-night .social-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header.header-night .social-links img {
+  filter: invert(1) brightness(1.05);
+  animation: footer-social-soft-glow 2.6s ease-in-out infinite;
+}
+
+.site-header.header-night .store-btn {
+  background: #fff;
+  color: #14151a;
+}
+
+.site-header.header-night .store-btn:hover {
+  background: #e8eaee;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header.header-night .social-links img {
+    animation: none;
+    filter:
+      invert(1)
+      brightness(1.05)
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55))
+      drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  }
+}
+
 .nav-backdrop {
   position: fixed;
   inset: 0;
@@ -282,12 +341,17 @@ body.menu-open {
   height: calc(100dvh - var(--header-h, 68px));
   display: flex;
   flex-direction: column;
-  background: #14151a;
-  color: #fff;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: #e8eaee;
+  color: #14151a;
+  border-right: 1px solid rgba(20, 21, 26, 0.1);
   padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
   transform: translateX(-105%);
-  transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
+  transition:
+    transform 0.4s var(--ease),
+    visibility 0s linear 0.4s,
+    background 0.45s var(--ease, ease),
+    color 0.45s var(--ease, ease),
+    border-color 0.45s var(--ease, ease);
   z-index: 999;
   box-shadow: var(--shadow-soft, 0 10px 30px rgba(20, 21, 26, 0.06));
   visibility: hidden;
@@ -302,7 +366,12 @@ body.menu-open {
   transform: translateX(0);
   visibility: visible;
   pointer-events: auto;
-  transition: transform 0.4s var(--ease), visibility 0s;
+  transition:
+    transform 0.4s var(--ease),
+    visibility 0s,
+    background 0.45s var(--ease, ease),
+    color 0.45s var(--ease, ease),
+    border-color 0.45s var(--ease, ease);
 }
 
 .mobile-nav ul {
@@ -320,18 +389,34 @@ body.menu-open {
   border-radius: 12px;
   font-weight: 600;
   font-size: 1.05rem;
-  color: #fff;
+  color: #14151a;
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
 
 .mobile-nav a:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(20, 21, 26, 0.06);
   color: var(--accent);
 }
 
 .mobile-nav a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Night menu — current dark panel */
+.mobile-nav.nav-night {
+  background: #14151a;
+  color: #fff;
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav.nav-night a {
+  color: #fff;
+}
+
+.mobile-nav.nav-night a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent);
 }
 
 /* Contact Me — under last menu link, flush to the right edge like a bookmark */
@@ -396,8 +481,12 @@ body.menu-open {
 }
 
 .mobile-nav a.nav-contact-bookmark:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid #14151a;
   outline-offset: 2px;
+}
+
+.mobile-nav.nav-night a.nav-contact-bookmark:focus-visible {
+  outline-color: #fff;
 }
 
 @media (hover: none) {
@@ -442,11 +531,15 @@ body.menu-open {
   font-weight: 600;
   font-size: 1.05rem;
   font-family: inherit;
-  color: #fff;
+  color: #14151a;
   background: transparent;
   border: none;
   text-align: left;
   cursor: default;
+}
+
+.mobile-nav.nav-night .nav-dropdown-header .nav-dropdown-label {
+  color: #fff;
 }
 
 .nav-dropdown-toggle {
@@ -457,16 +550,26 @@ body.menu-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(20, 21, 26, 0.14);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: rgba(20, 21, 26, 0.05);
+  color: #14151a;
   cursor: pointer;
   font: inherit;
-  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 
 .nav-dropdown-toggle:hover {
+  background: rgba(20, 21, 26, 0.08);
+}
+
+.mobile-nav.nav-night .nav-dropdown-toggle {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.mobile-nav.nav-night .nav-dropdown-toggle:hover {
   background: rgba(255, 255, 255, 0.14);
 }
 
@@ -519,7 +622,7 @@ body.menu-open {
   font-size: 0.98rem;
   font-weight: 500;
   padding: 0.75rem 1rem;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(20, 21, 26, 0.62);
 }
 
 .nav-submenu a:hover {
@@ -531,8 +634,13 @@ body.menu-open {
   font-size: 0.98rem;
   font-weight: 500;
   padding: 0.75rem 1rem;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(20, 21, 26, 0.62);
   cursor: default;
+}
+
+.mobile-nav.nav-night .nav-submenu a,
+.mobile-nav.nav-night .nav-submenu .nav-placeholder {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 @media (max-width: 900px) {
@@ -665,7 +773,7 @@ body.menu-open {
   }
 }
 
-/* Footer day/night — night from 5pm–8am America/New_York (EST/EDT) */
+/* Footer day/night — night from 5pm–8am local time */
 .site-footer {
   position: relative;
   overflow: hidden;

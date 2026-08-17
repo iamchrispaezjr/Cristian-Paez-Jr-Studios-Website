@@ -157,8 +157,8 @@
 
   var STORE_HREF = "https://www.iamchrispaezjrstore.com";
   var STORE_LABEL = "Store";
-  var MEMBERS_HREF = "https://www.google.com";
-  var MEMBERS_LABEL = "Members";
+  var MEMBERS_HREF = "https://www.patreon.com/cw/cristianpaezjr";
+  var MEMBERS_LABEL = "Patreon";
   var THRESHOLD = 72;
   var showingMembers = null;
 
@@ -168,7 +168,7 @@
     if (on) {
       btn.href = MEMBERS_HREF;
       btn.textContent = MEMBERS_LABEL;
-      btn.setAttribute("aria-label", "Members");
+      btn.setAttribute("aria-label", "Patreon");
     } else {
       btn.href = STORE_HREF;
       btn.textContent = STORE_LABEL;

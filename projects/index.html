@@ -122,13 +122,25 @@
       outline-offset: 3px;
     }
 
-    .project-card img {
+    .project-card-media {
+      position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 0;
+      padding-top: 100%;
+      overflow: hidden;
+      background: var(--bg-soft);
+      flex-shrink: 0;
+    }
+
+    .project-card-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
       object-fit: cover;
       object-position: center top;
       display: block;
-      background: var(--bg-soft);
     }
 
     .project-card-body {
@@ -333,7 +345,9 @@
 
     <section class="project-row" aria-label="Latest projects">
       <a class="project-card" href="https://www.iamchrispaezjr.com" aria-label="Open Cristian Paez Jr website">
-        <img src="../blog-slide-screenshot.jpg" alt="Screenshot of the Cristian Paez Jr website" width="1440" height="900" />
+        <div class="project-card-media">
+          <img src="../blog-slide-screenshot.jpg" alt="Screenshot of the Cristian Paez Jr website" />
+        </div>
         <div class="project-card-body">
           <time datetime="2026-08-12">Aug 12, 2026</time>
           <h2>This Website</h2>
@@ -349,7 +363,9 @@
         rel="noopener noreferrer"
         aria-label="Open SoundDrop soundboard"
       >
-        <img src="../soundrop-screenshot.jpg" alt="Screenshot of the SoundDrop soundboard" width="1440" height="900" />
+        <div class="project-card-media">
+          <img src="../soundrop-screenshot.jpg" alt="Screenshot of the SoundDrop soundboard" />
+        </div>
         <div class="project-card-body">
           <time datetime="2026-08-14">Aug 14, 2026</time>
           <h2>SoundDrop</h2>

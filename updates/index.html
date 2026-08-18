@@ -107,7 +107,10 @@
     }
 
     .post-link {
-      display: block;
+      display: grid;
+      grid-template-columns: 7.5rem minmax(0, 1fr);
+      gap: 1rem 1.15rem;
+      align-items: start;
       padding: 1.35rem 0.15rem;
       transition: color 0.25s var(--ease), transform 0.25s var(--ease);
     }
@@ -118,6 +121,27 @@
 
     .post-link:hover .post-title {
       color: var(--accent);
+    }
+
+    .post-media {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+    }
+
+    .post-media img {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .post-copy {
+      min-width: 0;
     }
 
     .post-date {
@@ -143,6 +167,16 @@
       color: var(--ink-muted);
       font-size: 0.98rem;
       max-width: 48ch;
+    }
+
+    @media (max-width: 560px) {
+      .post-link {
+        grid-template-columns: 1fr;
+      }
+
+      .post-media {
+        max-width: 16rem;
+      }
     }
 
     .empty-state {
@@ -368,6 +402,19 @@
         link.className = "post-link";
         link.href = window.CPJR_postHref(post.slug, "../");
 
+        var media = document.createElement("div");
+        media.className = "post-media";
+        var img = document.createElement("img");
+        img.src = window.CPJR_postImageSrc(post.image, "../");
+        img.alt = "";
+        img.width = 240;
+        img.height = 150;
+        img.decoding = "async";
+        media.appendChild(img);
+
+        var copy = document.createElement("div");
+        copy.className = "post-copy";
+
         var time = document.createElement("time");
         time.className = "post-date";
         time.setAttribute("datetime", post.date || "");
@@ -381,9 +428,11 @@
         excerpt.className = "post-excerpt";
         excerpt.textContent = post.excerpt || "";
 
-        link.appendChild(time);
-        link.appendChild(title);
-        link.appendChild(excerpt);
+        copy.appendChild(time);
+        copy.appendChild(title);
+        copy.appendChild(excerpt);
+        link.appendChild(media);
+        link.appendChild(copy);
         li.appendChild(link);
         list.appendChild(li);
       });

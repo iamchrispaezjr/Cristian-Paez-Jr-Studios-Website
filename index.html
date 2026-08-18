@@ -376,12 +376,59 @@
     }
 
     .home-posts-inner {
-      max-width: 1100px;
+      max-width: none;
       margin: 0 auto;
     }
 
     .home-posts-intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1.75rem;
+    }
+
+    .home-posts-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+      margin-bottom: 0.15rem;
+    }
+
+    .home-posts-nav-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), opacity 0.2s var(--ease);
+    }
+
+    .home-posts-nav-btn:hover:not(:disabled) {
+      background: var(--surface);
+      border-color: rgba(20, 21, 26, 0.16);
+    }
+
+    .home-posts-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .home-posts-nav-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .home-posts-nav-btn svg {
+      width: 14px;
+      height: 14px;
+      display: block;
     }
 
     .home-posts-intro h2 {
@@ -437,34 +484,80 @@
       outline-offset: 3px;
     }
 
-    .home-posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem 1.5rem;
+    .home-posts-slider {
+      --home-posts-gap: 0.8rem;
+      --home-posts-visible: 4;
+      position: relative;
+    }
+
+    .home-posts-track {
+      display: flex;
+      gap: var(--home-posts-gap);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.2rem 0 0.85rem;
+      scrollbar-width: none;
+    }
+
+    .home-posts-track::-webkit-scrollbar {
+      display: none;
     }
 
     .home-post {
+      flex: 0 0 calc((100% - (var(--home-posts-visible) - 1) * var(--home-posts-gap)) / var(--home-posts-visible));
+      min-width: 0;
+      scroll-snap-align: start;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
-      padding: 1.25rem 0 0;
-      border-top: 2px solid var(--ink);
-      min-height: 100%;
-      transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
 
     .home-post:hover {
       transform: translateY(-3px);
-      border-top-color: var(--accent);
+    }
+
+    .home-post-media {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      overflow: hidden;
+      background: var(--bg-soft);
+      flex-shrink: 0;
+    }
+
+    .home-post-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .home-post:focus-visible {
       outline: 2px solid var(--accent);
-      outline-offset: 4px;
+      outline-offset: 3px;
+    }
+
+    .home-post-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0.85rem 0.9rem 1rem;
     }
 
     .home-post-date {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       text-transform: uppercase;
@@ -473,9 +566,9 @@
 
     .home-post-title {
       font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+      font-size: clamp(1.02rem, 1.4vw, 1.28rem);
       font-weight: 400;
-      line-height: 1.25;
+      line-height: 1.2;
       transition: color 0.25s var(--ease);
     }
 
@@ -485,8 +578,8 @@
 
     .home-post-excerpt {
       color: var(--ink-muted);
-      font-size: 0.95rem;
-      line-height: 1.45;
+      font-size: 0.82rem;
+      line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -498,15 +591,20 @@
       padding: 0.5rem 0 0;
     }
 
-    @media (max-width: 900px) {
-      .home-posts-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 760px) {
+      .home-posts-slider {
+        --home-posts-visible: 3;
       }
     }
 
     @media (max-width: 560px) {
-      .home-posts-grid {
-        grid-template-columns: 1fr;
+      .home-posts-intro {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .home-posts-slider {
+        --home-posts-visible: 2;
       }
     }
 
@@ -1287,10 +1385,26 @@
     <section class="home-posts" aria-labelledby="home-posts-heading">
       <div class="home-posts-inner">
         <header class="home-posts-intro">
-          <h2 id="home-posts-heading">Latest Updates</h2>
-          <p>Recent notes, launches, and what’s new.</p>
+          <div>
+            <h2 id="home-posts-heading">Latest Updates</h2>
+            <p>Recent notes, launches, and what’s new.</p>
+          </div>
+          <div class="home-posts-nav">
+            <button type="button" class="home-posts-nav-btn" id="homePostsPrev" aria-label="Previous updates">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="home-posts-nav-btn" id="homePostsNext" aria-label="Next updates">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </header>
-        <div class="home-posts-grid" id="homePostsGrid"></div>
+        <div class="home-posts-slider">
+          <div class="home-posts-track" id="homePostsGrid"></div>
+        </div>
         <p class="home-posts-empty" id="homePostsEmpty" hidden>First update coming soon.</p>
         <div class="home-posts-footer">
           <a class="home-posts-all" href="updates/">
@@ -1603,28 +1717,37 @@
   <script>
     /* Latest posts under the hero — pulls from posts-data.js */
     (function () {
-      var grid = document.getElementById("homePostsGrid");
+      var track = document.getElementById("homePostsGrid");
       var empty = document.getElementById("homePostsEmpty");
-      if (!grid) return;
+      var prevBtn = document.getElementById("homePostsPrev");
+      var nextBtn = document.getElementById("homePostsNext");
+      if (!track) return;
 
       var posts = typeof window.CPJR_sortedPosts === "function"
         ? window.CPJR_sortedPosts().slice(0, 3)
         : [];
 
-      if (!posts.length) {
-        grid.hidden = true;
-        if (empty) empty.hidden = false;
-        return;
-      }
-
       if (empty) empty.hidden = true;
-      grid.hidden = false;
-      grid.innerHTML = "";
+      track.hidden = false;
 
+      var fragment = document.createDocumentFragment();
       posts.forEach(function (post) {
         var link = document.createElement("a");
         link.className = "home-post";
         link.href = window.CPJR_postHref(post.slug, "");
+
+        var media = document.createElement("div");
+        media.className = "home-post-media";
+        var img = document.createElement("img");
+        img.src = window.CPJR_postImageSrc(post.image, "");
+        img.alt = "";
+        img.width = 640;
+        img.height = 640;
+        img.decoding = "async";
+        media.appendChild(img);
+
+        var body = document.createElement("div");
+        body.className = "home-post-body";
 
         var time = document.createElement("time");
         time.className = "home-post-date";
@@ -1639,11 +1762,51 @@
         excerpt.className = "home-post-excerpt";
         excerpt.textContent = post.excerpt || "";
 
-        link.appendChild(time);
-        link.appendChild(title);
-        link.appendChild(excerpt);
-        grid.appendChild(link);
+        body.appendChild(time);
+        body.appendChild(title);
+        body.appendChild(excerpt);
+        link.appendChild(media);
+        link.appendChild(body);
+        fragment.appendChild(link);
       });
+      track.appendChild(fragment);
+
+      if (!track.children.length) {
+        track.hidden = true;
+        if (empty) empty.hidden = false;
+        if (prevBtn) prevBtn.hidden = true;
+        if (nextBtn) nextBtn.hidden = true;
+        return;
+      }
+
+      function cardStep() {
+        var card = track.querySelector(".home-post");
+        if (!card) return track.clientWidth;
+        var styles = window.getComputedStyle(track);
+        var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+        return card.getBoundingClientRect().width + gap;
+      }
+
+      function updateNav() {
+        if (!prevBtn || !nextBtn) return;
+        var max = Math.max(0, track.scrollWidth - track.clientWidth - 1);
+        prevBtn.disabled = track.scrollLeft <= 1;
+        nextBtn.disabled = track.scrollLeft >= max;
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          track.scrollBy({ left: -cardStep(), behavior: "smooth" });
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          track.scrollBy({ left: cardStep(), behavior: "smooth" });
+        });
+      }
+      track.addEventListener("scroll", updateNav, { passive: true });
+      window.addEventListener("resize", updateNav);
+      updateNav();
     })();
   </script>
 

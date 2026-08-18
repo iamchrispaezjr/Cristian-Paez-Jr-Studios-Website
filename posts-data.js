@@ -9,6 +9,7 @@ window.CPJR_POSTS = [
     slug: "leveling-up-my-web-setup",
     title: "Leveling Up My Web Setup :D",
     date: "2026-08-16",
+    image: "blog-slide-screenshot.jpg",
     excerpt:
       "Custom hamburger menu, day/night shift, social links, and more — how the site finally started to feel right."
   },
@@ -16,6 +17,7 @@ window.CPJR_POSTS = [
     slug: "why-i-created-sounddrop",
     title: "Why I Created SoundDrop (Official Name TBD)",
     date: "2026-08-14",
+    image: "soundrop-screenshot.jpg",
     excerpt:
       "Boredom, memes, and a hate of complicated UIs — how my first web project soundboard came to life."
   },
@@ -23,6 +25,7 @@ window.CPJR_POSTS = [
     slug: "welcome-to-my-website",
     title: "Welcome to My Website",
     date: "2026-08-12",
+    image: "youtube-slide-screenshot.jpg",
     excerpt:
       "Why I left template sites behind and built this hub from scratch — plus what’s coming next."
   }
@@ -46,4 +49,8 @@ window.CPJR_sortedPosts = function () {
 
 window.CPJR_postHref = function (slug, rootPrefix) {
   return (rootPrefix || "") + "posts/" + slug + "/";
+};
+
+window.CPJR_postImageSrc = function (image, rootPrefix) {
+  return (rootPrefix || "") + (image || "blog-slide-screenshot.jpg");
 };

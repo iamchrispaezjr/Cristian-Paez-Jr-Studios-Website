@@ -157,7 +157,7 @@
 
   var STORE_HREF = "https://www.iamchrispaezjrstore.com";
   var STORE_LABEL = "Store";
-  var MEMBERS_HREF = "https://www.patreon.com/cw/cristianpaezjr";
+  var MEMBERS_HREF = "https://www.patreon.com/cw/cristianpaezjr/membership";
   var MEMBERS_LABEL = "Patreon";
   var THRESHOLD = 72;
   var showingMembers = null;

@@ -150,7 +150,8 @@
       padding: 1rem 1.1rem 1.15rem;
     }
 
-    .project-card time {
+    .project-card time,
+    .project-card .project-date {
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.02em;
@@ -175,6 +176,59 @@
       font-size: 0.85rem;
       font-weight: 700;
       color: var(--ink);
+    }
+
+    .project-card--soon {
+      cursor: default;
+    }
+
+    .project-card--soon:hover {
+      transform: none;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-card-media.is-grey {
+      background: #c5c8ce;
+    }
+
+    .project-card-media.is-grey img {
+      filter: grayscale(1) contrast(0.9) brightness(0.78);
+    }
+
+    .project-card-status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      line-height: 1.2;
+      color: rgba(20, 21, 26, 0.55);
+      background: rgba(197, 200, 206, 0.35);
+      z-index: 1;
+    }
+
+    .project-card-media.is-grey .project-card-status {
+      background: rgba(80, 84, 90, 0.28);
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 1px 8px rgba(20, 21, 26, 0.35);
+    }
+
+    .project-card-media.is-soon {
+      background:
+        repeating-linear-gradient(
+          -18deg,
+          #d8dbe1 0 12px,
+          #e4e6eb 12px 24px
+        );
+    }
+
+    .project-card-media.is-soon .project-card-status {
+      background: rgba(247, 248, 250, 0.55);
+      color: var(--ink-muted);
     }
 
     .site-footer {
@@ -373,6 +427,31 @@
           <span class="project-card-cta">Open project →</span>
         </div>
       </a>
+
+      <article class="project-card project-card--soon" aria-label="Disease Imagined, in production">
+        <div class="project-card-media is-grey">
+          <img src="../disease-imagined-screenshot.jpg" alt="" />
+          <span class="project-card-status">In Production</span>
+        </div>
+        <div class="project-card-body">
+          <span class="project-date">In production</span>
+          <h2>Disease Imagined</h2>
+          <p>An original project still being built — not available to play yet.</p>
+          <span class="project-card-cta">Coming soon</span>
+        </div>
+      </article>
+
+      <article class="project-card project-card--soon" aria-label="TBD book, coming soon">
+        <div class="project-card-media is-soon">
+          <span class="project-card-status">Coming Soon</span>
+        </div>
+        <div class="project-card-body">
+          <span class="project-date">Book</span>
+          <h2>TBD</h2>
+          <p>A book in the works. Title and cover still under wraps.</p>
+          <span class="project-card-cta">Coming soon</span>
+        </div>
+      </article>
     </section>
   </main>
 

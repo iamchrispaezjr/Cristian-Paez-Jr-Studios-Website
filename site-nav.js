@@ -233,6 +233,9 @@
   bindSocialFade(".site-footer .social-links", function () {
     return mobileQuery.matches;
   });
+  bindSocialFade(".site-footer .footer-links", function () {
+    return mobileQuery.matches;
+  });
 
   onBreakpointChange(desktopQuery, function () {
     document.querySelectorAll(".header-right .social-links").forEach(function (el) {
@@ -240,7 +243,7 @@
     });
   });
   onBreakpointChange(mobileQuery, function () {
-    document.querySelectorAll(".site-footer .social-links").forEach(function (el) {
+    document.querySelectorAll(".site-footer .social-links, .site-footer .footer-links").forEach(function (el) {
       syncFade(el, mobileQuery.matches);
     });
   });

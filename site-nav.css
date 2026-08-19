@@ -1089,7 +1089,7 @@ body.menu-open {
   border: 1px solid rgba(20, 21, 26, 0.1);
   border-radius: 16px;
   box-shadow: 0 16px 40px rgba(20, 21, 26, 0.14);
-  overflow: hidden;
+  overflow: visible;
   opacity: 0;
   transform: translateY(18px) scale(0.98);
   pointer-events: none;
@@ -1108,6 +1108,7 @@ body.menu-open {
   transform: translateY(0) scale(1);
   pointer-events: auto;
   visibility: visible;
+  animation: announce-glow 0.95s ease-out;
   transition:
     opacity 0.45s var(--ease, ease),
     transform 0.45s var(--ease, ease),
@@ -1117,11 +1118,95 @@ body.menu-open {
     border-color 0.45s var(--ease, ease);
 }
 
+.announce-toast-rays,
+.announce-toast-flash {
+  pointer-events: none;
+}
+
+.announce-toast-rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 230%;
+  height: 230%;
+  transform: translate(-50%, -50%) rotate(-8deg) scale(0.55);
+  opacity: 0;
+  background: repeating-conic-gradient(
+    from -6deg,
+    transparent 0deg 14deg,
+    rgba(255, 236, 120, 0) 14deg 16deg,
+    rgba(255, 226, 70, 0.95) 17deg 21deg,
+    rgba(255, 248, 190, 0.85) 21deg 22deg,
+    rgba(255, 226, 70, 0) 23deg 25deg,
+    transparent 25deg 40deg
+  );
+  -webkit-mask-image: radial-gradient(circle, #000 6%, transparent 58%);
+  mask-image: radial-gradient(circle, #000 6%, transparent 58%);
+}
+
+.announce-toast-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 252, 220, 0.95) 0%, rgba(255, 224, 80, 0.45) 38%, transparent 72%);
+}
+
+.announce-toast.is-visible .announce-toast-rays {
+  animation: announce-rays 0.9s ease-out both;
+}
+
+.announce-toast.is-visible .announce-toast-flash {
+  animation: announce-flash 0.7s ease-out both;
+}
+
+@keyframes announce-rays {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-16deg) scale(0.4);
+  }
+  16% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(2deg) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(18deg) scale(1.28);
+  }
+}
+
+@keyframes announce-flash {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes announce-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 220, 60, 0), 0 16px 40px rgba(20, 21, 26, 0.14);
+  }
+  22% {
+    box-shadow: 0 0 46px 14px rgba(255, 220, 50, 0.62), 0 16px 40px rgba(20, 21, 26, 0.14);
+  }
+  100% {
+    box-shadow: 0 16px 40px rgba(20, 21, 26, 0.14);
+  }
+}
+
 .announce-toast-close {
   position: absolute;
   top: 0.55rem;
   right: 0.55rem;
-  z-index: 2;
+  z-index: 4;
   width: 30px;
   height: 30px;
   border: 0;
@@ -1148,6 +1233,8 @@ body.menu-open {
 }
 
 .announce-toast-link {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 5.75rem 1fr;
   gap: 0.85rem;
@@ -1218,6 +1305,22 @@ html.site-night .announce-toast {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
 }
 
+html.site-night .announce-toast.is-visible {
+  animation-name: announce-glow-night;
+}
+
+@keyframes announce-glow-night {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 220, 60, 0), 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+  22% {
+    box-shadow: 0 0 52px 16px rgba(255, 226, 70, 0.5), 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+  100% {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+}
+
 html.site-night .announce-toast-close {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
@@ -1265,5 +1368,12 @@ html.site-night .announce-toast-cta {
   .announce-toast.is-visible {
     transition: none;
     transform: none;
+    animation: none;
+  }
+
+  .announce-toast.is-visible .announce-toast-rays,
+  .announce-toast.is-visible .announce-toast-flash {
+    animation: none;
+    opacity: 0;
   }
 }

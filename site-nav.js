@@ -501,8 +501,10 @@
     if (!toast) toast = buildToast();
     document.body.appendChild(toast);
     window.requestAnimationFrame(function () {
-      toast.classList.add("is-visible");
-      playAnnounceSound();
+      window.requestAnimationFrame(function () {
+        toast.classList.add("is-visible");
+        playAnnounceSound();
+      });
     });
   }
 
@@ -575,8 +577,18 @@
 
     link.appendChild(media);
     link.appendChild(copy);
+    var rays = document.createElement("div");
+    rays.className = "announce-toast-rays";
+    rays.setAttribute("aria-hidden", "true");
+
+    var flash = document.createElement("div");
+    flash.className = "announce-toast-flash";
+    flash.setAttribute("aria-hidden", "true");
+
+    el.appendChild(rays);
     el.appendChild(close);
     el.appendChild(link);
+    el.appendChild(flash);
     return el;
   }
 

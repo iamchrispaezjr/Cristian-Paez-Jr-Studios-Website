@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Links — Cristian Paez Jr</title>
+  <meta name="description" content="All of Cristian Paez Jr’s links — web projects, socials, and more." />
+  <link rel="icon" href="../favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Gloria+Hallelujah&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --bg-soft: #e8eaee;
+      --surface: #ffffff;
+      --ink: #14151a;
+      --ink-muted: #5c616b;
+      --border: rgba(20, 21, 26, 0.08);
+      --accent: #89CFF0;
+      --radius-pill: 999px;
+      --font-display: "Gloria Hallelujah", cursive;
+      --font-body: "DM Sans", sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow-soft: 0 10px 30px rgba(20, 21, 26, 0.06);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #dfe7ef 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #e4ebe6 0%, transparent 50%),
+        linear-gradient(180deg, #f7f8fa 0%, var(--bg) 40%, #eef0f3 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      width: 100%;
+      max-width: 28rem;
+      margin: 0 auto;
+      padding: clamp(2rem, 6vw, 3.25rem) clamp(1.15rem, 5vw, 1.75rem) 3.5rem;
+    }
+
+    .page-intro {
+      margin-bottom: 1.75rem;
+      text-align: center;
+    }
+
+    .links-avatar {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid #fff;
+      box-shadow: var(--shadow-soft);
+      margin: 0 auto 0.85rem;
+      display: block;
+    }
+
+    .page-intro h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 0.35rem;
+    }
+
+    .page-intro p {
+      color: var(--ink-muted);
+      font-size: 0.98rem;
+    }
+
+    .link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .link-group h2 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-bottom: 0.15rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      min-height: 3.35rem;
+      padding: 0.55rem 1rem 0.55rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(137, 207, 240, 0.7);
+      box-shadow: 0 10px 24px rgba(20, 21, 26, 0.1);
+    }
+
+    .link-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .link-btn img {
+      width: 2.15rem;
+      height: 2.15rem;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background: var(--bg-soft);
+      flex-shrink: 0;
+    }
+
+    .link-btn span {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .link-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 0.35rem;
+    }
+
+    .link-icons a {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+
+    .link-icons a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(137, 207, 240, 0.7);
+    }
+
+    .link-icons a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .link-icons img {
+      width: 1.15rem;
+      height: 1.15rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-intro">
+      <a href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
+        <img class="links-avatar" src="../about-me.jpg" alt="" width="176" height="176" />
+      </a>
+      <h1>Links</h1>
+      <p>Cristian Paez Jr</p>
+    </header>
+
+    <section class="link-group" aria-labelledby="links-web">
+      <h2 id="links-web">Web Projects</h2>
+      <a class="link-btn" href="https://www.iamchrispaezjr.com" aria-label="This Website">
+        <img src="../favicon.png" alt="" width="34" height="34" />
+        <span>This Website</span>
+      </a>
+      <a
+        class="link-btn"
+        href="https://iamchrispaezjr.github.io/SoundDrop/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="SoundDrop soundboard"
+      >
+        <img src="../soundrop-screenshot.jpg" alt="" width="34" height="34" />
+        <span>SoundDrop</span>
+      </a>
+      <nav class="link-icons" aria-label="Social">
+        <a href="https://www.youtube.com/channel/UCWYtgKKmHAml5dol4--5GJQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <img src="../icons/youtube.png?v=4" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.instagram.com/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="../icons/instagram.png?v=3" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.threads.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="../icons/threads.png?v=3" alt="" width="18" height="18" />
+        </a>
+        <a href="https://x.com/iamchrispjr" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../icons/x.png?v=3" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.tiktok.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../icons/tiktok.png?v=3" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.snapchat.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+          <img src="../icons/snapchat.png?v=4" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.pinterest.com/iamchrispaezjroff/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+          <img src="../icons/pinterest.png?v=6" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.twitch.tv/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+          <img src="../icons/twitch.png?v=3" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </section>
+
+    <section class="link-group" aria-labelledby="links-apps">
+      <h2 id="links-apps">Apps &amp; Games</h2>
+      <nav class="link-icons" aria-label="Apps and games">
+        <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer" aria-label="App Store">
+          <img src="../icons/apple-apps.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" aria-label="Google Play">
+          <img src="../icons/google-play.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://itch.io/" target="_blank" rel="noopener noreferrer" aria-label="itch.io">
+          <img src="../icons/itch-io.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer" aria-label="Steam">
+          <img src="../icons/steam-logo.png?v=1" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </section>
+
+    <section class="link-group" aria-labelledby="links-books">
+      <h2 id="links-books">Books &amp; Comics</h2>
+      <nav class="link-icons" aria-label="Books and comics">
+        <a href="https://www.amazon.com/stores/Cristian-Paez-Jr/author/B0GV6KYY27?ref=ap_rdr&amp;shoppingPortalEnabled=true&amp;ccs_id=80c57f9e-624e-44c2-b58a-2f8451f99da0" target="_blank" rel="noopener noreferrer" aria-label="Amazon">
+          <img src="../icons/amazon.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://books.apple.com/" target="_blank" rel="noopener noreferrer" aria-label="Apple Books">
+          <img src="../icons/apple-books.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.webtoons.com/" target="_blank" rel="noopener noreferrer" aria-label="WEBTOON">
+          <img src="../icons/webtoon.png?v=1" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </section>
+
+    <section class="link-group" aria-labelledby="links-music">
+      <h2 id="links-music">Music</h2>
+      <nav class="link-icons" aria-label="Music">
+        <a href="https://music.apple.com/" target="_blank" rel="noopener noreferrer" aria-label="Apple Music">
+          <img src="../icons/apple-music.png?v=1" alt="" width="18" height="18" />
+        </a>
+        <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+          <img src="../icons/spotify.png?v=1" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </section>
+
+    <section class="link-group" aria-labelledby="links-support">
+      <h2 id="links-support">Support</h2>
+      <nav class="link-icons" aria-label="Support">
+        <a href="https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG" target="_blank" rel="noopener noreferrer" aria-label="PayPal">
+          <img src="../icons/paypal.png?v=1" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </section>
+  </main>
+</body>
+</html>

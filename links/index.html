@@ -179,6 +179,10 @@
       .links-blob {
         animation: none;
       }
+
+      .links-avatar {
+        transition: none;
+      }
     }
 
     a {
@@ -369,18 +373,32 @@
     .page-intro {
       margin-bottom: 1.75rem;
       text-align: center;
+      --avatar-size: clamp(6.85rem, 21vw, 7.75rem);
+      --avatar-border: 3.5px;
+      --avatar-gap: 0.95rem;
+    }
+
+    .page-intro.is-scrolled {
+      --avatar-size: 5.5rem;
+      --avatar-border: 3px;
+      --avatar-gap: 0.85rem;
     }
 
     .links-avatar {
-      width: 5.5rem;
-      height: 5.5rem;
+      width: var(--avatar-size);
+      height: var(--avatar-size);
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
-      border: 3px solid #fff;
+      border: var(--avatar-border) solid #fff;
       box-shadow: var(--shadow-soft);
-      margin: 0 auto 0.85rem;
+      margin: 0 auto var(--avatar-gap);
       display: block;
+      transition:
+        width 0.4s var(--ease),
+        height 0.4s var(--ease),
+        border-width 0.4s var(--ease),
+        margin 0.4s var(--ease);
     }
 
     .page-intro h1 {
@@ -573,7 +591,7 @@
   </div>
 
   <main>
-    <header class="page-intro">
+    <header class="page-intro" id="linksIntro">
       <a href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
         <img class="links-avatar" src="../about-me.jpg" alt="" width="176" height="176" />
       </a>
@@ -765,6 +783,20 @@
         } catch (err) {}
         document.body.removeChild(input);
       });
+    })();
+
+    (function () {
+      var intro = document.getElementById("linksIntro");
+      if (!intro) return;
+
+      var threshold = 28;
+
+      function syncAvatarScroll() {
+        intro.classList.toggle("is-scrolled", window.scrollY > threshold);
+      }
+
+      window.addEventListener("scroll", syncAvatarScroll, { passive: true });
+      syncAvatarScroll();
     })();
   </script>
 </body>

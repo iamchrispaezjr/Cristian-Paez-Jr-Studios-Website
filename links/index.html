@@ -250,6 +250,7 @@
     .links-corner-pill {
       background: var(--accent);
       color: var(--accent-text);
+      min-width: 5.65rem;
     }
 
     .links-corner-pill:hover {
@@ -267,6 +268,7 @@
       background: var(--surface);
       color: var(--ink);
       border: 1px solid var(--border);
+      min-width: 6.35rem;
     }
 
     .links-contact-pill:hover {
@@ -552,9 +554,9 @@
   </div>
 
   <div class="links-top-bar">
-    <a class="links-corner-pill" href="https://www.iamchrispaezjr.com/#mc_embed_signup">Subscribe</a>
+    <a class="links-corner-pill" id="linksPrimaryPill" href="https://www.iamchrispaezjr.com/#mc_embed_signup">Subscribe</a>
     <div class="links-top-actions">
-      <a class="links-contact-pill" href="../contact/">Contact Me</a>
+      <a class="links-contact-pill" id="linksSecondaryPill" href="../contact/">Contact Me</a>
       <div class="links-share-wrap" id="linksShareWrap">
       <button
         type="button"
@@ -800,16 +802,56 @@
 
     (function () {
       var intro = document.getElementById("linksIntro");
-      if (!intro) return;
-
+      var primaryPill = document.getElementById("linksPrimaryPill");
+      var secondaryPill = document.getElementById("linksSecondaryPill");
       var threshold = 28;
 
-      function syncAvatarScroll() {
-        intro.classList.toggle("is-scrolled", window.scrollY > threshold);
+      var subscribeState = {
+        href: "https://www.iamchrispaezjr.com/#mc_embed_signup",
+        label: "Subscribe",
+        aria: "Subscribe to newsletter"
+      };
+      var storeState = {
+        href: "https://www.iamchrispaezjrstore.com",
+        label: "Store",
+        aria: "Store",
+        external: true
+      };
+      var contactState = {
+        href: "../contact/",
+        label: "Contact Me",
+        aria: "Contact Me"
+      };
+      var patreonState = {
+        href: "https://www.patreon.com/cw/cristianpaezjr/membership",
+        label: "Patreon",
+        aria: "Patreon",
+        external: true
+      };
+
+      function applyPill(el, state) {
+        if (!el) return;
+        el.href = state.href;
+        el.textContent = state.label;
+        el.setAttribute("aria-label", state.aria);
+        if (state.external) {
+          el.target = "_blank";
+          el.rel = "noopener noreferrer";
+        } else {
+          el.removeAttribute("target");
+          el.removeAttribute("rel");
+        }
       }
 
-      window.addEventListener("scroll", syncAvatarScroll, { passive: true });
-      syncAvatarScroll();
+      function syncScrollState() {
+        var scrolled = window.scrollY > threshold;
+        if (intro) intro.classList.toggle("is-scrolled", scrolled);
+        applyPill(primaryPill, scrolled ? storeState : subscribeState);
+        applyPill(secondaryPill, scrolled ? patreonState : contactState);
+      }
+
+      window.addEventListener("scroll", syncScrollState, { passive: true });
+      syncScrollState();
     })();
   </script>
 </body>

@@ -895,7 +895,6 @@
     })();
 
     (function () {
-      var DRAW_KEY = "cpjr-links-name-drawn";
       var LETTER_MS = 420;
       var LETTER_GAP = 55;
       var svg = document.getElementById("linksNameSvg");
@@ -1015,9 +1014,6 @@
           doneCount += 1;
           if (doneCount !== tracks.length) return;
           showComplete();
-          try {
-            sessionStorage.setItem(DRAW_KEY, "1");
-          } catch (err) {}
         }
 
         tracks.forEach(function (track) {
@@ -1035,18 +1031,6 @@
           showComplete();
           return;
         }
-
-        var forceReplay = new URLSearchParams(window.location.search).has("replay-name");
-
-        try {
-          if (!forceReplay && sessionStorage.getItem(DRAW_KEY) === "1") {
-            showComplete();
-            return;
-          }
-          if (forceReplay) {
-            sessionStorage.removeItem(DRAW_KEY);
-          }
-        } catch (err) {}
 
         startDraw();
       }

@@ -149,6 +149,19 @@
       border-radius: 16px;
       box-shadow: var(--shadow-soft);
       min-width: 0;
+      color: inherit;
+      text-decoration: none;
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
+    }
+
+    .platform-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(137, 207, 240, 0.7);
+    }
+
+    .platform-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
     }
 
     .platform-card-top {
@@ -471,7 +484,7 @@
       <p>Ad space only — banners, video units, and in-feed inventory on my web and tech platforms. Not brand deals. Not this website.</p>
       <div class="followers-total">
         <span class="followers-total-label">Total followers</span>
-        <span class="followers-total-value" data-count="2730">0</span>
+        <span class="followers-total-value" data-count="2731">0</span>
       </div>
     </header>
 
@@ -488,7 +501,13 @@
         Current follower counts across the main social platforms. Numbers are listed manually and animate in when the page loads.
       </p>
       <div class="platform-grid">
-        <article class="platform-card">
+        <a
+          class="platform-card"
+          href="https://www.youtube.com/channel/UCWYtgKKmHAml5dol4--5GJQ"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="YouTube — 160 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/youtube.png?v=4" alt="" width="22" height="22" />
             <h3>YouTube</h3>
@@ -497,8 +516,14 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="160">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.instagram.com/iamchrispaezjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram — 104 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/instagram.png?v=3" alt="" width="22" height="22" />
             <h3>Instagram</h3>
@@ -507,8 +532,14 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="104">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.threads.com/@iamchrispaezjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Threads — 26 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/threads.png?v=3" alt="" width="22" height="22" />
             <h3>Threads</h3>
@@ -517,8 +548,14 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="26">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.tiktok.com/@iamchrispaezjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok — 2394 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/tiktok.png?v=3" alt="" width="22" height="22" />
             <h3>TikTok</h3>
@@ -527,8 +564,14 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="2394">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://x.com/iamchrispjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X — 15 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/x.png?v=3" alt="" width="22" height="22" />
             <h3>X</h3>
@@ -537,8 +580,14 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="15">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.snapchat.com/@iamchrispaezjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Snapchat — 30 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/snapchat.png?v=4" alt="" width="22" height="22" />
             <h3>Snapchat</h3>
@@ -547,18 +596,30 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="30">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.pinterest.com/iamchrispaezjroff/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Pinterest — 2 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/pinterest.png?v=6" alt="" width="22" height="22" />
             <h3>Pinterest</h3>
           </div>
           <div class="platform-stat">
             <span class="platform-stat-label">Followers</span>
-            <span class="platform-stat-value" data-count="1">0</span>
+            <span class="platform-stat-value" data-count="2">0</span>
           </div>
-        </article>
-        <article class="platform-card">
+        </a>
+        <a
+          class="platform-card"
+          href="https://www.twitch.tv/iamchrispaezjr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitch — 0 followers"
+        >
           <div class="platform-card-top">
             <img src="../icons/twitch.png?v=3" alt="" width="22" height="22" />
             <h3>Twitch</h3>
@@ -567,7 +628,7 @@
             <span class="platform-stat-label">Followers</span>
             <span class="platform-stat-value" data-count="0">0</span>
           </div>
-        </article>
+        </a>
       </div>
       <p class="kit-note">Follower totals are approximate and updated by hand. The personal site is not part of this inventory.</p>
     </section>

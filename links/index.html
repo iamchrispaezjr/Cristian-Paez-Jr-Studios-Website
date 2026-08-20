@@ -39,13 +39,146 @@
     body {
       font-family: var(--font-body);
       color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #dfe7ef 0%, transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, #e4ebe6 0%, transparent 50%),
-        linear-gradient(180deg, #f7f8fa 0%, var(--bg) 40%, #eef0f3 100%);
+      position: relative;
+      overflow-x: hidden;
+      background: #eaf4ff;
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+    }
+
+    .links-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .links-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(58px);
+      opacity: 0.78;
+      will-change: transform;
+    }
+
+    .links-blob-a {
+      width: min(78vw, 30rem);
+      height: min(78vw, 30rem);
+      background: #89cff0;
+      top: -14%;
+      left: -20%;
+      animation: links-lava-a 14s ease-in-out infinite;
+    }
+
+    .links-blob-b {
+      width: min(70vw, 27rem);
+      height: min(70vw, 27rem);
+      background: #ffb7d5;
+      top: 24%;
+      right: -22%;
+      animation: links-lava-b 17s ease-in-out infinite;
+    }
+
+    .links-blob-c {
+      width: min(64vw, 25rem);
+      height: min(64vw, 25rem);
+      background: #ffe08a;
+      bottom: -16%;
+      left: 6%;
+      animation: links-lava-c 16s ease-in-out infinite;
+    }
+
+    .links-blob-d {
+      width: min(60vw, 23rem);
+      height: min(60vw, 23rem);
+      background: #9ef0c8;
+      bottom: 14%;
+      right: 4%;
+      animation: links-lava-d 18s ease-in-out infinite;
+    }
+
+    @keyframes links-lava-a {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(18vw, 12vh) scale(1.14);
+      }
+
+      50% {
+        transform: translate(8vw, 24vh) scale(0.92);
+      }
+
+      75% {
+        transform: translate(-10vw, 10vh) scale(1.08);
+      }
+    }
+
+    @keyframes links-lava-b {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(-16vw, 10vh) scale(1.1);
+      }
+
+      50% {
+        transform: translate(-8vw, -14vh) scale(0.9);
+      }
+
+      75% {
+        transform: translate(-20vw, 6vh) scale(1.06);
+      }
+    }
+
+    @keyframes links-lava-c {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(14vw, -12vh) scale(1.12);
+      }
+
+      50% {
+        transform: translate(-6vw, -18vh) scale(0.94);
+      }
+
+      75% {
+        transform: translate(10vw, -8vh) scale(1.08);
+      }
+    }
+
+    @keyframes links-lava-d {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(-12vw, -10vh) scale(0.92);
+      }
+
+      50% {
+        transform: translate(10vw, -16vh) scale(1.12);
+      }
+
+      75% {
+        transform: translate(-6vw, 8vh) scale(1.02);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .links-blob {
+        animation: none;
+      }
     }
 
     a {
@@ -54,6 +187,8 @@
     }
 
     main {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 28rem;
       margin: 0 auto;
@@ -291,13 +426,12 @@
       box-shadow: var(--shadow-soft);
       font-weight: 600;
       font-size: 0.95rem;
-      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
     }
 
     .link-btn:hover {
       transform: translateY(-2px);
       border-color: rgba(137, 207, 240, 0.7);
-      box-shadow: 0 10px 24px rgba(20, 21, 26, 0.1);
     }
 
     .link-btn:focus-visible {
@@ -336,16 +470,16 @@
       border-radius: 50%;
       background: var(--surface);
       border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease);
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
     }
 
     .link-icons a:hover {
       transform: translateY(-2px);
-      border-color: rgba(137, 207, 240, 0.7);
+      background: rgba(137, 207, 240, 0.92);
+      border-color: rgba(110, 184, 227, 0.45);
     }
 
     .link-icons a:focus-visible {
@@ -368,9 +502,7 @@
         scroll-snap-type: x proximity;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
-        margin-left: -0.15rem;
-        margin-right: -0.15rem;
-        padding: 0.15rem 0.15rem 0.35rem;
+        padding: 0.1rem 0;
       }
 
       .link-icons::-webkit-scrollbar {
@@ -385,6 +517,13 @@
   </style>
 </head>
 <body>
+  <div class="links-bg" aria-hidden="true">
+    <span class="links-blob links-blob-a"></span>
+    <span class="links-blob links-blob-b"></span>
+    <span class="links-blob links-blob-c"></span>
+    <span class="links-blob links-blob-d"></span>
+  </div>
+
   <div class="links-top-bar">
     <a class="links-corner-pill" href="https://www.iamchrispaezjr.com/#mc_embed_signup">Subscribe</a>
     <div class="links-top-actions">

@@ -909,6 +909,12 @@
 
       function showComplete() {
         svg.classList.add("is-complete");
+        fills.forEach(function (fill) {
+          fill.style.opacity = "1";
+        });
+        strokes.forEach(function (stroke) {
+          stroke.style.opacity = "0";
+        });
       }
 
       function buildLetters(letters) {

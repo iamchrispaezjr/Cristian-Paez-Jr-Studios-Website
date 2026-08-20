@@ -84,6 +84,33 @@
       margin: 0 auto;
     }
 
+    .followers-total {
+      margin: 1.35rem auto 0;
+      max-width: 22rem;
+      padding: 1rem 1.15rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .followers-total-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .followers-total-value {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 8vw, 3.35rem);
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
     .kit-section {
       margin-bottom: 2.5rem;
     }
@@ -107,7 +134,7 @@
 
     .platform-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0.85rem;
       margin-top: 1.15rem;
     }
@@ -253,6 +280,13 @@
 
     .kit-cta-secondary:hover {
       border-color: rgba(137, 207, 240, 0.7);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .followers-total-value,
+      .platform-stat-value {
+        transition: none;
+      }
     }
 
     @media (max-width: 860px) {
@@ -435,6 +469,10 @@
     <header class="page-intro">
       <h1>Media Kit</h1>
       <p>Ad space only — banners, video units, and in-feed inventory on my web and tech platforms. Not brand deals. Not this website.</p>
+      <div class="followers-total">
+        <span class="followers-total-label">Total followers</span>
+        <span class="followers-total-value" data-count="2730">0</span>
+      </div>
     </header>
 
     <section class="kit-section">
@@ -445,83 +483,93 @@
     </section>
 
     <section class="kit-section">
-      <h2>Where the ads run</h2>
+      <h2>Audience</h2>
       <p>
-        Inventory lives on web- and tech-focused properties — currently YouTube, X, Threads, SoundDrop, and itch.io. Audience numbers will fill in here once a stats pipeline is connected.
+        Current follower counts across the main social platforms. Numbers are listed manually and animate in when the page loads.
       </p>
       <div class="platform-grid">
-        <article class="platform-card" data-platform="youtube">
+        <article class="platform-card">
           <div class="platform-card-top">
             <img src="../icons/youtube.png?v=4" alt="" width="22" height="22" />
             <h3>YouTube</h3>
           </div>
           <div class="platform-stat">
-            <span class="platform-stat-label">Subscribers</span>
-            <span class="platform-stat-value" data-stat="followers">TBD</span>
-          </div>
-          <div class="platform-stat">
-            <span class="platform-stat-label">Avg. views</span>
-            <span class="platform-stat-value" data-stat="avgViews">TBD</span>
+            <span class="platform-stat-label">Followers</span>
+            <span class="platform-stat-value" data-count="160">0</span>
           </div>
         </article>
-        <article class="platform-card" data-platform="x">
+        <article class="platform-card">
           <div class="platform-card-top">
-            <img src="../icons/x.png?v=3" alt="" width="22" height="22" />
-            <h3>X</h3>
+            <img src="../icons/instagram.png?v=3" alt="" width="22" height="22" />
+            <h3>Instagram</h3>
           </div>
           <div class="platform-stat">
             <span class="platform-stat-label">Followers</span>
-            <span class="platform-stat-value" data-stat="followers">TBD</span>
-          </div>
-          <div class="platform-stat">
-            <span class="platform-stat-label">Avg. impressions</span>
-            <span class="platform-stat-value" data-stat="avgViews">TBD</span>
+            <span class="platform-stat-value" data-count="104">0</span>
           </div>
         </article>
-        <article class="platform-card" data-platform="threads">
+        <article class="platform-card">
           <div class="platform-card-top">
             <img src="../icons/threads.png?v=3" alt="" width="22" height="22" />
             <h3>Threads</h3>
           </div>
           <div class="platform-stat">
             <span class="platform-stat-label">Followers</span>
-            <span class="platform-stat-value" data-stat="followers">TBD</span>
-          </div>
-          <div class="platform-stat">
-            <span class="platform-stat-label">Avg. impressions</span>
-            <span class="platform-stat-value" data-stat="avgViews">TBD</span>
+            <span class="platform-stat-value" data-count="26">0</span>
           </div>
         </article>
-        <article class="platform-card" data-platform="sounddrop">
+        <article class="platform-card">
           <div class="platform-card-top">
-            <img src="../soundrop-screenshot.jpg" alt="" width="22" height="22" style="border-radius: 6px; object-fit: cover;" />
-            <h3>SoundDrop</h3>
-          </div>
-          <div class="platform-stat">
-            <span class="platform-stat-label">Monthly users</span>
-            <span class="platform-stat-value" data-stat="followers">TBD</span>
-          </div>
-          <div class="platform-stat">
-            <span class="platform-stat-label">Monthly plays</span>
-            <span class="platform-stat-value" data-stat="avgViews">TBD</span>
-          </div>
-        </article>
-        <article class="platform-card" data-platform="itch">
-          <div class="platform-card-top">
-            <img src="../icons/itch-io.png?v=1" alt="" width="22" height="22" />
-            <h3>itch.io</h3>
+            <img src="../icons/tiktok.png?v=3" alt="" width="22" height="22" />
+            <h3>TikTok</h3>
           </div>
           <div class="platform-stat">
             <span class="platform-stat-label">Followers</span>
-            <span class="platform-stat-value" data-stat="followers">TBD</span>
+            <span class="platform-stat-value" data-count="2394">0</span>
+          </div>
+        </article>
+        <article class="platform-card">
+          <div class="platform-card-top">
+            <img src="../icons/x.png?v=3" alt="" width="22" height="22" />
+            <h3>X</h3>
           </div>
           <div class="platform-stat">
-            <span class="platform-stat-label">Page views</span>
-            <span class="platform-stat-value" data-stat="avgViews">TBD</span>
+            <span class="platform-stat-label">Followers</span>
+            <span class="platform-stat-value" data-count="15">0</span>
+          </div>
+        </article>
+        <article class="platform-card">
+          <div class="platform-card-top">
+            <img src="../icons/snapchat.png?v=4" alt="" width="22" height="22" />
+            <h3>Snapchat</h3>
+          </div>
+          <div class="platform-stat">
+            <span class="platform-stat-label">Followers</span>
+            <span class="platform-stat-value" data-count="30">0</span>
+          </div>
+        </article>
+        <article class="platform-card">
+          <div class="platform-card-top">
+            <img src="../icons/pinterest.png?v=6" alt="" width="22" height="22" />
+            <h3>Pinterest</h3>
+          </div>
+          <div class="platform-stat">
+            <span class="platform-stat-label">Followers</span>
+            <span class="platform-stat-value" data-count="1">0</span>
+          </div>
+        </article>
+        <article class="platform-card">
+          <div class="platform-card-top">
+            <img src="../icons/twitch.png?v=3" alt="" width="22" height="22" />
+            <h3>Twitch</h3>
+          </div>
+          <div class="platform-stat">
+            <span class="platform-stat-label">Followers</span>
+            <span class="platform-stat-value" data-count="0">0</span>
           </div>
         </article>
       </div>
-      <p class="kit-note">Stats stay TBD until they’re wired in. The personal site is not part of this inventory.</p>
+      <p class="kit-note">Follower totals are approximate and updated by hand. The personal site is not part of this inventory.</p>
     </section>
 
     <section class="kit-section">
@@ -602,30 +650,35 @@
   <script>
     document.getElementById("year").textContent = String(new Date().getFullYear());
 
-    /* Fill in numbers here later, or swap this object for a live API.
-       Leave a value as null to keep the TBD placeholder. */
-    var CPJR_MEDIA_STATS = {
-      youtube: { followers: null, avgViews: null },
-      x: { followers: null, avgViews: null },
-      threads: { followers: null, avgViews: null },
-      sounddrop: { followers: null, avgViews: null },
-      itch: { followers: null, avgViews: null }
-    };
-
-    function formatStat(value) {
-      if (value == null || value === "") return "TBD";
-      if (typeof value === "number") return value.toLocaleString("en-US");
-      return String(value);
+    function formatCount(value) {
+      return Math.round(value).toLocaleString("en-US");
     }
 
-    document.querySelectorAll(".platform-card").forEach(function (card) {
-      var key = card.getAttribute("data-platform");
-      var stats = CPJR_MEDIA_STATS[key];
-      if (!stats) return;
-      card.querySelectorAll("[data-stat]").forEach(function (el) {
-        var field = el.getAttribute("data-stat");
-        el.textContent = formatStat(stats[field]);
-      });
+    function animateCount(el, target, duration) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        el.textContent = formatCount(target);
+        return;
+      }
+
+      var start = null;
+
+      function frame(timestamp) {
+        if (start == null) start = timestamp;
+        var progress = Math.min((timestamp - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = formatCount(target * eased);
+        if (progress < 1) {
+          window.requestAnimationFrame(frame);
+        }
+      }
+
+      window.requestAnimationFrame(frame);
+    }
+
+    document.querySelectorAll("[data-count]").forEach(function (el) {
+      var target = Number(el.getAttribute("data-count"));
+      if (!Number.isFinite(target)) return;
+      animateCount(el, target, el.classList.contains("followers-total-value") ? 1600 : 1100);
     });
   </script>
   <script src="../site-nav.js"></script>

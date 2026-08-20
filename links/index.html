@@ -19,6 +19,8 @@
       --ink-muted: #5c616b;
       --border: rgba(20, 21, 26, 0.08);
       --accent: #89CFF0;
+      --accent-hover: #6eb8e3;
+      --accent-text: #14151a;
       --radius-pill: 999px;
       --font-display: "Gloria Hallelujah", cursive;
       --font-body: "DM Sans", sans-serif;
@@ -55,7 +57,178 @@
       width: 100%;
       max-width: 28rem;
       margin: 0 auto;
-      padding: clamp(2rem, 6vw, 3.25rem) clamp(1.15rem, 5vw, 1.75rem) 3.5rem;
+      padding:
+        calc(clamp(2rem, 6vw, 3.25rem) + 2.85rem)
+        clamp(1.15rem, 5vw, 1.75rem)
+        3.5rem;
+    }
+
+    .links-top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.55rem;
+      padding:
+        max(0.75rem, env(safe-area-inset-top))
+        max(0.85rem, env(safe-area-inset-right))
+        0.55rem
+        max(0.85rem, env(safe-area-inset-left));
+      pointer-events: none;
+    }
+
+    .links-top-bar > * {
+      pointer-events: auto;
+    }
+
+    .links-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .links-corner-pill,
+    .links-contact-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.35rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.01em;
+      box-shadow: var(--shadow-soft);
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease);
+      white-space: nowrap;
+    }
+
+    .links-corner-pill {
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .links-corner-pill:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .links-corner-pill:focus-visible,
+    .links-contact-pill:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .links-contact-pill {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .links-contact-pill:hover {
+      background: var(--bg-soft);
+      border-color: rgba(137, 207, 240, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .links-share-wrap {
+      position: relative;
+    }
+
+    .links-share-btn {
+      width: 2.35rem;
+      height: 2.35rem;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      box-shadow: var(--shadow-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .links-share-btn:hover {
+      background: #fff;
+      border-color: rgba(137, 207, 240, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .links-share-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .links-share-btn svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      display: block;
+    }
+
+    .links-share-menu {
+      position: absolute;
+      top: calc(100% + 0.45rem);
+      right: 0;
+      min-width: 11.5rem;
+      padding: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 14px 36px rgba(20, 21, 26, 0.14);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.98);
+      transform-origin: top right;
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s var(--ease);
+    }
+
+    .links-share-wrap.is-open .links-share-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .links-share-menu button,
+    .links-share-menu a {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s var(--ease);
+    }
+
+    .links-share-menu button:hover,
+    .links-share-menu a:hover {
+      background: var(--bg-soft);
+    }
+
+    .links-share-menu button:focus-visible,
+    .links-share-menu a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+
+    .links-share-menu svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
     }
 
     .page-intro {
@@ -185,9 +358,81 @@
       height: 1.15rem;
       display: block;
     }
+
+    @media (max-width: 900px) {
+      .link-icons {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        margin-left: -0.15rem;
+        margin-right: -0.15rem;
+        padding: 0.15rem 0.15rem 0.35rem;
+      }
+
+      .link-icons::-webkit-scrollbar {
+        display: none;
+      }
+
+      .link-icons a {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="links-top-bar">
+    <a class="links-corner-pill" href="https://www.iamchrispaezjr.com/#mc_embed_signup">Subscribe</a>
+    <div class="links-top-actions">
+      <a class="links-contact-pill" href="../contact/">Contact Me</a>
+      <div class="links-share-wrap" id="linksShareWrap">
+      <button
+        type="button"
+        class="links-share-btn"
+        id="linksShareBtn"
+        aria-label="Share this page"
+        aria-expanded="false"
+        aria-controls="linksShareMenu"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3v10.2M12 3 8.5 6.5M12 3l3.5 3.5M6 10.5v8a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 18 18.5v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="links-share-menu" id="linksShareMenu" role="menu" aria-label="Share options" hidden>
+        <button type="button" role="menuitem" id="linksShareNative" hidden>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v10.2M12 3 8.5 6.5M12 3l3.5 3.5M6 10.5v8a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 18 18.5v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Share…
+        </button>
+        <button type="button" role="menuitem" id="linksShareCopy">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 9h8v8H9V9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M7 15H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span id="linksShareCopyLabel">Copy link</span>
+        </button>
+        <a role="menuitem" id="linksShareX" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M13.2 10.8 19 4h-1.8l-5 6.2L8.2 4H4l6.1 8.9L4 20h1.8l5.3-6.5L15.8 20H20l-6.8-9.2Z" fill="currentColor"/>
+          </svg>
+          Share on X
+        </a>
+        <a role="menuitem" id="linksShareFacebook" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14 8.5h2.5L15.8 12H14v8h-3v-8H9V8.5h2V6.8C11 5.3 11.9 4 14.2 4H16.5v3h-1.4c-.8 0-.9.4-.9 1v.5Z" fill="currentColor"/>
+          </svg>
+          Share on Facebook
+        </a>
+      </div>
+      </div>
+    </div>
+  </div>
+
   <main>
     <header class="page-intro">
       <a href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
@@ -295,5 +540,93 @@
       </nav>
     </section>
   </main>
+
+  <script>
+    (function () {
+      var shareWrap = document.getElementById("linksShareWrap");
+      var shareBtn = document.getElementById("linksShareBtn");
+      var shareMenu = document.getElementById("linksShareMenu");
+      var shareNative = document.getElementById("linksShareNative");
+      var shareCopy = document.getElementById("linksShareCopy");
+      var shareCopyLabel = document.getElementById("linksShareCopyLabel");
+      var shareX = document.getElementById("linksShareX");
+      var shareFacebook = document.getElementById("linksShareFacebook");
+      if (!shareWrap || !shareBtn || !shareMenu) return;
+
+      var pageUrl = window.location.href;
+      var pageTitle = document.title;
+      var shareText = "All of Cristian Paez Jr’s links — web projects, socials, and more.";
+
+      shareX.href =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(pageTitle) +
+        "&url=" +
+        encodeURIComponent(pageUrl);
+      shareFacebook.href =
+        "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageUrl);
+
+      if (navigator.share) {
+        shareNative.hidden = false;
+      }
+
+      function setMenuOpen(open) {
+        shareWrap.classList.toggle("is-open", open);
+        shareBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        shareMenu.hidden = !open;
+      }
+
+      function closeMenu() {
+        setMenuOpen(false);
+      }
+
+      shareBtn.addEventListener("click", function () {
+        setMenuOpen(!shareWrap.classList.contains("is-open"));
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!shareWrap.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      shareNative.addEventListener("click", function () {
+        navigator.share({
+          title: pageTitle,
+          text: shareText,
+          url: pageUrl
+        }).then(closeMenu).catch(function () {});
+      });
+
+      shareCopy.addEventListener("click", function () {
+        function markCopied() {
+          if (shareCopyLabel) {
+            var original = shareCopyLabel.textContent;
+            shareCopyLabel.textContent = "Copied!";
+            window.setTimeout(function () {
+              shareCopyLabel.textContent = original;
+            }, 1600);
+          }
+          closeMenu();
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(pageUrl).then(markCopied).catch(function () {});
+          return;
+        }
+
+        var input = document.createElement("input");
+        input.value = pageUrl;
+        document.body.appendChild(input);
+        input.select();
+        try {
+          document.execCommand("copy");
+          markCopied();
+        } catch (err) {}
+        document.body.removeChild(input);
+      });
+    })();
+  </script>
 </body>
 </html>

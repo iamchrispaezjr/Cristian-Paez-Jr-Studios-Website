@@ -438,7 +438,7 @@
       width: 100%;
       min-height: 3.35rem;
       padding: 0.55rem 1rem 0.55rem 0.55rem;
-      border: 1px solid var(--border);
+      border: 1.5px solid #14151a;
       border-radius: var(--radius-pill);
       background: var(--surface);
       box-shadow: var(--shadow-soft);
@@ -449,7 +449,16 @@
 
     .link-btn:hover {
       transform: translateY(-2px);
-      border-color: rgba(137, 207, 240, 0.7);
+      border-color: #14151a;
+    }
+
+    .link-btn--static {
+      cursor: default;
+    }
+
+    .link-btn--static:hover {
+      transform: none;
+      border-color: #14151a;
     }
 
     .link-btn:focus-visible {
@@ -487,7 +496,7 @@
       height: 2.5rem;
       border-radius: 50%;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1.5px solid #14151a;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -497,7 +506,7 @@
     .link-icons a:hover {
       transform: translateY(-2px);
       background: rgba(137, 207, 240, 0.92);
-      border-color: rgba(110, 184, 227, 0.45);
+      border-color: #14151a;
     }
 
     .link-icons a:focus-visible {
@@ -601,9 +610,9 @@
 
     <section class="link-group" aria-labelledby="links-web">
       <h2 id="links-web">Web Projects</h2>
-      <a class="link-btn" href="https://www.iamchrispaezjr.com" aria-label="This Website">
+      <a class="link-btn" href="https://www.iamchrispaezjr.com" aria-label="My Website">
         <img src="../favicon.png" alt="" width="34" height="34" />
-        <span>This Website</span>
+        <span>My Website</span>
       </a>
       <a
         class="link-btn"
@@ -615,6 +624,10 @@
         <img src="../soundrop-screenshot.jpg" alt="" width="34" height="34" />
         <span>SoundDrop</span>
       </a>
+      <div class="link-btn link-btn--static" aria-label="Disease Imagined, coming soon">
+        <img src="../Disease-Imagined-Link.png" alt="" width="34" height="34" />
+        <span>Disease Imagined</span>
+      </div>
       <nav class="link-icons" aria-label="Social">
         <a href="https://www.youtube.com/channel/UCWYtgKKmHAml5dol4--5GJQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
           <img src="../icons/youtube.png?v=4" alt="" width="18" height="18" />

@@ -1090,6 +1090,69 @@
           .catch(showFallbackName);
       }
     })();
+
+    (function () {
+      var STING_KEY = "cpjr-links-sting-at";
+      var STING_COOLDOWN_MS = 3 * 60 * 60 * 1000;
+      var STING_SRC = "../sounds/musical-sting.mp3";
+
+      function canPlaySting() {
+        try {
+          var raw = localStorage.getItem(STING_KEY);
+          if (!raw) return true;
+          var lastAt = Number(raw);
+          if (!Number.isFinite(lastAt)) return true;
+          return Date.now() - lastAt >= STING_COOLDOWN_MS;
+        } catch (err) {
+          return true;
+        }
+      }
+
+      function markStingPlayed() {
+        try {
+          localStorage.setItem(STING_KEY, String(Date.now()));
+        } catch (err) {}
+      }
+
+      if (!canPlaySting()) return;
+
+      var audio = new Audio(STING_SRC);
+      audio.preload = "auto";
+      var started = false;
+
+      function playSting() {
+        if (started) return;
+        started = true;
+        var playPromise = audio.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise
+            .then(function () {
+              markStingPlayed();
+            })
+            .catch(function () {
+              started = false;
+              waitForGesture();
+            });
+        } else {
+          markStingPlayed();
+        }
+      }
+
+      function waitForGesture() {
+        function onGesture() {
+          document.removeEventListener("pointerdown", onGesture);
+          document.removeEventListener("keydown", onGesture);
+          document.removeEventListener("touchstart", onGesture);
+          playSting();
+        }
+
+        document.addEventListener("pointerdown", onGesture, { once: true });
+        document.addEventListener("keydown", onGesture, { once: true });
+        document.addEventListener("touchstart", onGesture, { once: true, passive: true });
+      }
+
+      playSting();
+    })();
   </script>
 </body>
 </html>

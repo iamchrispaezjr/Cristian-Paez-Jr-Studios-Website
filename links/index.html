@@ -325,6 +325,34 @@
       display: block;
     }
 
+    .links-menu-icon {
+      width: 1rem;
+      height: 0.72rem;
+      position: relative;
+      display: block;
+    }
+
+    .links-menu-icon span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+    }
+
+    .links-menu-icon span:nth-child(1) {
+      top: 0;
+    }
+
+    .links-menu-icon span:nth-child(2) {
+      top: 5px;
+    }
+
+    .links-menu-icon span:nth-child(3) {
+      top: 10px;
+    }
+
     .links-share-menu {
       position: absolute;
       top: calc(100% + 0.45rem);
@@ -617,15 +645,25 @@
         type="button"
         class="links-share-btn"
         id="linksShareBtn"
-        aria-label="Share this page"
+        aria-label="Open menu"
         aria-expanded="false"
         aria-controls="linksShareMenu"
       >
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3v10.2M12 3 8.5 6.5M12 3l3.5 3.5M6 10.5v8a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 18 18.5v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <span class="links-menu-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </button>
-      <div class="links-share-menu" id="linksShareMenu" role="menu" aria-label="Share options" hidden>
+      <div class="links-share-menu" id="linksShareMenu" role="menu" aria-label="Menu" hidden>
+        <a role="menuitem" href="../media-kit/">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 4.5h7.5L17 7v12.5H7V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M14.5 4.5V7H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.5 11h5M9.5 14.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Media Kit
+        </a>
         <button type="button" role="menuitem" id="linksShareNative" hidden>
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 3v10.2M12 3 8.5 6.5M12 3l3.5 3.5M6 10.5v8a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 18 18.5v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>

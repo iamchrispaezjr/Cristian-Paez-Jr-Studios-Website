@@ -42,7 +42,7 @@
     body {
       font-family: var(--font-body);
       color: var(--ink);
-      background: #fff4ec;
+      background: #e8f6ff;
       min-height: 100vh;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
@@ -58,10 +58,10 @@
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(36rem 28rem at 12% -6%, rgba(255, 138, 101, 0.42), transparent 64%),
-        radial-gradient(32rem 24rem at 96% 8%, rgba(196, 154, 255, 0.38), transparent 62%),
-        radial-gradient(28rem 22rem at 78% 100%, rgba(255, 196, 120, 0.45), transparent 58%),
-        linear-gradient(165deg, #fff6ee 0%, #ffe8dc 42%, #f3e8ff 100%);
+        radial-gradient(36rem 28rem at 12% -6%, rgba(137, 207, 240, 0.55), transparent 64%),
+        radial-gradient(32rem 24rem at 96% 8%, rgba(168, 223, 248, 0.5), transparent 62%),
+        radial-gradient(28rem 22rem at 78% 100%, rgba(186, 230, 255, 0.55), transparent 58%),
+        linear-gradient(165deg, #f3fbff 0%, #dff3ff 42%, #cfeeff 100%);
     }
 
     header.site-header,
@@ -91,13 +91,90 @@
       padding: clamp(2.5rem, 7vw, 4.25rem) clamp(1.25rem, 5vw, 2rem) 4rem;
     }
 
+    .post-stage {
+      position: relative;
+    }
+
+    .post-deco {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .post-deco-win {
+      top: -1.15rem;
+      right: 8%;
+      width: 78px;
+      z-index: 0;
+      transform: rotate(9deg);
+      filter: drop-shadow(0 8px 12px rgba(137, 207, 240, 0.28));
+    }
+
+    .post-deco-cursor {
+      right: -0.35rem;
+      bottom: -0.55rem;
+      width: 46px;
+      z-index: 2;
+      transform: rotate(12deg);
+      filter: drop-shadow(0 6px 8px rgba(20, 21, 26, 0.16));
+    }
+
+    .post-deco-keys {
+      left: -0.85rem;
+      bottom: 18%;
+      width: 64px;
+      z-index: 0;
+      transform: rotate(-12deg);
+      filter: drop-shadow(0 8px 10px rgba(137, 207, 240, 0.28));
+    }
+
     article {
-      background: rgba(255, 255, 255, 0.74);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 28px;
-      padding: clamp(1.4rem, 4vw, 2.15rem) clamp(1.2rem, 4vw, 2rem) 2rem;
-      box-shadow: 0 18px 40px rgba(255, 120, 80, 0.12);
+      --pad-x: clamp(1.2rem, 4vw, 2rem);
+      --pad-y: clamp(1.4rem, 4vw, 2.15rem);
+      position: relative;
+      z-index: 1;
+      background: #ffffff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 1.5px solid rgba(20, 21, 26, 0.1);
+      border-radius: 16px;
+      padding: var(--pad-y) var(--pad-x) 2rem;
+      box-shadow: 0 18px 40px rgba(137, 207, 240, 0.18);
+    }
+
+    .post-chrome {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: calc(-1 * var(--pad-y)) calc(-1 * var(--pad-x)) 1.15rem;
+      padding: 0.58rem 0.95rem;
+      background: linear-gradient(180deg, #d7f1ff 0%, #bfe6fb 100%);
+      border-bottom: 1px solid rgba(20, 21, 26, 0.08);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #2a5f7a;
+    }
+
+    .post-chrome-dots {
+      display: flex;
+      gap: 0.32rem;
+    }
+
+    .post-chrome-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .post-chrome-dots span:nth-child(1) { background: #ff6b6b; }
+    .post-chrome-dots span:nth-child(2) { background: #ffd166; }
+    .post-chrome-dots span:nth-child(3) { background: #7bed9f; }
+
+    @media (max-width: 620px) {
+      .post-deco-win { width: 58px; top: -0.85rem; }
+      .post-deco-cursor { width: 36px; }
+      .post-deco-keys { width: 48px; left: -0.4rem; }
     }
 
     .article-meta {
@@ -110,8 +187,8 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #9a4b2e;
-      background: rgba(255, 186, 73, 0.5);
+      color: #2a5f7a;
+      background: rgba(137, 207, 240, 0.55);
       padding: 0.22rem 0.65rem;
       border-radius: var(--radius-pill);
     }
@@ -131,8 +208,8 @@
       max-width: 42ch;
       margin-bottom: 1.75rem;
       padding: 0.85rem 1rem 0.85rem 1.05rem;
-      border-left: 5px solid #c49aff;
-      background: linear-gradient(90deg, rgba(196, 154, 255, 0.18), transparent 86%);
+      border-left: 5px solid #89CFF0;
+      background: linear-gradient(90deg, rgba(137, 207, 240, 0.28), transparent 86%);
       border-radius: 0 16px 16px 0;
     }
 
@@ -144,7 +221,7 @@
     }
 
     .article-lead a:hover {
-      color: #c45c32;
+      color: #2a5f7a;
     }
 
     .article-body p {
@@ -158,21 +235,21 @@
     }
 
     .article-body a {
-      color: #c45c32;
+      color: #2a5f7a;
       font-weight: 600;
       text-decoration: underline;
-      text-decoration-color: rgba(255, 186, 73, 0.9);
+      text-decoration-color: rgba(137, 207, 240, 0.95);
       text-underline-offset: 0.18em;
     }
 
     .article-body a:hover {
-      color: #9a4b2e;
+      color: #2a5f7a;
     }
 
     .article-cta {
       margin-top: 2.15rem;
       padding-top: 1.5rem;
-      border-top: 2px dashed rgba(196, 154, 255, 0.55);
+      border-top: 2px dashed rgba(137, 207, 240, 0.7);
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
@@ -190,7 +267,7 @@
     }
 
     .article-cta .primary {
-      background: linear-gradient(135deg, #ff8a65, #ffba49);
+      background: linear-gradient(135deg, #89CFF0, #c5ebfa);
       color: #14151a;
     }
 
@@ -199,18 +276,18 @@
     }
 
     .article-cta .secondary {
-      background: rgba(196, 154, 255, 0.22);
+      background: rgba(137, 207, 240, 0.28);
       color: var(--ink);
     }
 
     .article-cta .secondary:hover {
-      background: rgba(196, 154, 255, 0.38);
+      background: rgba(137, 207, 240, 0.45);
       transform: translateY(-1px);
     }
 
     .site-footer {
       border-top: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(232, 246, 255, 0.88);
       padding: 1.25rem clamp(1.25rem, 5vw, 2rem);
       display: flex;
       flex-wrap: wrap;
@@ -372,7 +449,31 @@
 </nav>
 
   <main>
-    <article>
+    <div class="post-stage">
+      <svg class="post-deco post-deco-win" viewBox="0 0 88 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="84" height="60" rx="8" fill="#fff" stroke="#14151a" stroke-width="2.4"/>
+        <rect x="2" y="2" width="84" height="16" rx="8" fill="#89CFF0"/>
+        <rect x="2" y="10" width="84" height="8" fill="#89CFF0"/>
+        <circle cx="12" cy="10" r="3" fill="#ff6b6b"/>
+        <circle cx="21" cy="10" r="3" fill="#ffd166"/>
+        <circle cx="30" cy="10" r="3" fill="#7bed9f"/>
+        <rect x="12" y="28" width="40" height="4" rx="2" fill="#d7f1ff"/>
+        <rect x="12" y="37" width="28" height="4" rx="2" fill="#d7f1ff"/>
+      </svg>
+      <svg class="post-deco post-deco-keys" viewBox="0 0 80 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="10" width="18" height="16" rx="3" fill="#fff" stroke="#14151a" stroke-width="2"/>
+        <rect x="22" y="10" width="18" height="16" rx="3" fill="#89CFF0" stroke="#14151a" stroke-width="2"/>
+        <rect x="42" y="10" width="18" height="16" rx="3" fill="#fff" stroke="#14151a" stroke-width="2"/>
+        <rect x="12" y="28" width="48" height="16" rx="3" fill="#bfe6fb" stroke="#14151a" stroke-width="2"/>
+      </svg>
+      <svg class="post-deco post-deco-cursor" viewBox="0 0 48 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M8 4l28 26-12-1.5-6 16-7-3 6-15L8 4z" fill="#fff" stroke="#14151a" stroke-width="2.4" stroke-linejoin="round"/>
+      </svg>
+      <article>
+        <div class="post-chrome">
+          <span class="post-chrome-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+          sounddrop.html
+        </div>
       <header>
         <div class="article-meta">
           <time class="article-date blog-date" data-published="2026-08-14" datetime="2026-08-14"></time>
@@ -422,6 +523,7 @@
         <a class="secondary" href="../../updates/">More Updates</a>
       </div>
     </article>
+    </div>
   </main>
 
   <footer class="site-footer">

@@ -1,4 +1,21 @@
-/* Shared hamburger menu behavior (all pages) */
+/* Shared hamburger menu behavior (all pages)
+ *
+ * Hey. Thanks for checking out my site. I see you inspecting it.
+ *
+ * © 2026 Cristian Paez Jr. All rights reserved.
+ * “Cristian Paez Jr”, “CPJR”, and related logos are trademarks of Cristian Paez Jr.
+ */
+
+// Hey. Thanks for checking out my site. I see you inspecting it.
+console.info(
+  "%cHey. Thanks for checking out my site. I see you inspecting it.",
+  "font-family: Georgia, serif; font-size: 16px; color: #14151a;"
+);
+console.info(
+  "%c© 2026 Cristian Paez Jr. All rights reserved. CPJR is a trademark of Cristian Paez Jr.",
+  "font-size: 11px; color: #5c616b;"
+);
+
 (function () {
   var toggle = document.getElementById("menuToggle");
   var nav = document.getElementById("mobileNav");

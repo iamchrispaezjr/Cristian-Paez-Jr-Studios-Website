@@ -1,4 +1,12 @@
-/* Shared sticky header + hamburger menu (all pages) */
+/* Shared sticky header + hamburger menu (all pages)
+ *
+ * Hey. Thanks for checking out my site. I see you inspecting it.
+ *
+ * © 2026 Cristian Paez Jr. All rights reserved.
+ * “Cristian Paez Jr”, “CPJR”, and related logos are trademarks of Cristian Paez Jr.
+ * No part of this site’s code, design, or content may be copied, scraped, or reused
+ * without prior written permission.
+ */
 
 body.menu-open {
   overflow: hidden;

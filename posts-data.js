@@ -47,6 +47,22 @@ window.CPJR_sortedPosts = function () {
   });
 };
 
+window.CPJR_nextPost = function (slug) {
+  var posts = (window.CPJR_POSTS || []).slice().sort(function (a, b) {
+    return String(a.date || "").localeCompare(String(b.date || ""));
+  });
+  var i = -1;
+  var n;
+  for (n = 0; n < posts.length; n += 1) {
+    if (posts[n].slug === slug) {
+      i = n;
+      break;
+    }
+  }
+  if (i < 0 || i >= posts.length - 1) return null;
+  return posts[i + 1];
+};
+
 window.CPJR_postHref = function (slug, rootPrefix) {
   return (rootPrefix || "") + "posts/" + slug + "/";
 };

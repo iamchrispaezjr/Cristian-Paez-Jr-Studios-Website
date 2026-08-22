@@ -110,11 +110,11 @@
     }
 
     .post-deco-cursor {
-      right: -0.35rem;
-      bottom: -0.55rem;
-      width: 46px;
+      right: -0.15rem;
+      bottom: -0.85rem;
+      width: 52px;
       z-index: 2;
-      transform: rotate(12deg);
+      transform: rotate(8deg);
       filter: drop-shadow(0 6px 8px rgba(20, 21, 26, 0.16));
     }
 
@@ -147,13 +147,13 @@
       gap: 0.55rem;
       margin: calc(-1 * var(--pad-y)) calc(-1 * var(--pad-x)) 1.15rem;
       padding: 0.58rem 0.95rem;
-      background: linear-gradient(180deg, #d7f1ff 0%, #bfe6fb 100%);
+      background: linear-gradient(180deg, #4a90d9 0%, #2f6fbd 100%);
       border-bottom: 1px solid rgba(20, 21, 26, 0.08);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.02em;
-      color: #2a5f7a;
+      color: #ffffff;
     }
 
     .post-chrome-dots {
@@ -187,8 +187,8 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #2a5f7a;
-      background: rgba(137, 207, 240, 0.55);
+      color: #ffffff;
+      background: #2563a8;
       padding: 0.22rem 0.65rem;
       border-radius: var(--radius-pill);
     }
@@ -208,8 +208,8 @@
       max-width: 42ch;
       margin-bottom: 1.75rem;
       padding: 0.85rem 1rem 0.85rem 1.05rem;
-      border-left: 5px solid #89CFF0;
-      background: linear-gradient(90deg, rgba(137, 207, 240, 0.28), transparent 86%);
+      border-left: 5px solid #ffb08a;
+      background: linear-gradient(90deg, rgba(255, 186, 140, 0.42), transparent 86%);
       border-radius: 0 16px 16px 0;
     }
 
@@ -263,7 +263,7 @@
     }
 
     .article-cta .primary {
-      background: linear-gradient(135deg, #89CFF0, #c5ebfa);
+      background: #ffb08a;
       color: #14151a;
     }
 
@@ -272,12 +272,12 @@
     }
 
     .article-cta .secondary {
-      background: rgba(137, 207, 240, 0.28);
-      color: var(--ink);
+      background: #ffd166;
+      color: #14151a;
     }
 
     .article-cta .secondary:hover {
-      background: rgba(137, 207, 240, 0.45);
+      background: #f4c44a;
       transform: translateY(-1px);
     }
 
@@ -448,22 +448,24 @@
     <div class="post-stage">
       <svg class="post-deco post-deco-win" viewBox="0 0 88 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="2" y="2" width="84" height="60" rx="8" fill="#fff" stroke="#14151a" stroke-width="2.4"/>
-        <rect x="2" y="2" width="84" height="16" rx="8" fill="#89CFF0"/>
-        <rect x="2" y="10" width="84" height="8" fill="#89CFF0"/>
+        <rect x="2" y="2" width="84" height="16" rx="8" fill="#2f6fbd"/>
+        <rect x="2" y="10" width="84" height="8" fill="#2f6fbd"/>
         <circle cx="12" cy="10" r="3" fill="#ff6b6b"/>
         <circle cx="21" cy="10" r="3" fill="#ffd166"/>
         <circle cx="30" cy="10" r="3" fill="#7bed9f"/>
-        <rect x="12" y="28" width="40" height="4" rx="2" fill="#d7f1ff"/>
-        <rect x="12" y="37" width="28" height="4" rx="2" fill="#d7f1ff"/>
+        <rect x="12" y="28" width="40" height="4" rx="2" fill="#cfe8ff"/>
+        <rect x="12" y="37" width="28" height="4" rx="2" fill="#cfe8ff"/>
       </svg>
       <svg class="post-deco post-deco-keys" viewBox="0 0 80 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="2" y="10" width="18" height="16" rx="3" fill="#fff" stroke="#14151a" stroke-width="2"/>
-        <rect x="22" y="10" width="18" height="16" rx="3" fill="#89CFF0" stroke="#14151a" stroke-width="2"/>
+        <rect x="22" y="10" width="18" height="16" rx="3" fill="#2f6fbd" stroke="#14151a" stroke-width="2"/>
         <rect x="42" y="10" width="18" height="16" rx="3" fill="#fff" stroke="#14151a" stroke-width="2"/>
-        <rect x="12" y="28" width="48" height="16" rx="3" fill="#bfe6fb" stroke="#14151a" stroke-width="2"/>
+        <rect x="12" y="28" width="48" height="16" rx="3" fill="#3d86cf" stroke="#14151a" stroke-width="2"/>
       </svg>
-      <svg class="post-deco post-deco-cursor" viewBox="0 0 48 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 4l28 26-12-1.5-6 16-7-3 6-15L8 4z" fill="#fff" stroke="#14151a" stroke-width="2.4" stroke-linejoin="round"/>
+      <svg class="post-deco post-deco-cursor" viewBox="0 0 56 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="6" width="36" height="58" rx="18" fill="#fff" stroke="#14151a" stroke-width="2.4"/>
+        <path d="M28 6v22" stroke="#14151a" stroke-width="2.2"/>
+        <rect x="24" y="14" width="8" height="12" rx="4" fill="#2f6fbd"/>
       </svg>
       <article>
         <div class="post-chrome">
@@ -498,7 +500,7 @@
       <div class="article-cta">
         <a class="primary" href="https://www.iamchrispaezjr.com">Back to Home</a>
         <a class="secondary" href="../../#mc_embed_signup">Subscribe</a>
-        <a class="secondary" href="../../updates/">More Updates</a>
+        <a class="secondary next-post-link" hidden href="#">Next post</a>
       </div>
     </article>
     </div>
@@ -516,6 +518,7 @@
     </nav>
   </footer>
 
+  <script src="../../posts-data.js"></script>
   <script>
     (function () {
       function formatBlogDate(isoDate) {
@@ -545,6 +548,16 @@
 
       var year = document.getElementById("year");
       if (year) year.textContent = String(new Date().getFullYear());
+
+      var parts = window.location.pathname.replace(/\/+$/, "").split("/");
+      var slug = parts[parts.length - 1];
+      var next = typeof window.CPJR_nextPost === "function" ? window.CPJR_nextPost(slug) : null;
+      var nextLink = document.querySelector(".next-post-link");
+      if (next && nextLink) {
+        nextLink.href = "../" + next.slug + "/";
+        nextLink.textContent = "Next post";
+        nextLink.removeAttribute("hidden");
+      }
     })();
   </script>
   <script src="../../site-nav.js"></script>

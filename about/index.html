@@ -40,15 +40,35 @@
     body {
       font-family: var(--font-body);
       color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #dfe7ef 0%, transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, #e4ebe6 0%, transparent 50%),
-        linear-gradient(180deg, #f7f8fa 0%, var(--bg) 40%, #eef0f3 100%);
+      background: #fff7fb;
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       display: flex;
       flex-direction: column;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(42rem 28rem at 8% -8%, rgba(255, 61, 148, 0.34), transparent 62%),
+        radial-gradient(38rem 26rem at 98% 4%, rgba(0, 168, 255, 0.3), transparent 60%),
+        radial-gradient(34rem 24rem at 82% 92%, rgba(255, 214, 0, 0.38), transparent 58%),
+        radial-gradient(30rem 22rem at 6% 86%, rgba(90, 255, 176, 0.28), transparent 62%);
+    }
+
+    header.site-header,
+    .nav-backdrop,
+    .mobile-nav,
+    main,
+    .site-footer {
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -59,76 +79,195 @@
     main {
       flex: 1;
       width: 100%;
-      max-width: 720px;
+      max-width: 820px;
       margin: 0 auto;
       padding: clamp(2.75rem, 7vw, 4.5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
     }
 
     .page-intro {
-      margin-bottom: 0;
+      margin-bottom: 1.75rem;
       text-align: center;
+    }
+
+    .about-kicker {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.28rem 0.72rem;
+      border: 2px solid #14151a;
+      background: #5affb0;
+      color: #14151a;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      box-shadow: 4px 4px 0 #ff3d94;
     }
 
     .page-intro h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 6vw, 3.25rem);
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
       font-weight: 400;
-      line-height: 1.15;
+      line-height: 1.12;
       margin-bottom: 0.65rem;
+      color: #14151a;
+      text-shadow: 3px 3px 0 #ff3d94;
     }
 
     .page-intro p {
       color: var(--ink-muted);
       font-size: 1.05rem;
       max-width: 40ch;
+      margin: 0 auto;
     }
 
-    /*
-      ============================================
-      ADD YOUR ABOUT ME TEXT BELOW
-      Replace the placeholder paragraphs with
-      your full About Me copy.
-      ============================================
-    */
-    .about-content {
+    .about-hero {
+      display: grid;
+      grid-template-columns: minmax(140px, 220px) minmax(0, 1fr);
+      gap: 1.5rem 2rem;
+      align-items: start;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+      max-width: 220px;
+      margin: 0 auto;
+    }
+
+    .about-photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 10px -10px -10px 10px;
+      background: #89cff0;
+      border: 2px solid #14151a;
+      border-radius: 22px;
+      z-index: 0;
+    }
+
+    .about-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      border: 2px solid #14151a;
+      background: var(--surface);
+      transform: rotate(-2.5deg);
+      box-shadow: 8px 8px 0 #ff3d94;
+    }
+
+    .about-story {
+      padding: 1.25rem 1.3rem 1.35rem;
+      background: var(--surface);
+      border: 2px solid #14151a;
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 #ffe14a;
       color: var(--ink-muted);
       font-size: 1.05rem;
     }
 
-    .about-photo {
-      width: 30%;
-      max-width: 220px;
-      min-width: 120px;
-      height: auto;
-      display: block;
-      margin: 10% auto;
-      border-radius: 12px;
+    .about-story p {
+      margin-bottom: 1.05rem;
     }
 
-    .about-content p {
-      margin-bottom: 1.1rem;
-      max-width: 58ch;
+    .about-story p:last-child {
+      margin-bottom: 0;
     }
 
-    .about-content .about-lead {
+    .about-lead {
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .about-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.35rem 0 1.5rem;
+    }
+
+    .about-chip {
+      display: inline-block;
+      padding: 0.35rem 0.72rem;
+      border: 2px solid #14151a;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #14151a;
+    }
+
+    .about-chip:nth-child(1) { background: #89cff0; }
+    .about-chip:nth-child(2) { background: #ffb3d9; }
+    .about-chip:nth-child(3) { background: #ffe14a; }
+    .about-chip:nth-child(4) { background: #5affb0; }
+    .about-chip:nth-child(5) { background: #d4b7ff; }
+    .about-chip:nth-child(6) { background: #ffc48a; }
+
+    .about-faves {
+      padding: 1.15rem 1.25rem 1.25rem;
+      background: var(--surface);
+      border: 2px solid #14151a;
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 #5affb0;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-faves h2 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 400;
+      margin-bottom: 0.65rem;
+      color: #14151a;
+    }
+
+    .about-faves p {
+      color: var(--ink-muted);
+      font-size: 1.02rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .about-faves p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-contact-card {
+      padding: 1.1rem 1.25rem;
+      background: var(--surface);
+      border: 2px solid #14151a;
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 #89cff0;
+    }
+
+    .about-contact-card p {
+      margin: 0;
       color: var(--ink);
       font-weight: 600;
-      font-size: 1.12rem;
     }
 
-    .about-content .about-contact a {
+    .about-contact-card a {
       color: var(--ink);
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: underline;
       text-underline-offset: 0.15em;
     }
 
-    .about-content .about-contact a:hover {
-      color: var(--accent);
+    .about-contact-card a:hover {
+      color: #ff3d94;
     }
 
-    .about-content p:last-child {
-      margin-bottom: 0;
+    @media (max-width: 700px) {
+      .about-hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: left;
+      }
+
+      .about-photo-wrap {
+        margin-bottom: 0.35rem;
+      }
     }
 
     /* Waving hello — below header, top-right (desktop); soft placement on mobile */
@@ -355,40 +494,62 @@
 
   <main>
     <header class="page-intro">
+      <span class="about-kicker">The story</span>
       <h1>About Me</h1>
+      <p>Creator, tinkerer, and pop-culture nerd taking it one idea at a time.</p>
     </header>
 
-    <div class="about-content">
-      <img
-        class="about-photo"
-        src="../about-me.jpg"
-        alt="Cristian Paez Jr"
-        width="878"
-        height="1024"
-      />
-      <p class="about-lead">Hey! I’m Chris.</p>
-      <p>
-        I haven’t exactly landed on what I’d like to do in life… so I’m taking it one step at a time.
-      </p>
-      <p>
-        I have a love for Visual Effects, Animation, Web Design, Interior Design, and so much more.
-      </p>
-      <p>
-        I have a passion for seamless UI integration, being irritated and annoyed by complicated user interfaces that confuse visitors and make it harder to complete an objective (such as Facebook’s crappy UI for deactivating accounts).
-      </p>
+    <section class="about-hero">
+      <div class="about-photo-wrap">
+        <img
+          class="about-photo"
+          src="../about-me.jpg"
+          alt="Cristian Paez Jr"
+          width="878"
+          height="1024"
+        />
+      </div>
+      <div class="about-story">
+        <p class="about-lead">Hey! I’m Chris.</p>
+        <p>
+          I haven’t exactly landed on what I’d like to do in life… so I’m taking it one step at a time.
+        </p>
+        <p>
+          I have a love for Visual Effects, Animation, Web Design, Interior Design, and so much more.
+        </p>
+        <p>
+          I have a passion for seamless UI integration, being irritated and annoyed by complicated user interfaces that confuse visitors and make it harder to complete an objective (such as Facebook’s crappy UI for deactivating accounts).
+        </p>
+        <p>
+          And I really love technology, especially Apple’s products that are designed very minimalistic, while still retaining some of that artistic edge that other technology companies do not have.
+        </p>
+        <p>
+          So what exactly am I working on…? Honestly, I’m not sure. I have too many ideas, inspirations, and passions to completely fill out one box, so for now, I’m taking it one step at a time, putting stuff out there, And hoping that my audience, finds inspiration as I have from others 😌.
+        </p>
+      </div>
+    </section>
+
+    <div class="about-chips" aria-label="Things I love making">
+      <span class="about-chip">Visual Effects</span>
+      <span class="about-chip">Animation</span>
+      <span class="about-chip">Web Design</span>
+      <span class="about-chip">Interior Design</span>
+      <span class="about-chip">UI</span>
+      <span class="about-chip">Apple / Tech</span>
+    </div>
+
+    <section class="about-faves">
+      <h2>Currently obsessed</h2>
       <p>
         I love pop-culture media and entertainment, escaping into other worlds and stories that allow me to live out another reality, that isn’t mundane like our own.
       </p>
       <p>
         I love popular movies, television shows, books &amp; video-games like The Last Of Us, The Avengers, Marvel, Harry Potter, Star Wars: Battlefront 2, Wizards of (and beyond) Waverly Place, and AppleTV’s prestigious shows, Maximum Pleasure Guaranteed, and my new favorite, Silo!
       </p>
+    </section>
+
+    <div class="about-contact-card">
       <p>
-        And I really love technology, especially Apple’s products that are designed very minimalistic, while still retaining some of that artistic edge that other technology companies do not have.
-      </p>
-      <p>
-        So what exactly am I working on…? Honestly, I’m not sure. I have too many ideas, inspirations, and passions to completely fill out one box, so for now, I’m taking it one step at a time, putting stuff out there, And hoping that my audience, finds inspiration as I have from others 😌.
-      </p>
-      <p class="about-contact">
         📩
         <a href="mailto:contactme@iamchrispaezjr.com">contactme@iamchrispaezjr.com</a>
       </p>

@@ -40,15 +40,34 @@
     body {
       font-family: var(--font-body);
       color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #dfe7ef 0%, transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, #e4ebe6 0%, transparent 50%),
-        linear-gradient(180deg, #f7f8fa 0%, var(--bg) 40%, #eef0f3 100%);
+      background: #eaf4ff;
       min-height: 100vh;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       display: flex;
       flex-direction: column;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(34rem 24rem at 6% -4%, rgba(74, 144, 217, 0.28), transparent 62%),
+        radial-gradient(28rem 22rem at 94% 8%, rgba(255, 214, 102, 0.28), transparent 60%),
+        linear-gradient(180deg, #f4f8ff 0%, #e7f1ff 45%, #f7f3ea 100%);
+    }
+
+    header.site-header,
+    .nav-backdrop,
+    .mobile-nav,
+    main,
+    .site-footer {
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -64,9 +83,34 @@
       padding: clamp(2.75rem, 7vw, 4.5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
     }
 
+    .mail-stage {
+      position: relative;
+    }
+
+    .corner-letter {
+      position: absolute;
+      top: -1.85rem;
+      left: -2.15rem;
+      width: clamp(108px, 18vw, 148px);
+      height: auto;
+      transform: rotate(-24deg);
+      transform-origin: center;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 8px 14px rgba(29, 58, 92, 0.16));
+    }
+
+    @media (max-width: 700px) {
+      .corner-letter {
+        width: 92px;
+        top: -1.45rem;
+        left: -1.55rem;
+      }
+    }
+
     .page-intro {
-      margin-bottom: 1.75rem;
-      text-align: center;
+      margin-bottom: 1.5rem;
+      text-align: left;
     }
 
     .page-intro h1 {
@@ -75,20 +119,60 @@
       font-weight: 400;
       line-height: 1.15;
       margin-bottom: 0.65rem;
+      color: #1d3a5c;
     }
 
     .page-intro p {
       color: var(--ink-muted);
       font-size: 1.05rem;
       max-width: 42ch;
-      margin: 0 auto;
     }
+
+    .mail-window {
+      position: relative;
+      z-index: 1;
+      background: #fffdf8;
+      border: 1px solid rgba(29, 58, 92, 0.16);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(29, 58, 92, 0.12);
+    }
+
+    .mail-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(180deg, #5aa0e6 0%, #3d86cf 100%);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mail-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .mail-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .mail-dots span:nth-child(1) { background: #ff6b6b; }
+    .mail-dots span:nth-child(2) { background: #ffd166; }
+    .mail-dots span:nth-child(3) { background: #7bed9f; }
 
     .contact-form-wrap {
       width: 100%;
-      max-width: 640px;
       margin: 0 auto;
       min-height: 280px;
+      padding: 0.35rem 0.55rem 0.75rem;
+      background: #fff;
     }
 
     .contact-email {
@@ -99,14 +183,14 @@
     }
 
     .contact-email a {
-      color: var(--ink);
+      color: #2f6fbd;
       font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
 
     .contact-email a:hover {
-      color: var(--accent);
+      color: #1d3a5c;
     }
 
     .site-footer {
@@ -275,12 +359,28 @@
   <main>
     <header class="page-intro">
       <h1>Contact Me</h1>
-      <p>Collaborations, freelance, or just saying hello — drop a message below.</p>
+      <p>For business and/or general inquiries, or just saying hello — drop a message below.</p>
     </header>
 
-    <div class="contact-form-wrap" id="contactForm">
-      <!-- Elfsight Contact Form | Untitled Contact Form (script injected only when near viewport) -->
-      <div class="elfsight-app-f564c552-0651-495f-ab7e-969f84db638a" data-elfsight-app-lazy></div>
+    <div class="mail-stage">
+      <svg class="corner-letter" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="10" y="38" width="160" height="84" rx="6" fill="#fffdf8" stroke="#1d3a5c" stroke-width="3"/>
+        <path d="M12 40l78 52L168 40" stroke="#3d86cf" stroke-width="3" fill="none"/>
+        <path d="M12 120L78 70M168 120L102 70" stroke="#cfe0f4" stroke-width="2"/>
+        <path d="M10 38h160L100 92 10 38z" fill="#d7ebff" stroke="#1d3a5c" stroke-width="3" stroke-linejoin="round"/>
+        <rect x="118" y="52" width="38" height="30" rx="2" fill="#fff" stroke="#c45c32" stroke-width="2"/>
+        <circle cx="137" cy="67" r="7" fill="#e24b4b"/>
+      </svg>
+      <section class="mail-window" aria-label="Compose a message">
+        <div class="mail-toolbar">
+          <span class="mail-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+          New Message
+        </div>
+        <div class="contact-form-wrap" id="contactForm">
+          <!-- Elfsight Contact Form | Untitled Contact Form (script injected only when near viewport) -->
+          <div class="elfsight-app-f564c552-0651-495f-ab7e-969f84db638a" data-elfsight-app-lazy></div>
+        </div>
+      </section>
     </div>
 
     <p class="contact-email">

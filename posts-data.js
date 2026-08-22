@@ -1,4 +1,8 @@
 /* Central blog post list — newest first.
+   Published dates from each post’s <time data-published>:
+   - leveling-up-my-web-setup: 2026-08-16
+   - why-i-created-sounddrop: 2026-08-14
+   - welcome-to-my-website: 2026-08-12
    When you publish a new post:
    1. Add the post folder under /posts/your-slug/
    2. Add an entry at the TOP of CPJR_POSTS below
@@ -47,20 +51,27 @@ window.CPJR_sortedPosts = function () {
   });
 };
 
+window.CPJR_currentPostSlug = function () {
+  var parts = String(window.location.pathname || "")
+    .split("/")
+    .filter(function (part) {
+      return part && part !== "index.html";
+    });
+  var i = parts.indexOf("posts");
+  if (i >= 0 && parts[i + 1]) return parts[i + 1];
+  return parts[parts.length - 1] || "";
+};
+
+/* Next in chronological order: oldest → newer (Aug 12 → Aug 14 → Aug 16). */
 window.CPJR_nextPost = function (slug) {
   var posts = (window.CPJR_POSTS || []).slice().sort(function (a, b) {
     return String(a.date || "").localeCompare(String(b.date || ""));
   });
-  var i = -1;
   var n;
   for (n = 0; n < posts.length; n += 1) {
-    if (posts[n].slug === slug) {
-      i = n;
-      break;
-    }
+    if (posts[n].slug === slug) return posts[n + 1] || null;
   }
-  if (i < 0 || i >= posts.length - 1) return null;
-  return posts[i + 1];
+  return null;
 };
 
 window.CPJR_postHref = function (slug, rootPrefix) {

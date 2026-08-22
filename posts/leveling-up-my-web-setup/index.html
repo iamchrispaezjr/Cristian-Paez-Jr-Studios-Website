@@ -248,6 +248,7 @@
       border-top: 2px dashed rgba(137, 207, 240, 0.7);
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 0.75rem;
     }
 
@@ -279,6 +280,31 @@
     .article-cta .secondary:hover {
       background: #f4c44a;
       transform: translateY(-1px);
+    }
+
+    .article-cta .next-post-link {
+      display: none;
+      margin-left: auto;
+      margin-top: 0;
+      padding: 0;
+      background: none;
+      border-radius: 0;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #2f6fbd;
+    }
+
+    .article-cta .next-post-link.is-visible {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .article-cta .next-post-link:hover {
+      color: #1d4e8c;
+      background: none;
+      transform: none;
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
     }
 
     .site-footer {
@@ -500,7 +526,7 @@
       <div class="article-cta">
         <a class="primary" href="https://www.iamchrispaezjr.com">Back to Home</a>
         <a class="secondary" href="../../#mc_embed_signup">Subscribe</a>
-        <a class="secondary next-post-link" hidden href="#">Next post</a>
+        <a class="next-post-link" href="#">Next Post →</a>
       </div>
     </article>
     </div>
@@ -549,14 +575,17 @@
       var year = document.getElementById("year");
       if (year) year.textContent = String(new Date().getFullYear());
 
-      var parts = window.location.pathname.replace(/\/+$/, "").split("/");
-      var slug = parts[parts.length - 1];
+      var slug = typeof window.CPJR_currentPostSlug === "function"
+        ? window.CPJR_currentPostSlug()
+        : "";
       var next = typeof window.CPJR_nextPost === "function" ? window.CPJR_nextPost(slug) : null;
       var nextLink = document.querySelector(".next-post-link");
       if (next && nextLink) {
         nextLink.href = "../" + next.slug + "/";
-        nextLink.textContent = "Next post";
-        nextLink.removeAttribute("hidden");
+        nextLink.textContent = "Next Post →";
+        nextLink.classList.add("is-visible");
+      } else if (nextLink) {
+        nextLink.remove();
       }
     })();
   </script>

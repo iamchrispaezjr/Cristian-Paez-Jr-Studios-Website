@@ -281,6 +281,18 @@
     .offer-list li:nth-child(4) { box-shadow: 5px 5px 0 #5affb0; }
     .offer-list li:nth-child(5) { box-shadow: 5px 5px 0 #ff8a3d; }
     .offer-list li:nth-child(6) { box-shadow: 5px 5px 0 #b07cff; }
+    .offer-list li:last-child {
+      box-shadow: 5px 5px 0 #14151a;
+    }
+
+    @media (min-width: 521px) {
+      .offer-list li:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 100%;
+        max-width: calc((100% - 0.85rem) / 2);
+      }
+    }
 
     .offer-list strong {
       display: block;
@@ -292,15 +304,50 @@
       font-size: 0.92rem;
     }
 
+    .rate-table-wrap {
+      position: relative;
+      margin-top: 1.15rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .rate-table-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: 16px;
+      transform: translate(8px, 8px);
+      background: linear-gradient(
+        115deg,
+        #89cff0,
+        #b8f0d4,
+        #ffe14a,
+        #ffb38a,
+        #ff7eb6,
+        #89cff0,
+        #b8f0d4,
+        #ffe14a
+      );
+      background-size: 300% 300%;
+      animation: kit-rate-shadow 18s ease-in-out infinite;
+    }
+
+    @keyframes kit-rate-shadow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .rate-table {
+      position: relative;
+      z-index: 1;
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1.15rem;
       background: var(--surface);
       border: 2px solid #14151a;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 8px 8px 0 #ff3d94;
     }
 
     .rate-table th,
@@ -368,6 +415,11 @@
       .followers-total-value,
       .platform-stat-value {
         transition: none;
+      }
+
+      .rate-table-wrap::before {
+        animation: none;
+        background-position: 50% 50%;
       }
     }
 
@@ -740,6 +792,7 @@
     <section class="kit-section">
       <h2>Starting rates</h2>
       <p>Slot pricing first. Handshake swaps are inventory-for-inventory unless the placements are uneven. Affiliate deals are commission-based unless we agree on something else.</p>
+      <div class="rate-table-wrap">
       <table class="rate-table">
         <thead>
           <tr>
@@ -790,6 +843,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
       <p class="kit-note">Buying a slot is buying the space. Handshake deals are trades. Affiliate is commission on tracked links. UGC is optional creative for the ads themselves.</p>
     </section>
 

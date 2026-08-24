@@ -131,24 +131,42 @@
       margin: 0 auto;
     }
 
-    .followers-total {
+    .kit-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
       margin: 1.35rem auto 0;
-      max-width: 22rem;
+      max-width: 44rem;
+      text-align: left;
+    }
+
+    .followers-total,
+    .kit-stat-box {
+      margin: 0;
+      max-width: none;
       padding: 1rem 1.15rem 1.1rem;
       background: var(--surface);
       border: 2px solid #14151a;
       border-radius: 18px;
+    }
+
+    .followers-total {
       box-shadow: 8px 8px 0 #89cff0;
+    }
+
+    .kit-stat-box--projects {
+      box-shadow: 8px 8px 0 #ff3d94;
     }
 
     .followers-total-label {
       display: block;
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--ink-muted);
       margin-bottom: 0.2rem;
+      line-height: 1.35;
     }
 
     .followers-total-value {
@@ -423,6 +441,13 @@
       }
     }
 
+    @media (max-width: 640px) {
+      .kit-stat-row {
+        grid-template-columns: 1fr;
+        max-width: 22rem;
+      }
+    }
+
     @media (max-width: 860px) {
       .platform-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -604,9 +629,15 @@
       <span class="kit-kicker">Ads / Slots / Swaps / Affiliates</span>
       <h1>Media Kit</h1>
       <p>This kit is for buying ad slots, handshake deals, and affiliate links — I place ads on my platforms, you place ads on yours, you buy the space outright, or we run an affiliate partnership.</p>
-      <div class="followers-total">
-        <span class="followers-total-label">Total followers</span>
-        <span class="followers-total-value" data-count="2731">0</span>
+      <div class="kit-stat-row">
+        <div class="followers-total">
+          <span class="followers-total-label">Total followers</span>
+          <span class="followers-total-value" data-count="2731">0</span>
+        </div>
+        <div class="kit-stat-box kit-stat-box--projects">
+          <span class="followers-total-label">Projects Created/Written/Produced &amp; Delivered</span>
+          <span class="followers-total-value" data-count="3">0</span>
+        </div>
       </div>
     </header>
 
@@ -753,6 +784,25 @@
         </a>
       </div>
       <p class="kit-note">Follower totals are approximate and updated by hand. Ad slots live on social and other properties — not as sponsored posts on this personal site.</p>
+    </section>
+
+    <section class="kit-section">
+      <h2>Projects created/written/produced &amp; delivered</h2>
+      <div class="platform-grid">
+        <a
+          class="platform-card"
+          href="../projects/"
+          aria-label="Web Projects — 3 created"
+        >
+          <div class="platform-card-top">
+            <h3>Web Projects</h3>
+          </div>
+          <div class="platform-stat">
+            <span class="platform-stat-label">Created</span>
+            <span class="platform-stat-value" data-count="3">0</span>
+          </div>
+        </a>
+      </div>
     </section>
 
     <section class="kit-section">

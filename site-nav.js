@@ -23,14 +23,7 @@ console.info(
   if (!toggle || !nav || !backdrop) return;
 
   var year = document.getElementById("year");
-  var dropdowns = [
-    {
-      toggle: document.getElementById("projectsDropdownToggle"),
-      menu: document.getElementById("projectsSubmenu"),
-      showLabel: "Show Web Projects links",
-      hideLabel: "Hide Web Projects links"
-    }
-  ];
+  var dropdowns = [];
 
   if (year) {
     year.textContent = String(new Date().getFullYear());

@@ -98,6 +98,31 @@
       margin: 0 auto;
     }
 
+    .project-filter {
+      display: block;
+      margin-top: 1.50rem;
+    }
+
+    .project-filter-select {
+      font: inherit;
+      font-weight: 600;
+      color: #163a5a;
+      background: #ffffff;
+      border: 2px solid #14151a;
+      border-radius: 12px;
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+    }
+
+    .project-filter-select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .project-slider[hidden] {
+      display: none;
+    }
+
     .project-slider {
       position: relative;
     }
@@ -544,21 +569,16 @@
     <header class="page-intro">
       <h1>Latest Projects</h1>
       <p>Check out what I’m creating — and what I just released.</p>
+      <label class="project-filter">
+        <select class="project-filter-select" id="projectFilter" aria-label="Project type">
+          <option value="web">Web Projects</option>
+          <option value="tbd">TBD</option>
+        </select>
+      </label>
     </header>
 
-    <div class="project-slider" id="projectSlider">
-      <section class="project-row" id="projectRow" aria-label="Latest projects">
-      <article class="project-card project-card--soon" aria-label="TBD book, coming soon">
-        <div class="project-card-media is-soon">
-          <span class="project-card-status">Coming Soon</span>
-        </div>
-        <div class="project-card-body">
-          <h2>TBD</h2>
-          <p>TBD</p>
-          <span class="project-card-cta">Coming soon</span>
-        </div>
-      </article>
-
+    <div class="project-slider" data-group="web" id="projectSliderWeb">
+      <section class="project-row" aria-label="Web projects">
       <article class="project-card project-card--soon" aria-label="Disease Imagined, in production">
         <div class="project-card-media is-grey">
           <img src="../disease-imagined-screenshot.jpg" alt="" />
@@ -619,6 +639,21 @@
       </a>
       </section>
     </div>
+
+    <div class="project-slider" data-group="tbd" id="projectSliderTbd" hidden>
+      <section class="project-row" aria-label="TBD projects">
+      <article class="project-card project-card--soon" aria-label="TBD book, coming soon">
+        <div class="project-card-media is-soon">
+          <span class="project-card-status">Coming Soon</span>
+        </div>
+        <div class="project-card-body">
+          <h2>TBD</h2>
+          <p>TBD</p>
+          <span class="project-card-cta">Coming soon</span>
+        </div>
+      </article>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -637,11 +672,12 @@
     document.getElementById("year").textContent = String(new Date().getFullYear());
 
     (function () {
-      var slider = document.getElementById("projectSlider");
-      var track = document.getElementById("projectRow");
-      if (!slider || !track) return;
+      var filter = document.getElementById("projectFilter");
+      var sliders = Array.prototype.slice.call(document.querySelectorAll(".project-slider"));
 
-      function updateScrollState() {
+      function updateScrollState(slider) {
+        var track = slider.querySelector(".project-row");
+        if (!track) return;
         var max = Math.max(0, track.scrollWidth - track.clientWidth - 1);
         var left = track.scrollLeft;
         var canScroll = max > 2;
@@ -650,14 +686,49 @@
         slider.classList.toggle("project-fade-right", canScroll && left < max - 1);
       }
 
-      track.addEventListener("scroll", updateScrollState, { passive: true });
-      window.addEventListener("resize", updateScrollState);
+      function initSlider(slider) {
+        var track = slider.querySelector(".project-row");
+        if (!track) return;
 
-      track.querySelectorAll("img").forEach(function (img) {
-        if (!img.complete) img.addEventListener("load", updateScrollState);
+        track.addEventListener("scroll", function () {
+          updateScrollState(slider);
+        }, { passive: true });
+
+        track.querySelectorAll("img").forEach(function (img) {
+          if (!img.complete) {
+            img.addEventListener("load", function () {
+              updateScrollState(slider);
+            });
+          }
+        });
+
+        updateScrollState(slider);
+      }
+
+      function showGroup(group) {
+        sliders.forEach(function (slider) {
+          var on = slider.getAttribute("data-group") === group;
+          slider.hidden = !on;
+          if (on) {
+            var track = slider.querySelector(".project-row");
+            if (track) track.scrollLeft = 0;
+            updateScrollState(slider);
+          }
+        });
+      }
+
+      sliders.forEach(initSlider);
+      window.addEventListener("resize", function () {
+        sliders.forEach(function (slider) {
+          if (!slider.hidden) updateScrollState(slider);
+        });
       });
 
-      updateScrollState();
+      if (filter) {
+        filter.addEventListener("change", function () {
+          showGroup(filter.value);
+        });
+      }
     })();
   </script>
   <script src="../site-nav.js"></script>

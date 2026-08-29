@@ -238,7 +238,7 @@ console.info(
   }
 
   bindSocialFade(".header-right .social-links", function () {
-    return desktopQuery.matches;
+    return true;
   });
   bindSocialFade(".site-footer .social-links", function () {
     return mobileQuery.matches;
@@ -249,10 +249,13 @@ console.info(
 
   onBreakpointChange(desktopQuery, function () {
     document.querySelectorAll(".header-right .social-links").forEach(function (el) {
-      syncFade(el, desktopQuery.matches);
+      syncFade(el, true);
     });
   });
   onBreakpointChange(mobileQuery, function () {
+    document.querySelectorAll(".header-right .social-links").forEach(function (el) {
+      syncFade(el, true);
+    });
     document.querySelectorAll(".site-footer .social-links, .site-footer .footer-links").forEach(function (el) {
       syncFade(el, mobileQuery.matches);
     });

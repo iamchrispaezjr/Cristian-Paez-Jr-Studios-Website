@@ -1,5 +1,6 @@
 /* Central blog post list — newest first.
    Published dates from each post’s <time data-published>:
+   - building-a-command-center-menu: 2026-08-30
    - leveling-up-my-web-setup: 2026-08-16
    - why-i-created-sounddrop: 2026-08-14
    - welcome-to-my-website: 2026-08-12
@@ -9,6 +10,14 @@
    Homepage (3 latest) and Updates both read from this file. */
 
 window.CPJR_POSTS = [
+  {
+    slug: "building-a-command-center-menu",
+    title: "Building a Command Center Menu",
+    date: "2026-08-30",
+    image: "blog-slide-screenshot.jpg",
+    excerpt:
+      "Turning a basic drop-down into a full-on dashboard — social scroller, TagDiv-inspired layout, and what’s cooking next."
+  },
   {
     slug: "leveling-up-my-web-setup",
     title: "Leveling Up My Web Setup :D",

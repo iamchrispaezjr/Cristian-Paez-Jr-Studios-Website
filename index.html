@@ -1512,17 +1512,17 @@
       line-height: 1.15;
       color: #fff;
       text-transform: uppercase;
-      transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+      padding: 0.06em 0.28em;
+      margin-left: -0.28em;
+      border-radius: 2px;
+      transition: color 0.18s var(--ease), background-color 0.18s var(--ease);
     }
 
-    .full-menu-links a:hover {
-      color: #89cff0;
-      transform: translateX(4px);
-    }
-
+    .full-menu-links a:hover,
     .full-menu-links a:focus-visible {
-      outline: 2px solid #89cff0;
-      outline-offset: 3px;
+      background: #fff;
+      color: #14151a;
+      outline: none;
     }
 
     .full-menu-links--compact a {

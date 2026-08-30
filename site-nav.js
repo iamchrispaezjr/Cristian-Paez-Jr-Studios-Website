@@ -886,19 +886,25 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
 
       function isNewPost(iso) {
         if (!iso) return false;
-        var published = new Date(iso + "T12:00:00");
+        /* Start of publish day so same-day posts before noon still count as new */
+        var published = new Date(iso + "T00:00:00");
         if (Number.isNaN(published.getTime())) return false;
         var age = Date.now() - published.getTime();
         return age >= 0 && age < NEW_MS;
       }
 
-      function syncBadge(card) {
+      function syncBadge() {
         if (!badge) return;
-        if (card && isNewPost(card.getAttribute("data-published"))) {
-          badge.removeAttribute("hidden");
-        } else {
-          badge.setAttribute("hidden", "");
+        /* Stay on while any update in the rotation is still within the new window */
+        var anyNew = false;
+        for (var i = 0; i < cards.length; i++) {
+          if (isNewPost(cards[i].getAttribute("data-published"))) {
+            anyNew = true;
+            break;
+          }
         }
+        if (anyNew) badge.removeAttribute("hidden");
+        else badge.setAttribute("hidden", "");
       }
 
       function show(next) {
@@ -910,7 +916,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
           else card.setAttribute("tabindex", "-1");
         });
         index = next;
-        syncBadge(cards[next]);
+        syncBadge();
       }
 
       function tick() {

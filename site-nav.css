@@ -1755,6 +1755,13 @@ html.site-night .announce-toast-cta {
 
     .full-menu-updates-frame {
       position: relative;
+      overflow: visible;
+    }
+
+    .full-menu-new:not([hidden]) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .full-menu-updates-track {

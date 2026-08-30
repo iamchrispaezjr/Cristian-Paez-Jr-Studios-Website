@@ -402,7 +402,7 @@ console.info(
 (function () {
   var STORAGE_KEY = "cpjr-announce-state";
   var LEGACY_KEY = "cpjr-announce-dismissed";
-  var ANNOUNCE_ID = "sounddrop-2026";
+  var ANNOUNCE_ID = "noisegoblin-2026";
   var DELAY_MS = 3000;
   var SCROLL_PX = 120;
   var RESHOW_MS = 5 * 60 * 60 * 1000;
@@ -410,13 +410,13 @@ console.info(
 
   var announcement = {
     id: ANNOUNCE_ID,
-    href: "https://iamchrispaezjr.github.io/SoundDrop/",
+    href: "https://www.noisegoblin.com",
     eyebrow: "🚨 New Project!",
-    title: "SoundDrop",
+    title: "Noisegoblin",
     description: "A clean soundboard for memes and iconic effects — try it out.",
     cta: "Open project →",
     image: "soundrop-screenshot.jpg",
-    imageAlt: "SoundDrop project screenshot"
+    imageAlt: "Noisegoblin project screenshot"
   };
 
   function defaultState() {

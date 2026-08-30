@@ -893,18 +893,14 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         return age >= 0 && age < NEW_MS;
       }
 
-      function syncBadge() {
+      function syncBadge(card) {
         if (!badge) return;
-        /* Stay on while any update in the rotation is still within the new window */
-        var anyNew = false;
-        for (var i = 0; i < cards.length; i++) {
-          if (isNewPost(cards[i].getAttribute("data-published"))) {
-            anyNew = true;
-            break;
-          }
+        /* Only for the card currently on screen, and only within 3 days of publish */
+        if (card && isNewPost(card.getAttribute("data-published"))) {
+          badge.removeAttribute("hidden");
+        } else {
+          badge.setAttribute("hidden", "");
         }
-        if (anyNew) badge.removeAttribute("hidden");
-        else badge.setAttribute("hidden", "");
       }
 
       function show(next) {
@@ -916,7 +912,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
           else card.setAttribute("tabindex", "-1");
         });
         index = next;
-        syncBadge();
+        syncBadge(cards[next]);
       }
 
       function tick() {

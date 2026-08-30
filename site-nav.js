@@ -761,25 +761,30 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         drag.moved = false;
         drag.startX = e.clientX;
         drag.startLeft = scroller.scrollLeft;
-        scroller.classList.add("is-dragging");
-        try {
-          scroller.setPointerCapture(e.pointerId);
-        } catch (err) {}
+        /* Don't capture yet — capturing on icon clicks blocks the link */
       });
 
       scroller.addEventListener("pointermove", function (e) {
         if (!drag.on) return;
         var dx = e.clientX - drag.startX;
-        if (Math.abs(dx) > 4) drag.moved = true;
+        if (!drag.moved && Math.abs(dx) > 6) {
+          drag.moved = true;
+          scroller.classList.add("is-dragging");
+          try {
+            scroller.setPointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+        if (!drag.moved) return;
         scroller.scrollLeft = drag.startLeft - dx;
         wrap();
       });
 
       function endDrag() {
         if (!drag.on) return;
+        var wasDrag = drag.moved;
         drag.on = false;
         scroller.classList.remove("is-dragging");
-        if (drag.moved) pauseBriefly();
+        if (wasDrag) pauseBriefly();
       }
 
       scroller.addEventListener("pointerup", endDrag);
@@ -791,6 +796,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
           if (!drag.moved) return;
           e.preventDefault();
           e.stopPropagation();
+          drag.moved = false;
         },
         true
       );

@@ -14,7 +14,7 @@ window.CPJR_POSTS = [
     slug: "building-a-command-center-menu",
     title: "Building a Command Center Menu",
     date: "2026-08-30",
-    image: "blog-slide-screenshot.jpg",
+    image: "command-center-screenshot.jpg",
     excerpt:
       "Turning a basic drop-down into a full-on dashboard — social scroller, TagDiv-inspired layout, and what’s cooking next."
   },

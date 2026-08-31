@@ -707,9 +707,10 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var speed = 0.9;
       var carry = 0;
+      var offset = 0;
       var paused = false;
       var resumeTimer = 0;
-      var drag = { on: false, startX: 0, startLeft: 0, moved: false };
+      var drag = { on: false, startX: 0, startOffset: 0, moved: false };
 
       function loopWidth() {
         var groups = track.querySelectorAll(".full-menu-social-group");
@@ -718,22 +719,15 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         return track.scrollWidth / 2;
       }
 
-      function maxScroll() {
-        return Math.max(0, scroller.scrollWidth - scroller.clientWidth);
-      }
-
-      function wrap() {
+      function wrapOffset() {
         var loop = loopWidth();
         if (!loop) return;
-        var max = maxScroll();
-        if (scroller.scrollLeft >= loop) {
-          scroller.scrollLeft -= loop;
-        } else if (max > 0 && scroller.scrollLeft >= max - 0.5) {
-          /* Wide desktop: can't reach the loop point — jump back to the start */
-          scroller.scrollLeft = 0;
-        } else if (scroller.scrollLeft < 0) {
-          scroller.scrollLeft += loop;
-        }
+        while (offset >= loop) offset -= loop;
+        while (offset < 0) offset += loop;
+      }
+
+      function apply() {
+        track.style.transform = "translate3d(" + -offset + "px,0,0)";
       }
 
       function pauseBriefly() {
@@ -752,8 +746,9 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         var step = carry | 0;
         if (!step) return;
         carry -= step;
-        scroller.scrollLeft += step;
-        wrap();
+        offset += step;
+        wrapOffset();
+        apply();
       }
 
       scroller.addEventListener(
@@ -761,8 +756,9 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         function (e) {
           if (Math.abs(e.deltaY) < 1 && Math.abs(e.deltaX) < 1) return;
           e.preventDefault();
-          scroller.scrollLeft += e.deltaY + e.deltaX;
-          wrap();
+          offset += e.deltaY + e.deltaX;
+          wrapOffset();
+          apply();
           pauseBriefly();
         },
         { passive: false }
@@ -770,12 +766,10 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
 
       scroller.addEventListener("pointerdown", function (e) {
         if (e.pointerType === "mouse" && e.button !== 0) return;
-        if (e.pointerType === "touch") return;
         drag.on = true;
         drag.moved = false;
         drag.startX = e.clientX;
-        drag.startLeft = scroller.scrollLeft;
-        /* Don't capture yet — capturing on icon clicks blocks the link */
+        drag.startOffset = offset;
       });
 
       scroller.addEventListener("pointermove", function (e) {
@@ -789,8 +783,9 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
           } catch (err) {}
         }
         if (!drag.moved) return;
-        scroller.scrollLeft = drag.startLeft - dx;
-        wrap();
+        offset = drag.startOffset - dx;
+        wrapOffset();
+        apply();
       });
 
       function endDrag() {
@@ -815,8 +810,6 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         true
       );
 
-      scroller.addEventListener("scroll", wrap, { passive: true });
-
       scroller.addEventListener(
         "touchstart",
         function () {
@@ -828,8 +821,17 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
       scroller.addEventListener("touchend", pauseBriefly, { passive: true });
       scroller.addEventListener("touchcancel", pauseBriefly, { passive: true });
 
-      window.addEventListener("resize", wrap, { passive: true });
+      window.addEventListener(
+        "resize",
+        function () {
+          wrapOffset();
+          apply();
+        },
+        { passive: true }
+      );
 
+      wrapOffset();
+      apply();
       tick();
     })();
 

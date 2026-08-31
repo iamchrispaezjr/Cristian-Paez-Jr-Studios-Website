@@ -1532,12 +1532,8 @@ html.site-night .announce-toast-cta {
     }
 
     .full-menu-social {
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: hidden;
       width: 100%;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      -webkit-overflow-scrolling: touch;
       touch-action: pan-x;
       overscroll-behavior-x: contain;
       cursor: grab;
@@ -1570,6 +1566,7 @@ html.site-night .announce-toast-cta {
       width: max-content;
       gap: 0.85rem;
       padding: 0.55rem 0 0.35rem;
+      will-change: transform;
     }
 
     .full-menu-social-group {

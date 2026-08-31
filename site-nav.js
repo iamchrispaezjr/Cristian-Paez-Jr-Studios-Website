@@ -711,15 +711,29 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
       var resumeTimer = 0;
       var drag = { on: false, startX: 0, startLeft: 0, moved: false };
 
-      function halfWidth() {
+      function loopWidth() {
+        var groups = track.querySelectorAll(".full-menu-social-group");
+        if (groups.length >= 2) return groups[1].offsetLeft;
+        if (groups[0]) return groups[0].offsetWidth;
         return track.scrollWidth / 2;
       }
 
+      function maxScroll() {
+        return Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+      }
+
       function wrap() {
-        var half = halfWidth();
-        if (!half) return;
-        if (scroller.scrollLeft >= half) scroller.scrollLeft -= half;
-        else if (scroller.scrollLeft < 0) scroller.scrollLeft += half;
+        var loop = loopWidth();
+        if (!loop) return;
+        var max = maxScroll();
+        if (scroller.scrollLeft >= loop) {
+          scroller.scrollLeft -= loop;
+        } else if (max > 0 && scroller.scrollLeft >= max - 0.5) {
+          /* Wide desktop: can't reach the loop point — jump back to the start */
+          scroller.scrollLeft = 0;
+        } else if (scroller.scrollLeft < 0) {
+          scroller.scrollLeft += loop;
+        }
       }
 
       function pauseBriefly() {
@@ -814,23 +828,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
       scroller.addEventListener("touchend", pauseBriefly, { passive: true });
       scroller.addEventListener("touchcancel", pauseBriefly, { passive: true });
 
-      /* Pause only while hovering an icon, so the row keeps auto-scrolling otherwise */
-      scroller.addEventListener("mouseover", function (e) {
-        if (!e.target.closest("a")) return;
-        paused = true;
-        window.clearTimeout(resumeTimer);
-      });
-      scroller.addEventListener("mouseout", function (e) {
-        var fromLink = e.target.closest("a");
-        if (!fromLink) return;
-        var toLink = e.relatedTarget && e.relatedTarget.closest
-          ? e.relatedTarget.closest("a")
-          : null;
-        if (toLink && scroller.contains(toLink)) return;
-        resumeTimer = window.setTimeout(function () {
-          paused = false;
-        }, 350);
-      });
+      window.addEventListener("resize", wrap, { passive: true });
 
       tick();
     })();

@@ -41,6 +41,73 @@ body.menu-open {
   flex-shrink: 0;
 }
 
+/* Desktop header announcement ticker — centered */
+.header-ticker {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(22rem, 34vw);
+  height: 1.35rem;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 901px) {
+  .header-ticker {
+    display: block;
+  }
+}
+
+.header-ticker-viewport {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header-ticker-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(20, 21, 26, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  text-align: center;
+}
+
+.header-ticker-item.is-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header-ticker-item.is-exit {
+  transform: translateY(110%);
+  opacity: 0;
+}
+
+.site-header.header-night .header-ticker-item {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-ticker-item {
+    transition: none;
+  }
+}
+
 .menu-toggle {
   flex-shrink: 0;
   width: 42px;

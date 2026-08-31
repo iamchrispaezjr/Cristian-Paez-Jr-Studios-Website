@@ -144,6 +144,92 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
   });
 })();
 
+/* Header announcement ticker — desktop only, centered */
+(function () {
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+
+  if (!document.querySelector('link[href*="Raleway"]')) {
+    var fontLink = document.createElement("link");
+    fontLink.rel = "stylesheet";
+    fontLink.href =
+      "https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800;900&display=swap";
+    document.head.appendChild(fontLink);
+  }
+
+  var root = header.querySelector(".header-ticker");
+  if (!root) {
+    root = document.createElement("div");
+    root.className = "header-ticker";
+    root.setAttribute("aria-live", "polite");
+    root.setAttribute("aria-atomic", "true");
+    root.innerHTML =
+      '<div class="header-ticker-viewport">' +
+      '<span class="header-ticker-item is-active">Hello There.</span>' +
+      "</div>";
+    var left = header.querySelector(".header-left");
+    if (left && left.nextSibling) {
+      header.insertBefore(root, left.nextSibling);
+    } else if (left) {
+      header.appendChild(root);
+    } else {
+      header.insertBefore(root, header.firstChild);
+    }
+  }
+
+  var viewport = root.querySelector(".header-ticker-viewport");
+  if (!viewport) return;
+
+  var HOLD_MS = 4000;
+  var index = 0;
+  var timer = 0;
+  var animating = false;
+
+  function formatToday() {
+    return new Date().toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
+  }
+
+  function messages() {
+    return ["Hello There.", formatToday()];
+  }
+
+  function showNext() {
+    if (animating) return;
+    if (document.body.classList.contains("full-menu-open")) return;
+
+    var list = messages();
+    if (list.length < 2) return;
+
+    var current = viewport.querySelector(".header-ticker-item.is-active");
+    index = (index + 1) % list.length;
+
+    var next = document.createElement("span");
+    next.className = "header-ticker-item";
+    next.textContent = list[index];
+    viewport.appendChild(next);
+
+    animating = true;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (current) current.classList.add("is-exit");
+        next.classList.add("is-active");
+      });
+    });
+
+    window.setTimeout(function () {
+      if (current && current.parentNode) current.parentNode.removeChild(current);
+      animating = false;
+    }, 600);
+  }
+
+  window.clearInterval(timer);
+  timer = window.setInterval(showNext, HOLD_MS);
+})();
+
 /* Header pill: Store at top → Members after scroll */
 (function () {
   var btn = document.querySelector(".header-right .store-btn");

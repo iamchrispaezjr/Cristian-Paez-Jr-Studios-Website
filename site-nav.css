@@ -1703,18 +1703,39 @@ html.site-night .announce-toast-cta {
 
     .full-menu-cats {
       display: flex;
-      flex-wrap: wrap;
-      align-items: stretch;
-      gap: 0.15rem;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0;
       width: 100%;
       margin-bottom: clamp(1.15rem, 3vw, 1.65rem);
       padding: 0.3rem;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+      overflow: hidden;
     }
 
-    .full-menu-cats button {
+    .full-menu-cats-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 0.15rem;
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-right: 0.2rem;
+    }
+
+    .full-menu-cats-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .full-menu-cats-scroll button {
       appearance: none;
       border: 0;
       background: transparent;
@@ -1728,19 +1749,21 @@ html.site-night .announce-toast-cta {
       padding: 0.72rem 1.05rem;
       border-radius: 9px;
       cursor: pointer;
+      flex-shrink: 0;
+      white-space: nowrap;
       transition: background 0.2s var(--ease), color 0.2s var(--ease);
     }
 
-    .full-menu-cats button:hover {
+    .full-menu-cats-scroll button:hover {
       background: rgba(20, 21, 26, 0.06);
     }
 
-    .full-menu-cats button.is-selected {
+    .full-menu-cats-scroll button.is-selected {
       background: #14151a;
       color: #fff;
     }
 
-    .full-menu-cats button:focus-visible {
+    .full-menu-cats-scroll button:focus-visible {
       outline: 2px solid #89cff0;
       outline-offset: 2px;
     }
@@ -1748,8 +1771,7 @@ html.site-night .announce-toast-cta {
     .full-menu-cats-sep {
       flex-shrink: 0;
       align-self: center;
-      margin-left: auto;
-      margin-right: 0.35rem;
+      margin: 0 0.35rem 0 0.1rem;
       color: rgba(20, 21, 26, 0.22);
       font-weight: 400;
       user-select: none;
@@ -1799,8 +1821,8 @@ html.site-night .announce-toast-cta {
       display: none !important;
     }
 
-    .full-menu-body[data-active-mode="creative"] .full-menu-cats [data-menu-cat-mode="tech"],
-    .full-menu-body[data-active-mode="tech"] .full-menu-cats [data-menu-cat-mode="creative"] {
+    .full-menu-body[data-active-mode="creative"] .full-menu-cats-scroll [data-menu-cat-mode="tech"],
+    .full-menu-body[data-active-mode="tech"] .full-menu-cats-scroll [data-menu-cat-mode="creative"] {
       display: none;
     }
 
@@ -2064,7 +2086,8 @@ html.site-night .announce-toast-cta {
       display: none;
     }
 
-    .full-menu-utility.social-fade-right {
+    .full-menu-utility.social-fade-right,
+    .full-menu-cats-scroll.social-fade-right {
       -webkit-mask-image: linear-gradient(
         to right,
         #000 0%,
@@ -2081,7 +2104,8 @@ html.site-night .announce-toast-cta {
       );
     }
 
-    .full-menu-utility.social-fade-left {
+    .full-menu-utility.social-fade-left,
+    .full-menu-cats-scroll.social-fade-left {
       -webkit-mask-image: linear-gradient(
         to right,
         transparent 0%,
@@ -2098,7 +2122,8 @@ html.site-night .announce-toast-cta {
       );
     }
 
-    .full-menu-utility.social-fade-left.social-fade-right {
+    .full-menu-utility.social-fade-left.social-fade-right,
+    .full-menu-cats-scroll.social-fade-left.social-fade-right {
       -webkit-mask-image: linear-gradient(
         to right,
         transparent 0%,

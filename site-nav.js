@@ -181,9 +181,14 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
   if (!viewport) return;
 
   var HOLD_MS = 4000;
+  var ANIM_MS = 600;
   var index = 0;
   var timer = 0;
+  var exitTimer = 0;
+  var resizeTimer = 0;
   var animating = false;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var desktopMq = window.matchMedia("(min-width: 901px)");
 
   function formatToday() {
     return new Date().toLocaleDateString("en-US", {
@@ -197,16 +202,65 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
     return ["Hello There.", formatToday()];
   }
 
+  function paintMessage(immediate) {
+    var list = messages();
+    if (!list.length) return;
+
+    window.clearTimeout(exitTimer);
+    animating = false;
+    index = ((index % list.length) + list.length) % list.length;
+
+    viewport.replaceChildren();
+    var item = document.createElement("span");
+    item.className = "header-ticker-item";
+    item.textContent = list[index];
+    viewport.appendChild(item);
+
+    if (immediate || reduceMotion) {
+      void viewport.offsetHeight;
+      item.classList.add("is-active");
+    }
+  }
+
+  function finishExit(current) {
+    if (current && current.parentNode === viewport) {
+      viewport.removeChild(current);
+    }
+    animating = false;
+  }
+
+  function bindExit(current) {
+    function done(e) {
+      if (e && e.target !== current) return;
+      if (e && e.propertyName !== "transform") return;
+      current.removeEventListener("transitionend", done);
+      window.clearTimeout(exitTimer);
+      finishExit(current);
+    }
+
+    current.addEventListener("transitionend", done);
+    exitTimer = window.setTimeout(function () {
+      current.removeEventListener("transitionend", done);
+      finishExit(current);
+    }, ANIM_MS + 80);
+  }
+
   function showNext() {
     if (animating) return;
     if (document.body.classList.contains("full-menu-open")) return;
+    if (!desktopMq.matches) return;
 
     var list = messages();
     if (list.length < 2) return;
 
-    var current = viewport.querySelector(".header-ticker-item.is-active");
     index = (index + 1) % list.length;
 
+    if (reduceMotion) {
+      paintMessage(true);
+      return;
+    }
+
+    var current = viewport.querySelector(".header-ticker-item.is-active");
     var next = document.createElement("span");
     next.className = "header-ticker-item";
     next.textContent = list[index];
@@ -215,17 +269,34 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
     animating = true;
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        if (current) current.classList.add("is-exit");
+        if (current) {
+          current.classList.add("is-exit");
+          bindExit(current);
+        } else {
+          animating = false;
+        }
         next.classList.add("is-active");
       });
     });
-
-    window.setTimeout(function () {
-      if (current && current.parentNode) current.parentNode.removeChild(current);
-      animating = false;
-    }, 600);
   }
 
+  function syncAfterLayout() {
+    paintMessage(true);
+  }
+
+  function scheduleSync() {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(syncAfterLayout, 120);
+  }
+
+  window.addEventListener("resize", scheduleSync, { passive: true });
+  if (typeof desktopMq.addEventListener === "function") {
+    desktopMq.addEventListener("change", scheduleSync);
+  } else if (typeof desktopMq.addListener === "function") {
+    desktopMq.addListener(scheduleSync);
+  }
+
+  paintMessage(true);
   window.clearInterval(timer);
   timer = window.setInterval(showNext, HOLD_MS);
 })();

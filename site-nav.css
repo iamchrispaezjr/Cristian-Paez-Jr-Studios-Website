@@ -1768,6 +1768,32 @@ html.site-night .announce-toast-cta {
       outline-offset: 2px;
     }
 
+    @keyframes full-menu-cats-peek-wiggle {
+      0%,
+      78%,
+      100% {
+        transform: translateX(0);
+      }
+
+      84% {
+        transform: translateX(-5px);
+      }
+
+      90% {
+        transform: translateX(3px);
+      }
+
+      96% {
+        transform: translateX(-2px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .full-menu-cats-scroll.social-fade-right:not(.scroll-hint-dismissed) {
+        animation: full-menu-cats-peek-wiggle 2.8s ease-in-out infinite;
+      }
+    }
+
     .full-menu-cats-sep {
       flex-shrink: 0;
       align-self: center;
@@ -2384,5 +2410,9 @@ html.site-night .announce-toast-cta {
 
   .full-menu-feature {
     transition-duration: 0.01ms !important;
+  }
+
+  .full-menu-cats-scroll {
+    animation: none !important;
   }
 }

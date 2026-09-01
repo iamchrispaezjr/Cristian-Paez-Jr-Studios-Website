@@ -804,12 +804,27 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
       bind(utility);
       bind(cats);
 
+      if (cats) {
+        cats.addEventListener(
+          "scroll",
+          function () {
+            if (cats.scrollLeft > 2) {
+              cats.classList.add("scroll-hint-dismissed");
+            }
+          },
+          { passive: true }
+        );
+      }
+
       document.querySelectorAll(".site-footer .footer-links").forEach(bind);
 
       var modal = document.getElementById("fullMenuModal");
       if (modal && (utility || cats)) {
         var observer = new MutationObserver(function () {
           if (modal.classList.contains("is-open")) {
+            if (cats) {
+              cats.classList.remove("scroll-hint-dismissed");
+            }
             window.requestAnimationFrame(function () {
               if (utility) syncFade(utility);
               if (cats) syncFade(cats);

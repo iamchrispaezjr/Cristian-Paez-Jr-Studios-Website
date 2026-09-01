@@ -1797,6 +1797,42 @@ html.site-night .announce-toast-cta {
       outline: none;
     }
 
+    /* Contact Me — baby-blue pulse (text-shadow only; no layout shift) */
+    .full-menu-links a[href*="contact/"] {
+      color: #89cff0;
+      animation: full-menu-contact-glow 2.4s ease-in-out infinite;
+    }
+
+    .full-menu-links a[href*="contact/"]:hover,
+    .full-menu-links a[href*="contact/"]:focus-visible {
+      background: transparent;
+      color: #b8e4fa;
+      outline: none;
+    }
+
+    @keyframes full-menu-contact-glow {
+      0%,
+      100% {
+        text-shadow:
+          0 0 8px rgba(137, 207, 240, 0.55),
+          0 0 18px rgba(137, 207, 240, 0.35);
+      }
+
+      50% {
+        text-shadow:
+          0 0 14px rgba(137, 207, 240, 0.95),
+          0 0 28px rgba(137, 207, 240, 0.7),
+          0 0 42px rgba(137, 207, 240, 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .full-menu-links a[href*="contact/"] {
+        animation: none;
+        text-shadow: 0 0 10px rgba(137, 207, 240, 0.65);
+      }
+    }
+
     .full-menu-links--compact a {
       font-size: clamp(1.05rem, 2.4vw, 1.35rem);
       font-weight: 900;

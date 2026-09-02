@@ -549,7 +549,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
 (function () {
   var STORAGE_KEY = "cpjr-announce-state";
   var LEGACY_KEY = "cpjr-announce-dismissed";
-  var ANNOUNCE_ID = "noisegoblin-2026";
+  var ANNOUNCE_ID = "disease-imagined-2026";
   var DELAY_MS = 3000;
   var SCROLL_PX = 120;
   var RESHOW_MS = 5 * 60 * 60 * 1000;
@@ -557,13 +557,13 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
 
   var announcement = {
     id: ANNOUNCE_ID,
-    href: "https://www.noisegoblin.com",
+    href: "https://diseaseimagined.com",
     eyebrow: "🚨 New Project!",
-    title: "Noisegoblin",
-    description: "A clean soundboard for memes and iconic effects — try it out.",
+    title: "Disease Imagined",
+    description: "An interactive web experience built with Three.js — explore it and see what's inside.",
     cta: "Open project →",
-    image: "soundrop-screenshot.jpg",
-    imageAlt: "Noisegoblin project screenshot"
+    image: "disease-imagined-screenshot.jpg",
+    imageAlt: "Disease Imagined project screenshot"
   };
 
   function defaultState() {
@@ -643,7 +643,7 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
   function playAnnounceSound() {
     if (!canPlaySound()) return;
     try {
-      var audio = new Audio(assetBase() + "sounds/peter-griffin-laugh.mp3");
+      var audio = new Audio(assetBase() + "sounds/futuristic-announcement-bar-sfx.mp3");
       audio.preload = "auto";
       var playPromise = audio.play();
       if (playPromise && typeof playPromise.then === "function") {

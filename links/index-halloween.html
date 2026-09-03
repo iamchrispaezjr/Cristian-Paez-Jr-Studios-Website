@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7SSEB01QJM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7SSEB01QJM');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Links — Cristian Paez Jr</title>
+  <meta name="description" content="All of Cristian Paez Jr’s links — web projects, socials, and more." />
+  <link rel="canonical" href="https://www.iamchrispaezjr.com/links/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Cristian Paez Jr" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cristian Paez Jr" />
+  <meta property="og:title" content="Links — Cristian Paez Jr" />
+  <meta property="og:description" content="All of Cristian Paez Jr’s links — web projects, socials, and more." />
+  <meta property="og:url" content="https://www.iamchrispaezjr.com/links/" />
+  <meta property="og:image" content="https://www.iamchrispaezjr.com/about-me.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Links — Cristian Paez Jr" />
+  <meta name="twitter:description" content="All of Cristian Paez Jr’s links — web projects, socials, and more." />
+  <meta name="twitter:image" content="https://www.iamchrispaezjr.com/about-me.jpg" />
+  <link rel="icon" href="../favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Gloria+Hallelujah&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #120c18;
+      --bg-soft: #1c1424;
+      --surface: rgba(28, 18, 36, 0.88);
+      --ink: #f6e8d0;
+      --ink-muted: #c4a98a;
+      --border: rgba(255, 168, 76, 0.28);
+      --accent: #ff7a18;
+      --accent-hover: #ff952f;
+      --accent-text: #1a0c08;
+      --ghost: #7dff9a;
+      --ghost-soft: rgba(125, 255, 154, 0.55);
+      --ghost-glow: rgba(90, 255, 140, 0.45);
+      --radius-pill: 999px;
+      --font-display: "Gloria Hallelujah", cursive;
+      --font-body: "DM Sans", sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.45);
+      --pumpkin-glow: #ff9a1a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      position: relative;
+      overflow-x: hidden;
+      background: #0a0710;
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .links-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        #05080a
+        url("halloween-graveyard.jpg")
+        center / cover no-repeat;
+    }
+
+    .links-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5, 8, 10, 0.28) 0%, rgba(5, 8, 10, 0.18) 38%, rgba(5, 8, 10, 0.42) 100%);
+    }
+
+    .halloween-pumpkins {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .halloween-pumpkin {
+      position: absolute;
+      bottom: max(0.35rem, env(safe-area-inset-bottom));
+      width: 4.6rem;
+      height: 3.85rem;
+    }
+
+    .halloween-pumpkin-left {
+      left: max(0.35rem, env(safe-area-inset-left));
+    }
+
+    .halloween-pumpkin-right {
+      right: max(0.35rem, env(safe-area-inset-right));
+      transform: scaleX(-1);
+    }
+
+    .halloween-pumpkin-stem {
+      position: absolute;
+      top: 0.05rem;
+      left: 50%;
+      width: 0.5rem;
+      height: 0.7rem;
+      transform: translateX(-50%) rotate(-8deg);
+      background: #3d6b28;
+      border-radius: 3px 3px 2px 2px;
+    }
+
+    .halloween-pumpkin-body {
+      position: absolute;
+      inset: 0.55rem 0 0;
+      border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
+      background:
+        radial-gradient(circle at 50% 38%, #ffb347 0%, #e87300 52%, #b84a00 100%);
+      box-shadow:
+        0 0 16px rgba(255, 154, 26, 0.45),
+        inset -10px -8px 16px rgba(80, 20, 0, 0.35);
+    }
+
+    .halloween-pumpkin-face {
+      position: absolute;
+      inset: 1.05rem 0.7rem 0.55rem;
+      z-index: 1;
+    }
+
+    .halloween-pumpkin-face .eye {
+      position: absolute;
+      top: 18%;
+      width: 0.62rem;
+      height: 0.72rem;
+      background: #ffe08a;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      box-shadow:
+        0 0 8px #ffe08a,
+        0 0 16px rgba(255, 154, 26, 0.95),
+        0 0 28px rgba(255, 122, 24, 0.7);
+      animation: pumpkin-eye-glow 1.8s ease-in-out infinite;
+    }
+
+    .halloween-pumpkin-face .eye-l { left: 16%; }
+    .halloween-pumpkin-face .eye-r { right: 16%; animation-delay: -0.7s; }
+
+    .halloween-pumpkin-face .mouth {
+      position: absolute;
+      bottom: 14%;
+      left: 50%;
+      width: 1.85rem;
+      height: 0.72rem;
+      transform: translateX(-50%);
+      background: #120806;
+      clip-path: polygon(0 20%, 14% 100%, 28% 35%, 50% 100%, 72% 35%, 86% 100%, 100% 20%, 100% 0, 0 0);
+    }
+
+    @keyframes pumpkin-eye-glow {
+      0%, 100% {
+        filter: brightness(1);
+        box-shadow:
+          0 0 8px #ffe08a,
+          0 0 16px rgba(255, 154, 26, 0.9),
+          0 0 26px rgba(255, 122, 24, 0.65);
+      }
+      50% {
+        filter: brightness(1.25);
+        box-shadow:
+          0 0 12px #fff3b0,
+          0 0 24px rgba(255, 180, 60, 1),
+          0 0 36px rgba(255, 122, 24, 0.85);
+      }
+    }
+
+    .halloween-bats {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+      overflow: hidden;
+      contain: strict;
+    }
+
+    .halloween-bat {
+      position: absolute;
+      left: 50%;
+      top: 42%;
+      width: 3.25rem;
+      height: 1.55rem;
+      margin-left: -1.625rem;
+      margin-top: -0.775rem;
+      opacity: 0;
+      color: #050308;
+      will-change: transform, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .halloween-bat svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .halloween-bat.is-flying {
+      animation: bat-dive var(--bat-duration, 2.4s) linear var(--bat-delay, 0s) both;
+    }
+
+    @keyframes bat-dive {
+      0% {
+        opacity: 0;
+        transform: translate3d(var(--bat-ox, 0px), var(--bat-oy, -80px), 0) scale(0.22);
+      }
+      10% {
+        opacity: 1;
+      }
+      78% {
+        opacity: 1;
+        transform: translate3d(calc(var(--bat-ox, 0px) * 0.18), calc(var(--bat-oy, -80px) * 0.12), 0) scale(3.8);
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0) scale(7.2);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .link-icons a,
+      .halloween-pumpkin-face .eye {
+        animation: none;
+      }
+
+      .halloween-bat.is-flying {
+        animation: none;
+        display: none;
+      }
+
+      .links-avatar {
+        transition: none;
+      }
+
+      .links-name-fill {
+        opacity: 1;
+      }
+
+      .links-name-stroke {
+        display: none;
+      }
+
+      .links-name-svg.is-drawing .links-name-stroke {
+        animation: none;
+      }
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 28rem;
+      margin: 0 auto;
+      padding:
+        calc(clamp(2rem, 6vw, 3.25rem) + 2.85rem)
+        clamp(1.15rem, 5vw, 1.75rem)
+        3.5rem;
+    }
+
+    .links-top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.55rem;
+      padding:
+        max(0.75rem, env(safe-area-inset-top))
+        max(0.85rem, env(safe-area-inset-right))
+        0.55rem
+        max(0.85rem, env(safe-area-inset-left));
+      pointer-events: none;
+    }
+
+    .links-top-bar > * {
+      pointer-events: auto;
+    }
+
+    .links-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .links-corner-pill,
+    .links-contact-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.35rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.01em;
+      box-shadow: var(--shadow-soft);
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease);
+      white-space: nowrap;
+    }
+
+    .links-corner-pill {
+      background: var(--accent);
+      color: var(--accent-text);
+      min-width: 5.65rem;
+    }
+
+    .links-corner-pill:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .links-corner-pill:focus-visible,
+    .links-contact-pill:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .links-contact-pill {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      min-width: 6.35rem;
+    }
+
+    .links-contact-pill:hover {
+      background: var(--bg-soft);
+      border-color: rgba(255, 154, 26, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .links-share-wrap {
+      position: relative;
+    }
+
+    .links-share-btn {
+      width: 2.35rem;
+      height: 2.35rem;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(28, 18, 36, 0.94);
+      color: var(--ink);
+      box-shadow: var(--shadow-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .links-share-btn:hover {
+      background: rgba(40, 24, 48, 0.98);
+      border-color: rgba(255, 154, 26, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .links-share-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .links-share-btn svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      display: block;
+    }
+
+    .links-menu-icon {
+      width: 1rem;
+      height: 0.72rem;
+      position: relative;
+      display: block;
+    }
+
+    .links-menu-icon span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+    }
+
+    .links-menu-icon span:nth-child(1) {
+      top: 0;
+    }
+
+    .links-menu-icon span:nth-child(2) {
+      top: 5px;
+    }
+
+    .links-menu-icon span:nth-child(3) {
+      top: 10px;
+    }
+
+    .links-share-menu {
+      position: absolute;
+      top: calc(100% + 0.45rem);
+      right: 0;
+      min-width: 11.5rem;
+      padding: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(22, 14, 30, 0.98);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.98);
+      transform-origin: top right;
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s var(--ease);
+    }
+
+    .links-share-wrap.is-open .links-share-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .links-share-menu button,
+    .links-share-menu a {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s var(--ease);
+    }
+
+    .links-share-menu button:hover,
+    .links-share-menu a:hover {
+      background: var(--bg-soft);
+    }
+
+    .links-share-menu button:focus-visible,
+    .links-share-menu a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+
+    .links-share-menu svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    .page-intro {
+      margin-bottom: 1.75rem;
+      text-align: center;
+      --avatar-size: clamp(6.85rem, 21vw, 7.75rem);
+      --avatar-border: 3.5px;
+      --avatar-gap: 0.95rem;
+    }
+
+    .page-intro.is-scrolled {
+      --avatar-size: 5.5rem;
+      --avatar-border: 3px;
+      --avatar-gap: 0.85rem;
+    }
+
+    .links-avatar {
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: var(--avatar-border) solid rgba(255, 168, 76, 0.85);
+      box-shadow:
+        0 0 0 3px rgba(255, 122, 24, 0.25),
+        0 0 28px rgba(255, 122, 24, 0.35),
+        var(--shadow-soft);
+      margin: 0 auto var(--avatar-gap);
+      display: block;
+      transition:
+        width 0.4s var(--ease),
+        height 0.4s var(--ease),
+        border-width 0.4s var(--ease),
+        margin 0.4s var(--ease);
+    }
+
+    .page-intro h1 {
+      margin-bottom: 0.35rem;
+    }
+
+    .links-name-svg {
+      width: min(100%, 22.5rem);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      overflow: visible;
+    }
+
+    .links-name-fill {
+      fill: #ffd089;
+      opacity: 0;
+      transition: opacity 0.12s var(--ease);
+      filter: drop-shadow(0 0 8px rgba(255, 154, 26, 0.45));
+    }
+
+    .links-name-stroke {
+      fill: none;
+      stroke: #ffd089;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transition: opacity 0.15s var(--ease);
+    }
+
+    .links-name-svg.is-complete .links-name-stroke {
+      opacity: 0;
+    }
+
+    .page-intro .link-icons {
+      margin-top: 0.95rem;
+    }
+
+    .link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .link-group h2 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-bottom: 0.15rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      min-height: 3.35rem;
+      padding: 0.55rem 1rem 0.55rem 0.55rem;
+      border: 1.5px solid rgba(255, 168, 76, 0.55);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      box-shadow:
+        0 0 0 1px rgba(255, 122, 24, 0.08),
+        var(--shadow-soft);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 168, 76, 0.95);
+      box-shadow:
+        0 0 22px rgba(255, 122, 24, 0.28),
+        var(--shadow-soft);
+    }
+
+    .link-btn--static {
+      cursor: default;
+    }
+
+    .link-btn--static:hover {
+      transform: none;
+      border-color: rgba(255, 168, 76, 0.55);
+      box-shadow:
+        0 0 0 1px rgba(255, 122, 24, 0.08),
+        var(--shadow-soft);
+    }
+
+    .link-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .link-btn img {
+      width: 2.15rem;
+      height: 2.15rem;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background: var(--bg-soft);
+      flex-shrink: 0;
+    }
+
+    .link-btn span {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .link-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 0.35rem;
+    }
+
+    .link-icons a {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(10, 18, 12, 0.78);
+      border: 1.5px solid var(--ghost);
+      box-shadow:
+        0 0 10px var(--ghost-glow),
+        0 0 22px rgba(90, 255, 140, 0.22),
+        inset 0 0 10px rgba(125, 255, 154, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      animation: ghost-icon-pulse 2.8s ease-in-out infinite;
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .link-icons a:hover {
+      transform: translateY(-2px);
+      background: rgba(40, 90, 55, 0.45);
+      border-color: #b6ffc6;
+      box-shadow:
+        0 0 16px rgba(125, 255, 154, 0.75),
+        0 0 34px rgba(90, 255, 140, 0.4),
+        inset 0 0 12px rgba(125, 255, 154, 0.2);
+      animation: none;
+    }
+
+    .link-icons a:nth-child(2) { animation-delay: -0.35s; }
+    .link-icons a:nth-child(3) { animation-delay: -0.7s; }
+    .link-icons a:nth-child(4) { animation-delay: -1.05s; }
+    .link-icons a:nth-child(5) { animation-delay: -1.4s; }
+    .link-icons a:nth-child(6) { animation-delay: -1.75s; }
+    .link-icons a:nth-child(7) { animation-delay: -2.1s; }
+    .link-icons a:nth-child(8) { animation-delay: -2.45s; }
+
+    @keyframes ghost-icon-pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 8px rgba(90, 255, 140, 0.35),
+          0 0 18px rgba(90, 255, 140, 0.16),
+          inset 0 0 8px rgba(125, 255, 154, 0.08);
+      }
+      50% {
+        box-shadow:
+          0 0 16px rgba(125, 255, 154, 0.7),
+          0 0 30px rgba(90, 255, 140, 0.35),
+          inset 0 0 12px rgba(125, 255, 154, 0.16);
+      }
+    }
+
+    .link-icons a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .link-icons img {
+      width: 1.15rem;
+      height: 1.15rem;
+      display: block;
+      filter:
+        brightness(0) invert(1)
+        drop-shadow(0 0 3px rgba(125, 255, 154, 0.95))
+        drop-shadow(0 0 8px rgba(90, 255, 140, 0.75))
+        drop-shadow(0 0 14px rgba(70, 255, 130, 0.45));
+      transition: filter 0.25s var(--ease);
+    }
+
+    .link-icons a:hover img {
+      filter:
+        brightness(0) invert(1)
+        drop-shadow(0 0 4px rgba(182, 255, 198, 1))
+        drop-shadow(0 0 10px rgba(125, 255, 154, 0.95))
+        drop-shadow(0 0 18px rgba(90, 255, 140, 0.7));
+    }
+
+    @media (max-width: 900px) {
+      .link-icons {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        padding: 0.1rem 0;
+      }
+
+      .link-icons::-webkit-scrollbar {
+        display: none;
+      }
+
+      .link-icons a {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+
+      .page-intro .link-icons a {
+        width: 2.3rem;
+        height: 2.3rem;
+      }
+
+      .page-intro .link-icons img {
+        width: 1.05rem;
+        height: 1.05rem;
+      }
+
+      .page-intro .link-icons {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        max-width: 22.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="links-bg" aria-hidden="true"></div>
+  <div class="halloween-pumpkins" aria-hidden="true">
+    <div class="halloween-pumpkin halloween-pumpkin-left">
+      <span class="halloween-pumpkin-stem"></span>
+      <span class="halloween-pumpkin-body"></span>
+      <span class="halloween-pumpkin-face">
+        <span class="eye eye-l"></span>
+        <span class="eye eye-r"></span>
+        <span class="mouth"></span>
+      </span>
+    </div>
+    <div class="halloween-pumpkin halloween-pumpkin-right">
+      <span class="halloween-pumpkin-stem"></span>
+      <span class="halloween-pumpkin-body"></span>
+      <span class="halloween-pumpkin-face">
+        <span class="eye eye-l"></span>
+        <span class="eye eye-r"></span>
+        <span class="mouth"></span>
+      </span>
+    </div>
+  </div>
+
+  <div class="halloween-bats" id="halloweenBats" aria-hidden="true"></div>
+  <div class="links-top-bar">
+    <a class="links-corner-pill" id="linksPrimaryPill" href="https://www.iamchrispaezjr.com/#mc_embed_signup">Subscribe</a>
+    <div class="links-top-actions">
+      <a class="links-contact-pill" id="linksSecondaryPill" href="../contact/">Contact Me</a>
+      <div class="links-share-wrap" id="linksShareWrap">
+      <button
+        type="button"
+        class="links-share-btn"
+        id="linksShareBtn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="linksShareMenu"
+      >
+        <span class="links-menu-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <div class="links-share-menu" id="linksShareMenu" role="menu" aria-label="Menu" hidden>
+        <a role="menuitem" href="../media-kit/">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 4.5h7.5L17 7v12.5H7V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M14.5 4.5V7H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.5 11h5M9.5 14.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          Media Kit
+        </a>
+        <a
+          role="menuitem"
+          href="https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 20.5s-6.5-4.1-6.5-9.1A3.9 3.9 0 0 1 12 7.8a3.9 3.9 0 0 1 6.5 3.6c0 5-6.5 9.1-6.5 9.1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          Support
+        </a>
+        <button type="button" role="menuitem" id="linksShareNative" hidden>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v10.2M12 3 8.5 6.5M12 3l3.5 3.5M6 10.5v8a1.5 1.5 0 0 0 1.5 1.5h9A1.5 1.5 0 0 0 18 18.5v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Share…
+        </button>
+        <button type="button" role="menuitem" id="linksShareCopy">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 9h8v8H9V9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M7 15H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span id="linksShareCopyLabel">Copy link</span>
+        </button>
+        <a role="menuitem" id="linksShareX" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M13.2 10.8 19 4h-1.8l-5 6.2L8.2 4H4l6.1 8.9L4 20h1.8l5.3-6.5L15.8 20H20l-6.8-9.2Z" fill="currentColor"/>
+          </svg>
+          Share on X
+        </a>
+        <a role="menuitem" id="linksShareFacebook" href="#" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14 8.5h2.5L15.8 12H14v8h-3v-8H9V8.5h2V6.8C11 5.3 11.9 4 14.2 4H16.5v3h-1.4c-.8 0-.9.4-.9 1v.5Z" fill="currentColor"/>
+          </svg>
+          Share on Facebook
+        </a>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <header class="page-intro" id="linksIntro">
+      <a href="https://www.iamchrispaezjr.com" aria-label="Cristian Paez Jr home">
+        <img class="links-avatar" src="../about-me.jpg" alt="" width="176" height="176" />
+      </a>
+      <h1>
+        <svg class="links-name-svg" id="linksNameSvg" viewBox="-1.06 -4.95 390.86 47.13" aria-label="Cristian Paez Jr">
+          <g id="linksNameLetters"></g>
+        </svg>
+      </h1>
+      <nav class="link-icons" aria-label="Social">
+        <a href="https://www.youtube.com/channel/UCWYtgKKmHAml5dol4--5GJQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <img src="../icons/youtube.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.instagram.com/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="../icons/instagram.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.threads.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="../icons/threads.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://x.com/iamchrispjr" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../icons/x.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.tiktok.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../icons/tiktok.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.snapchat.com/@iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+          <img src="../icons/snapchat.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.pinterest.com/iamchrispaezjroff/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+          <img src="../icons/pinterest.svg" alt="" width="18" height="18" />
+        </a>
+        <a href="https://www.twitch.tv/iamchrispaezjr" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+          <img src="../icons/twitch.svg" alt="" width="18" height="18" />
+        </a>
+      </nav>
+    </header>
+
+    <section class="link-group" aria-labelledby="links-home">
+      <h2 id="links-home">Home</h2>
+      <a class="link-btn" href="https://www.iamchrispaezjr.com" aria-label="My Website">
+        <img src="../favicon.png" alt="" width="34" height="34" />
+        <span>My Website</span>
+      </a>
+    </section>
+
+    <section class="link-group" aria-labelledby="links-web">
+      <h2 id="links-web">Web Projects</h2>
+      <a
+        class="link-btn"
+        href="https://www.noisegoblin.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Noisegoblin soundboard"
+      >
+        <img src="../soundrop-screenshot.jpg" alt="" width="34" height="34" />
+        <span>Noisegoblin</span>
+      </a>
+      <a
+        class="link-btn"
+        href="https://diseaseimagined.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Disease Imagined"
+      >
+        <img src="../Disease-Imagined-Link.png" alt="" width="34" height="34" />
+        <span>Disease Imagined</span>
+      </a>
+    </section>
+  </main>
+
+  <script type="application/json" id="cpjrNamePaths">{"viewBox":[-1.06,-4.95,390.86,47.13],"letters":[{"char":"C","d":"M0.9375 23.281875Q0.9375 21.688125 1.3828125 19.813125Q1.828125 17.938125 2.625 16.0396875Q3.421875 14.14125 4.546875 12.3365625Q5.671875 10.531875 7.078125 9.1490625Q8.484375 7.766249999999999 10.125 6.945937499999999Q11.765625 6.125624999999999 13.59375 6.125624999999999Q15.09375 6.125624999999999 16.40625 6.524062499999999Q17.71875 6.922499999999999 18.65625 7.719374999999999Q19.59375 8.51625 20.1328125 9.7115625Q20.671875 10.906875 20.671875 12.5475Q19.640625 12.5475 19.0078125 12.0084375Q18.375 11.469375 17.8359375 10.813125Q17.296875 10.156875 16.6640625 9.64125Q16.03125 9.125625 15.046875 9.125625Q13.59375 9.125625 12.2578125 9.875625Q10.921875 10.625625 9.7734375 11.89125Q8.625 13.156875 7.7578125 14.750625Q6.890625 16.344375 6.2578125 17.9615625Q5.625 19.57875 5.2734375 21.125625Q4.921875 22.6725 4.921875 23.7975Q4.921875 26.235 5.6484375 28.3678125Q6.375 30.500625 7.734375 32.0709375Q9.09375 33.64125 11.109375 34.531875Q13.125 35.4225 15.703125 35.4225Q17.34375 35.4225 18.8203125 34.9303125Q20.296875 34.438125 21.6796875 33.8521875Q23.0625 33.26625 24.421875 32.750625Q25.78125 32.235 27.140625 32.235Q27.328125 32.235 27.6796875 32.2584375Q28.03125 32.281875 28.3359375 32.375625Q28.640625 32.469375 28.875 32.6803125Q29.109375 32.89125 29.109375 33.313125Q29.109375 35.000625 27.8203125 36.1725Q26.53125 37.344375 24.75 38.0709375Q22.96875 38.7975 21.046875 39.125625Q19.125 39.45375 17.90625 39.45375Q14.34375 39.45375 11.25 38.3053125Q8.15625 37.156875 5.859375 35.0475Q3.5625 32.938125 2.25 29.9615625Q0.9375 26.985 0.9375 23.281875Z"},{"char":"r","d":"M31.078125 19.6725Q31.078125 19.250625 31.125 18.8053125Q31.171875 18.36 31.3125 18.0084375Q31.453125 17.656875 31.7578125 17.4225Q32.0625 17.188125 32.625 17.188125Q33.09375 17.188125 33.6796875 17.9146875Q34.265625 18.64125 34.875 19.7428125Q35.484375 20.844375 36.0703125 22.156875Q36.65625 23.469375 37.1015625 24.5709375Q37.546875 25.6725 37.828125 26.469375Q38.109375 27.26625 38.15625 27.313125Q38.765625 25.6725 39.515625 23.750625Q40.265625 21.82875 41.3671875 20.1646875Q42.46875 18.500625 43.9921875 17.375625Q45.515625 16.250625 47.71875 16.250625Q48.84375 16.250625 49.8515625 16.6021875Q50.859375 16.95375 51.6328125 17.6334375Q52.40625 18.313125 52.875 19.250625Q53.34375 20.188125 53.34375 21.406875Q53.34375 22.438125 52.5234375 22.86Q51.703125 23.281875 50.671875 23.281875H50.203125L48.1875 21.26625Q48.09375 21.26625 48.046875 21.219375Q47.953125 21.219375 47.8828125 21.1959375Q47.8125 21.1725 47.71875 21.1725Q46.078125 21.1725 45.1640625 22.0865625Q44.25 23.000625 43.78125 24.3365625Q43.3125 25.6725 43.1953125 27.1490625Q43.078125 28.625625 43.078125 29.844375Q43.078125 30.781875 43.265625 31.7428125Q43.453125 32.70375 43.6875 33.6178125Q43.921875 34.531875 44.109375 35.4928125Q44.296875 36.45375 44.296875 37.485Q44.296875 39.45375 42.1875 39.45375Q41.015625 39.45375 39.75 38.2115625Q38.484375 36.969375 37.2421875 35.0475Q36.0 33.125625 34.875 30.8053125Q33.75 28.485 32.90625 26.281875Q32.0625 24.07875 31.5703125 22.2975Q31.078125 20.51625 31.078125 19.6725Z"},{"char":"i","d":"M57.0 21.781875Q57.0 21.500625 57.0234375 20.8678125Q57.046875 20.235 57.0703125 19.531875Q57.09375 18.82875 57.1171875 18.1725Q57.140625 17.51625 57.140625 17.235Q57.65625 16.485 58.4765625 16.01625Q59.296875 15.5475 60.140625 15.26625Q60.28125 17.7975 60.9375 20.656875Q61.59375 23.51625 62.34375 26.3990625Q63.09375 29.281875 63.6796875 32.094375Q64.265625 34.906875 64.265625 37.344375Q64.265625 39.45375 62.109375 39.45375Q60.796875 39.45375 59.90625 38.375625Q59.015625 37.2975 58.4765625 35.6334375Q57.9375 33.969375 57.609375 31.9303125Q57.28125 29.89125 57.1640625 27.9225Q57.046875 25.95375 57.0234375 24.313125Q57.0 22.6725 57.0 21.781875ZM57.65625 4.203749999999999Q58.546875 4.578749999999999 59.15625 5.422499999999999Q59.765625 6.266249999999999 59.6953125 6.945937499999999Q59.625 7.625624999999999 58.640625 7.883437499999999Q57.65625 8.14125 55.359375 7.344374999999999Q55.359375 6.078749999999999 55.8515625 5.141249999999999Q56.34375 4.203749999999999 57.65625 4.203749999999999Z"},{"char":"s","d":"M75.09375 37.250625Q75.84375 36.735 76.8984375 35.9146875Q77.953125 35.094375 79.03125 34.156875Q80.109375 33.219375 81.046875 32.188125Q81.984375 31.156875 82.5234375 30.1959375Q83.0625 29.235 83.0625 28.39125Q83.0625 27.5475 82.21875 26.985Q80.71875 26.985 78.9375 27.1021875Q77.15625 27.219375 75.375 27.1959375Q73.59375 27.1725 71.9296875 26.89125Q70.265625 26.61 68.953125 25.86Q67.640625 25.11 66.8671875 23.7271875Q66.09375 22.344375 66.09375 20.188125Q66.09375 17.656875 67.0546875 15.6178125Q68.015625 13.57875 69.609375 12.0084375Q71.203125 10.438125 73.1953125 9.2428125Q75.1875 8.0475 77.203125 7.203749999999999Q78.421875 7.531874999999999 79.453125 8.375625Q80.484375 9.219375 81.234375 10.250625Q80.90625 11.281875 79.9453125 11.844375Q78.984375 12.406875 77.7421875 12.82875Q76.5 13.250625 75.140625 13.719375Q73.78125 14.188125 72.6796875 14.9615625Q71.578125 15.735 70.828125 16.9771875Q70.078125 18.219375 70.078125 20.235Q70.078125 21.735 70.828125 22.438125Q71.578125 23.14125 72.796875 23.3990625Q74.015625 23.656875 75.5625 23.5865625Q77.109375 23.51625 78.7265625 23.375625Q80.34375 23.235 81.890625 23.2115625Q83.4375 23.188125 84.65625 23.5865625Q85.875 23.985 86.6015625 24.875625Q87.328125 25.76625 87.328125 27.500625Q87.328125 28.250625 86.8359375 29.4225Q86.34375 30.594375 85.5234375 31.9303125Q84.703125 33.26625 83.6015625 34.57875Q82.5 35.89125 81.3046875 36.9459375Q80.109375 38.000625 78.9140625 38.6803125Q77.71875 39.36 76.6875 39.36Q75.703125 39.36 75.3984375 38.656875Q75.09375 37.95375 75.09375 37.250625Z"},{"char":"t","d":"M88.171875 15.735Q88.171875 15.594375 88.21875 15.500625Q88.21875 15.406875 88.265625 15.26625Q88.453125 15.031875 88.828125 14.656875Q89.203125 14.281875 89.296875 14.281875H98.71875Q98.71875 13.76625 98.578125 12.64125Q98.4375 11.51625 98.3203125 10.156875Q98.203125 8.7975 98.25 7.320937499999999Q98.296875 5.844374999999999 98.6484375 4.649062499999999Q99.0 3.4537499999999994 99.7734375 2.6803124999999994Q100.546875 1.9068749999999994 101.953125 1.9068749999999994Q101.953125 6.641249999999999 102.609375 9.500625Q103.265625 12.36 104.3671875 13.906875Q105.46875 15.45375 106.875 15.9225Q108.28125 16.39125 109.7578125 16.3209375Q111.234375 16.250625 112.640625 15.875625Q114.046875 15.500625 115.1484375 15.36Q116.25 15.219375 116.90625 15.5709375Q117.5625 15.9225 117.5625 17.235Q117.5625 18.219375 117.1171875 18.64125Q116.671875 19.063125 115.40625 19.2975Q115.03125 19.344375 114.1640625 19.4615625Q113.296875 19.57875 112.21875 19.6725Q111.140625 19.76625 109.921875 19.8834375Q108.703125 20.000625 107.625 20.094375Q106.546875 20.188125 105.65625 20.2115625Q104.765625 20.235 104.34375 20.235Q104.34375 20.469375 104.296875 21.031875Q104.25 21.594375 104.25 21.781875Q104.25 23.844375 104.90625 25.7896875Q105.5625 27.735 106.3359375 29.656875Q107.109375 31.57875 107.765625 33.500625Q108.421875 35.4225 108.421875 37.485Q108.421875 37.86 108.3515625 38.2584375Q108.28125 38.656875 108.0703125 38.9615625Q107.859375 39.26625 107.4609375 39.4303125Q107.0625 39.594375 106.359375 39.36Q104.578125 38.89125 103.7109375 37.344375Q102.84375 35.7975 102.421875 33.6646875Q102.0 31.531875 101.859375 29.14125Q101.71875 26.750625 101.4140625 24.6646875Q101.109375 22.57875 100.453125 21.1021875Q99.796875 19.625625 98.34375 19.2975L89.296875 17.235Q89.109375 17.235 88.734375 16.8365625Q88.359375 16.438125 88.265625 16.250625Q88.21875 16.156875 88.21875 16.01625Q88.171875 15.9225 88.171875 15.735Z"},{"char":"i","d":"M121.3125 21.781875Q121.3125 21.500625 121.3359375 20.8678125Q121.359375 20.235 121.3828125 19.531875Q121.40625 18.82875 121.4296875 18.1725Q121.453125 17.51625 121.453125 17.235Q121.96875 16.485 122.7890625 16.01625Q123.609375 15.5475 124.453125 15.26625Q124.59375 17.7975 125.25 20.656875Q125.90625 23.51625 126.65625 26.3990625Q127.40625 29.281875 127.9921875 32.094375Q128.578125 34.906875 128.578125 37.344375Q128.578125 39.45375 126.421875 39.45375Q125.109375 39.45375 124.21875 38.375625Q123.328125 37.2975 122.7890625 35.6334375Q122.25 33.969375 121.921875 31.9303125Q121.59375 29.89125 121.4765625 27.9225Q121.359375 25.95375 121.3359375 24.313125Q121.3125 22.6725 121.3125 21.781875ZM121.96875 4.203749999999999Q122.859375 4.578749999999999 123.46875 5.422499999999999Q124.078125 6.266249999999999 124.0078125 6.945937499999999Q123.9375 7.625624999999999 122.953125 7.883437499999999Q121.96875 8.14125 119.671875 7.344374999999999Q119.671875 6.078749999999999 120.1640625 5.141249999999999Q120.65625 4.203749999999999 121.96875 4.203749999999999Z"},{"char":"a","d":"M150.5625 33.313125Q148.78125 34.531875 147.4921875 35.4928125Q146.203125 36.45375 144.984375 37.11Q143.765625 37.76625 142.3828125 38.094375Q141.0 38.4225 138.984375 38.4225Q134.625 38.4225 132.515625 36.1021875Q130.40625 33.781875 130.40625 29.188125Q130.40625 27.406875 130.875 25.485Q131.34375 23.563125 132.2578125 21.6646875Q133.171875 19.76625 134.4375 18.0553125Q135.703125 16.344375 137.296875 15.031875Q138.890625 13.719375 140.6953125 12.9459375Q142.5 12.1725 144.515625 12.1725Q147.890625 12.500625 149.8125 13.8365625Q151.734375 15.1725 152.71875 17.2584375Q153.703125 19.344375 154.078125 21.8990625Q154.453125 24.45375 154.6640625 27.1725Q154.875 29.89125 155.203125 32.61Q155.53125 35.32875 156.5625 37.625625Q155.953125 39.1725 155.4140625 39.8053125Q154.875 40.438125 154.21875 40.01625Q153.5625 39.594375 152.6953125 37.95375Q151.828125 36.313125 150.5625 33.313125ZM134.390625 29.281875Q134.390625 31.95375 135.3984375 33.1959375Q136.40625 34.438125 138.984375 34.438125Q140.90625 34.438125 142.6640625 33.7584375Q144.421875 33.07875 145.734375 31.8834375Q147.046875 30.688125 147.84375 29.000625Q148.640625 27.313125 148.640625 25.250625Q148.640625 24.406875 148.6875 22.8834375Q148.734375 21.36 148.5 19.86Q148.265625 18.36 147.609375 17.2584375Q146.953125 16.156875 145.640625 16.156875Q143.203125 16.156875 141.140625 17.3990625Q139.078125 18.64125 137.578125 20.563125Q136.078125 22.485 135.234375 24.8053125Q134.390625 27.125625 134.390625 29.281875Z"},{"char":"n","d":"M159.515625 23.563125Q159.515625 22.344375 160.125 21.8053125Q160.734375 21.26625 162.09375 21.26625H162.5625Q162.703125 22.01625 162.890625 23.000625Q163.078125 23.985 163.453125 25.01625Q163.828125 26.0475 164.34375 26.9146875Q164.859375 27.781875 165.609375 28.2975Q165.65625 26.656875 166.4296875 25.1334375Q167.203125 23.61 168.3515625 22.4146875Q169.5 21.219375 170.8828125 20.3990625Q172.265625 19.57875 173.625 19.2975H174.65625Q176.90625 19.2975 178.5 20.3053125Q180.09375 21.313125 181.1484375 22.9303125Q182.203125 24.5475 182.765625 26.61Q183.328125 28.6725 183.6328125 30.8053125Q183.9375 32.938125 184.0078125 34.9303125Q184.078125 36.9225 184.078125 38.32875H180.65625Q180.375 35.51625 179.953125 32.938125Q179.8125 31.906875 179.578125 30.7584375Q179.34375 29.61 179.0625 28.6021875Q178.78125 27.594375 178.453125 26.7271875Q178.125 25.86 177.703125 25.250625Q177.515625 25.063125 177.2109375 24.735Q176.90625 24.406875 176.578125 24.07875Q176.25 23.750625 175.96875 23.51625Q175.6875 23.281875 175.640625 23.281875Q174.234375 22.906875 173.203125 23.8209375Q172.171875 24.735 171.375 26.281875Q170.578125 27.82875 170.0859375 29.7975Q169.59375 31.76625 169.265625 33.5709375Q168.9375 35.375625 168.796875 36.7115625Q168.65625 38.0475 168.609375 38.32875Q167.4375 39.1725 166.40625 38.8209375Q165.375 38.469375 164.4609375 37.344375Q163.546875 36.219375 162.8203125 34.531875Q162.09375 32.844375 161.484375 30.9459375Q160.875 29.0475 160.3828125 27.125625Q159.890625 25.20375 159.515625 23.563125Z"},{"char":"P","d":"M207.796875 2.3287499999999994Q207.796875 0.8756249999999994 208.3359375 -0.06187500000000057Q208.875 -0.9993750000000006 209.8125 -1.5853125000000006Q210.75 -2.1712500000000006 211.8984375 -2.4525000000000006Q213.046875 -2.7337500000000006 214.2890625 -2.8509375000000006Q215.53125 -2.9681250000000006 216.703125 -2.9446875000000006Q217.875 -2.9212500000000006 218.859375 -2.9212500000000006Q220.78125 -2.9212500000000006 222.703125 -2.5462500000000006Q224.625 -2.1712500000000006 226.1015625 -1.2337500000000006Q227.578125 -0.29625000000000057 228.515625 1.2740624999999994Q229.453125 2.8443749999999994 229.453125 5.188124999999999Q229.453125 7.250624999999999 228.6328125 9.2896875Q227.8125 11.32875 226.5234375 13.1803125Q225.234375 15.031875 223.59375 16.5553125Q221.953125 18.07875 220.3359375 19.156875Q218.71875 20.235 217.2421875 20.844375Q215.765625 21.45375 214.78125 21.313125Q214.21875 23.14125 214.1015625 25.2271875Q213.984375 27.313125 214.03125 29.3053125Q214.078125 31.2975 214.171875 33.1021875Q214.265625 34.906875 214.0078125 36.1959375Q213.75 37.485 213.046875 38.1178125Q212.34375 38.750625 210.890625 38.51625Q210.46875 35.188125 210.2578125 31.76625Q210.046875 28.344375 209.90625 24.969375Q209.765625 21.594375 209.6484375 18.3834375Q209.53125 15.1725 209.3203125 12.26625Q209.109375 9.36 208.734375 6.828749999999999Q208.359375 4.297499999999999 207.796875 2.3287499999999994ZM219.375 1.1099999999999994Q218.671875 1.1099999999999994 217.640625 1.1568749999999994Q216.609375 1.2037499999999994 215.6484375 1.4615624999999994Q214.6875 1.7193749999999994 214.03125 2.3521874999999994Q213.375 2.9849999999999994 213.375 4.156874999999999V16.438125Q215.296875 16.438125 217.453125 15.406875Q219.609375 14.375625 221.390625 12.781875Q223.171875 11.188125 224.34375 9.1725Q225.515625 7.156874999999999 225.515625 5.188124999999999Q225.515625 3.7349999999999994 224.9765625 2.9381249999999994Q224.4375 2.1412499999999994 223.5703125 1.7193749999999994Q222.703125 1.2974999999999994 221.625 1.2037499999999994Q220.546875 1.1099999999999994 219.375 1.1099999999999994Z"},{"char":"a","d":"M251.53125 33.313125Q249.75 34.531875 248.4609375 35.4928125Q247.171875 36.45375 245.953125 37.11Q244.734375 37.76625 243.3515625 38.094375Q241.96875 38.4225 239.953125 38.4225Q235.59375 38.4225 233.484375 36.1021875Q231.375 33.781875 231.375 29.188125Q231.375 27.406875 231.84375 25.485Q232.3125 23.563125 233.2265625 21.6646875Q234.140625 19.76625 235.40625 18.0553125Q236.671875 16.344375 238.265625 15.031875Q239.859375 13.719375 241.6640625 12.9459375Q243.46875 12.1725 245.484375 12.1725Q248.859375 12.500625 250.78125 13.8365625Q252.703125 15.1725 253.6875 17.2584375Q254.671875 19.344375 255.046875 21.8990625Q255.421875 24.45375 255.6328125 27.1725Q255.84375 29.89125 256.171875 32.61Q256.5 35.32875 257.53125 37.625625Q256.921875 39.1725 256.3828125 39.8053125Q255.84375 40.438125 255.1875 40.01625Q254.53125 39.594375 253.6640625 37.95375Q252.796875 36.313125 251.53125 33.313125ZM235.359375 29.281875Q235.359375 31.95375 236.3671875 33.1959375Q237.375 34.438125 239.953125 34.438125Q241.875 34.438125 243.6328125 33.7584375Q245.390625 33.07875 246.703125 31.8834375Q248.015625 30.688125 248.8125 29.000625Q249.609375 27.313125 249.609375 25.250625Q249.609375 24.406875 249.65625 22.8834375Q249.703125 21.36 249.46875 19.86Q249.234375 18.36 248.578125 17.2584375Q247.921875 16.156875 246.609375 16.156875Q244.171875 16.156875 242.109375 17.3990625Q240.046875 18.64125 238.546875 20.563125Q237.046875 22.485 236.203125 24.8053125Q235.359375 27.125625 235.359375 29.281875Z"},{"char":"e","d":"M260.484375 26.32875Q260.484375 23.7975 261.09375 21.26625Q261.703125 18.735 263.0390625 16.719375Q264.375 14.70375 266.5078125 13.438125Q268.640625 12.1725 271.6875 12.1725Q273.421875 12.1725 274.734375 12.8053125Q276.046875 13.438125 276.9375 14.469375Q277.828125 15.500625 278.2734375 16.8834375Q278.71875 18.26625 278.71875 19.76625Q278.71875 22.156875 277.6171875 24.406875Q276.515625 26.656875 274.6640625 28.3678125Q272.8125 30.07875 270.421875 30.9459375Q268.03125 31.813125 265.546875 31.344375Q265.59375 32.70375 266.4609375 33.5240625Q267.328125 34.344375 268.546875 34.76625Q269.765625 35.188125 271.078125 35.3053125Q272.390625 35.4225 273.421875 35.4225Q274.5 35.4225 275.4375 35.235Q276.375 35.0475 277.3125 34.813125Q278.25 34.57875 279.2109375 34.39125Q280.171875 34.20375 281.25 34.20375Q281.671875 34.20375 282.09375 34.250625Q282.515625 34.2975 282.890625 34.4615625Q283.265625 34.625625 283.5 34.9771875Q283.734375 35.32875 283.734375 35.844375Q283.734375 36.735 283.078125 37.3209375Q282.421875 37.906875 281.4140625 38.32875Q280.40625 38.750625 279.1875 38.9615625Q277.96875 39.1725 276.8203125 39.2896875Q275.671875 39.406875 274.7109375 39.4303125Q273.75 39.45375 273.28125 39.45375Q270.28125 39.45375 267.890625 38.4928125Q265.5 37.531875 263.859375 35.8209375Q262.21875 34.11 261.3515625 31.6959375Q260.484375 29.281875 260.484375 26.32875ZM265.453125 23.281875Q265.453125 24.9225 265.8984375 25.6725Q266.34375 26.4225 268.078125 26.4225Q269.296875 26.4225 270.46875 25.9771875Q271.640625 25.531875 272.6015625 24.735Q273.5625 23.938125 274.125 22.86Q274.6875 21.781875 274.6875 20.51625Q274.6875 19.813125 274.5703125 19.063125Q274.453125 18.313125 274.078125 17.6803125Q273.703125 17.0475 273.1171875 16.6490625Q272.53125 16.250625 271.59375 16.250625Q270.1875 16.250625 269.0390625 16.8834375Q267.890625 17.51625 267.09375 18.5240625Q266.296875 19.531875 265.875 20.7740625Q265.453125 22.01625 265.453125 23.281875Z"},{"char":"z","d":"M302.765625 16.250625Q302.859375 16.156875 302.9296875 15.9928125Q303.0 15.82875 303.0 15.735Q303.0 14.656875 301.7109375 14.3053125Q300.421875 13.95375 298.5 13.9771875Q296.578125 14.000625 294.3515625 14.188125Q292.125 14.375625 290.203125 14.3521875Q288.28125 14.32875 286.9921875 13.8834375Q285.703125 13.438125 285.703125 12.219375Q285.703125 11.4225 285.8203125 11.0240625Q285.9375 10.625625 286.171875 10.4615625Q286.40625 10.2975 286.7578125 10.2740625Q287.109375 10.250625 287.53125 10.250625H288.75Q289.3125 10.2975 290.578125 10.3678125Q291.84375 10.438125 293.4375 10.5084375Q295.03125 10.57875 296.7890625 10.6959375Q298.546875 10.813125 300.1171875 10.906875Q301.6875 11.000625 302.9296875 11.094375Q304.171875 11.188125 304.828125 11.235Q305.671875 11.750625 306.2578125 12.1725Q306.84375 12.594375 307.1953125 13.01625Q307.546875 13.438125 307.7109375 13.9303125Q307.875 14.4225 307.875 15.1725Q307.875 16.76625 307.21875 18.2896875Q306.5625 19.813125 305.5546875 21.3365625Q304.546875 22.86 303.2578125 24.3834375Q301.96875 25.906875 300.75 27.406875Q299.53125 28.906875 298.453125 30.406875Q297.375 31.906875 296.765625 33.313125H308.8125Q310.171875 33.313125 310.546875 33.82875Q310.921875 34.344375 310.921875 35.281875Q310.921875 35.938125 310.78125 36.500625Q310.640625 37.063125 309.796875 37.344375Q307.546875 37.531875 305.25 37.906875Q302.953125 38.281875 300.65625 38.656875Q298.359375 39.031875 296.0390625 39.313125Q293.71875 39.594375 291.421875 39.594375Q291.421875 36.219375 292.4765625 33.1021875Q293.53125 29.985 295.1953125 27.07875Q296.859375 24.1725 298.8515625 21.45375Q300.84375 18.735 302.765625 16.250625Z"},{"char":"J","d":"M343.40625 36.313125Q343.40625 35.0475 344.15625 34.6021875Q344.90625 34.156875 346.0546875 34.0396875Q347.203125 33.9225 348.515625 33.8990625Q349.828125 33.875625 350.9765625 33.45375Q352.125 33.031875 352.875 32.0475Q353.625 31.063125 353.625 29.000625Q353.625 23.14125 352.9921875 19.156875Q352.359375 15.1725 350.4609375 12.82875Q348.5625 10.485 345.2109375 9.64125Q341.859375 8.7975 336.46875 9.219375Q336.328125 9.1725 336.0234375 8.89125Q335.71875 8.61 335.390625 8.281875Q335.0625 7.953749999999999 334.8046875 7.649062499999999Q334.546875 7.344374999999999 334.453125 7.203749999999999Q334.40625 7.109999999999999 334.40625 7.016249999999999Q334.359375 6.875624999999999 334.359375 6.688124999999999Q334.359375 6.594374999999999 334.40625 6.453749999999999Q334.40625 6.359999999999999 334.453125 6.266249999999999Q334.59375 6.125624999999999 334.8515625 5.938124999999999Q335.109375 5.750624999999999 335.4609375 5.586562499999999Q335.8125 5.422499999999999 336.0703125 5.305312499999999Q336.328125 5.188124999999999 336.46875 5.188124999999999Q337.359375 5.141249999999999 339.1640625 5.047499999999999Q340.96875 4.953749999999999 343.265625 4.836562499999999Q345.5625 4.719374999999999 348.2109375 4.578749999999999Q350.859375 4.438124999999999 353.5078125 4.320937499999999Q356.15625 4.203749999999999 358.5703125 4.156874999999999Q360.984375 4.109999999999999 362.90625 4.109999999999999Q362.90625 5.563124999999999 362.34375 6.336562499999999Q361.78125 7.109999999999999 360.9609375 7.508437499999999Q360.140625 7.906874999999999 359.1796875 8.094375Q358.21875 8.281875 357.3984375 8.5865625Q356.578125 8.89125 356.015625 9.5240625Q355.453125 10.156875 355.453125 11.375625Q355.453125 13.813125 355.9453125 16.11Q356.4375 18.406875 357.046875 20.6803125Q357.65625 22.95375 358.1484375 25.250625Q358.640625 27.5475 358.640625 29.89125Q358.640625 32.000625 357.703125 33.735Q356.765625 35.469375 355.2421875 36.735Q353.71875 38.000625 351.8203125 38.7271875Q349.921875 39.45375 348.046875 39.45375Q347.296875 39.45375 346.4765625 39.313125Q345.65625 39.1725 344.9765625 38.7740625Q344.296875 38.375625 343.8515625 37.7896875Q343.40625 37.20375 343.40625 36.313125Z"},{"char":"r","d":"M365.53125 19.6725Q365.53125 19.250625 365.578125 18.8053125Q365.625 18.36 365.765625 18.0084375Q365.90625 17.656875 366.2109375 17.4225Q366.515625 17.188125 367.078125 17.188125Q367.546875 17.188125 368.1328125 17.9146875Q368.71875 18.64125 369.328125 19.7428125Q369.9375 20.844375 370.5234375 22.156875Q371.109375 23.469375 371.5546875 24.5709375Q372.0 25.6725 372.28125 26.469375Q372.5625 27.26625 372.609375 27.313125Q373.21875 25.6725 373.96875 23.750625Q374.71875 21.82875 375.8203125 20.1646875Q376.921875 18.500625 378.4453125 17.375625Q379.96875 16.250625 382.171875 16.250625Q383.296875 16.250625 384.3046875 16.6021875Q385.3125 16.95375 386.0859375 17.6334375Q386.859375 18.313125 387.328125 19.250625Q387.796875 20.188125 387.796875 21.406875Q387.796875 22.438125 386.9765625 22.86Q386.15625 23.281875 385.125 23.281875H384.65625L382.640625 21.26625Q382.546875 21.26625 382.5 21.219375Q382.40625 21.219375 382.3359375 21.1959375Q382.265625 21.1725 382.171875 21.1725Q380.53125 21.1725 379.6171875 22.0865625Q378.703125 23.000625 378.234375 24.3365625Q377.765625 25.6725 377.6484375 27.1490625Q377.53125 28.625625 377.53125 29.844375Q377.53125 30.781875 377.71875 31.7428125Q377.90625 32.70375 378.140625 33.6178125Q378.375 34.531875 378.5625 35.4928125Q378.75 36.45375 378.75 37.485Q378.75 39.45375 376.640625 39.45375Q375.46875 39.45375 374.203125 38.2115625Q372.9375 36.969375 371.6953125 35.0475Q370.453125 33.125625 369.328125 30.8053125Q368.203125 28.485 367.359375 26.281875Q366.515625 24.07875 366.0234375 22.2975Q365.53125 20.51625 365.53125 19.6725Z"}]}</script>
+
+  <script>
+    (function () {
+      var shareWrap = document.getElementById("linksShareWrap");
+      var shareBtn = document.getElementById("linksShareBtn");
+      var shareMenu = document.getElementById("linksShareMenu");
+      var shareNative = document.getElementById("linksShareNative");
+      var shareCopy = document.getElementById("linksShareCopy");
+      var shareCopyLabel = document.getElementById("linksShareCopyLabel");
+      var shareX = document.getElementById("linksShareX");
+      var shareFacebook = document.getElementById("linksShareFacebook");
+      if (!shareWrap || !shareBtn || !shareMenu) return;
+
+      var pageUrl = window.location.href;
+      var pageTitle = document.title;
+      var shareText = "All of Cristian Paez Jr’s links — web projects, socials, and more.";
+
+      shareX.href =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(pageTitle) +
+        "&url=" +
+        encodeURIComponent(pageUrl);
+      shareFacebook.href =
+        "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageUrl);
+
+      if (navigator.share) {
+        shareNative.hidden = false;
+      }
+
+      function setMenuOpen(open) {
+        shareWrap.classList.toggle("is-open", open);
+        shareBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        shareMenu.hidden = !open;
+      }
+
+      function closeMenu() {
+        setMenuOpen(false);
+      }
+
+      shareBtn.addEventListener("click", function () {
+        setMenuOpen(!shareWrap.classList.contains("is-open"));
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!shareWrap.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      shareNative.addEventListener("click", function () {
+        navigator.share({
+          title: pageTitle,
+          text: shareText,
+          url: pageUrl
+        }).then(closeMenu).catch(function () {});
+      });
+
+      shareCopy.addEventListener("click", function () {
+        function markCopied() {
+          if (shareCopyLabel) {
+            var original = shareCopyLabel.textContent;
+            shareCopyLabel.textContent = "Copied!";
+            window.setTimeout(function () {
+              shareCopyLabel.textContent = original;
+            }, 1600);
+          }
+          closeMenu();
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(pageUrl).then(markCopied).catch(function () {});
+          return;
+        }
+
+        var input = document.createElement("input");
+        input.value = pageUrl;
+        document.body.appendChild(input);
+        input.select();
+        try {
+          document.execCommand("copy");
+          markCopied();
+        } catch (err) {}
+        document.body.removeChild(input);
+      });
+    })();
+
+    (function () {
+      var intro = document.getElementById("linksIntro");
+      var primaryPill = document.getElementById("linksPrimaryPill");
+      var secondaryPill = document.getElementById("linksSecondaryPill");
+      var threshold = 28;
+
+      var subscribeState = {
+        href: "https://www.iamchrispaezjr.com/#mc_embed_signup",
+        label: "Subscribe",
+        aria: "Subscribe to newsletter"
+      };
+      var storeState = {
+        href: "https://www.iamchrispaezjrstore.com",
+        label: "Store",
+        aria: "Store",
+        external: true
+      };
+      var contactState = {
+        href: "../contact/",
+        label: "Contact Me",
+        aria: "Contact Me"
+      };
+      var patreonState = {
+        href: "https://www.patreon.com/cw/cristianpaezjr/membership",
+        label: "Patreon",
+        aria: "Patreon",
+        external: true
+      };
+
+      function applyPill(el, state) {
+        if (!el) return;
+        el.href = state.href;
+        el.textContent = state.label;
+        el.setAttribute("aria-label", state.aria);
+        if (state.external) {
+          el.target = "_blank";
+          el.rel = "noopener noreferrer";
+        } else {
+          el.removeAttribute("target");
+          el.removeAttribute("rel");
+        }
+      }
+
+      function syncScrollState() {
+        var scrolled = window.scrollY > threshold;
+        if (intro) intro.classList.toggle("is-scrolled", scrolled);
+        applyPill(primaryPill, scrolled ? storeState : subscribeState);
+        applyPill(secondaryPill, scrolled ? patreonState : contactState);
+      }
+
+      window.addEventListener("scroll", syncScrollState, { passive: true });
+      syncScrollState();
+    })();
+
+    (function () {
+      var LETTER_MS = 420;
+      var LETTER_GAP = 55;
+      var svg = document.getElementById("linksNameSvg");
+      var lettersRoot = document.getElementById("linksNameLetters");
+      if (!svg || !lettersRoot) return;
+
+      var NS = "http://www.w3.org/2000/svg";
+      var fills = [];
+      var strokes = [];
+      var letterChars = [];
+
+      function showComplete() {
+        svg.classList.add("is-complete");
+        fills.forEach(function (fill) {
+          fill.style.opacity = "1";
+        });
+        strokes.forEach(function (stroke) {
+          stroke.style.opacity = "0";
+        });
+      }
+
+      function buildLetters(letters) {
+        letters.forEach(function (letter) {
+          var group = document.createElementNS(NS, "g");
+          group.classList.add("links-name-letter");
+
+          var fill = document.createElementNS(NS, "path");
+          fill.classList.add("links-name-fill");
+          fill.setAttribute("d", letter.d);
+
+          var stroke = document.createElementNS(NS, "path");
+          stroke.classList.add("links-name-stroke");
+          stroke.setAttribute("d", letter.d);
+
+          group.appendChild(fill);
+          group.appendChild(stroke);
+          lettersRoot.appendChild(group);
+          fills.push(fill);
+          strokes.push(stroke);
+          letterChars.push(letter.char || "");
+        });
+      }
+
+      function animateLetter(index, onDone) {
+        var stroke = strokes[index];
+        var fill = fills[index];
+        if (!stroke || !fill) {
+          onDone();
+          return;
+        }
+        var length = stroke.getTotalLength();
+        var finished = false;
+        var safetyTimer = null;
+
+        function finishLetter() {
+          if (finished) return;
+          finished = true;
+          fill.style.opacity = "1";
+          stroke.style.opacity = "0";
+          onDone();
+        }
+
+        stroke.style.opacity = "1";
+        stroke.style.transition = "none";
+        stroke.style.strokeDasharray = String(length);
+        stroke.style.strokeDashoffset = String(length);
+        stroke.getBoundingClientRect();
+
+        stroke.style.transition = "stroke-dashoffset " + LETTER_MS + "ms cubic-bezier(0.33, 1, 0.68, 1)";
+        stroke.addEventListener("transitionend", function onLetterDrawn(event) {
+          if (event.propertyName !== "stroke-dashoffset") return;
+          stroke.removeEventListener("transitionend", onLetterDrawn);
+          if (safetyTimer) window.clearTimeout(safetyTimer);
+          finishLetter();
+        });
+
+        safetyTimer = window.setTimeout(finishLetter, LETTER_MS + 280);
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            stroke.style.strokeDashoffset = "0";
+          });
+        });
+      }
+
+      function runTrack(indices, pos, onTrackDone) {
+        if (pos >= indices.length) {
+          onTrackDone();
+          return;
+        }
+
+        animateLetter(indices[pos], function () {
+          window.setTimeout(function () {
+            runTrack(indices, pos + 1, onTrackDone);
+          }, LETTER_GAP);
+        });
+      }
+
+      function startDraw() {
+        svg.classList.add("is-drawing");
+
+        var starters = [];
+        letterChars.forEach(function (ch, idx) {
+          if (/^[A-Z]$/.test(ch)) starters.push(idx);
+        });
+
+        var trackStarts = starters.length ? starters : [0];
+        var tracks = trackStarts.map(function (startIdx, i) {
+          var endExclusive = i + 1 < trackStarts.length ? trackStarts[i + 1] : strokes.length;
+          var indices = [];
+          for (var j = startIdx; j < endExclusive; j += 1) indices.push(j);
+          return indices;
+        });
+
+        var doneCount = 0;
+        function finishAllTracks() {
+          doneCount += 1;
+          if (doneCount !== tracks.length) return;
+          showComplete();
+        }
+
+        tracks.forEach(function (track) {
+          runTrack(track, 0, finishAllTracks);
+        });
+      }
+
+      function initNameDraw(data) {
+        if (data.viewBox) {
+          svg.setAttribute("viewBox", data.viewBox.join(" "));
+        }
+        buildLetters(data.letters || []);
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          showComplete();
+          return;
+        }
+
+        startDraw();
+      }
+
+      function showFallbackName() {
+        lettersRoot.innerHTML = "";
+        var text = document.createElementNS(NS, "text");
+        text.setAttribute("x", "50%");
+        text.setAttribute("y", "72%");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("fill", "#ffd089");
+        text.setAttribute("font-family", '"Gloria Hallelujah", cursive');
+        text.setAttribute("font-size", "32");
+        text.textContent = "Cristian Paez Jr";
+        lettersRoot.appendChild(text);
+        showComplete();
+      }
+
+      var pathsEl = document.getElementById("cpjrNamePaths");
+      if (pathsEl && pathsEl.textContent) {
+        try {
+          initNameDraw(JSON.parse(pathsEl.textContent));
+        } catch (err) {
+          showFallbackName();
+        }
+      } else {
+        fetch("cpjr-name-paths.json")
+          .then(function (response) {
+            if (!response.ok) throw new Error("path data missing");
+            return response.json();
+          })
+          .then(initNameDraw)
+          .catch(showFallbackName);
+      }
+    })();
+
+    (function () {
+      var BAT_KEY = "cpjr-links-halloween-bats-at";
+      var BAT_COOLDOWN_MS = 3 * 60 * 60 * 1000;
+      var BAT_COUNT = 7;
+      var layer = document.getElementById("halloweenBats");
+      if (!layer) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      var flying = false;
+
+      function canFly() {
+        try {
+          if (/[?&]bats=1(?:&|$)/.test(window.location.search)) return true;
+          var raw = localStorage.getItem(BAT_KEY);
+          if (!raw) return true;
+          var lastAt = Number(raw);
+          if (!Number.isFinite(lastAt)) return true;
+          return Date.now() - lastAt >= BAT_COOLDOWN_MS;
+        } catch (err) {
+          return true;
+        }
+      }
+
+      function markFlown() {
+        try {
+          localStorage.setItem(BAT_KEY, String(Date.now()));
+        } catch (err) {}
+      }
+
+      function batSvg() {
+        return (
+          '<svg viewBox="0 0 64 28" fill="currentColor" aria-hidden="true">' +
+          '<path class="wing-l" d="M30 14C22 12 12 4 2 8c8 2 14 8 16 12 2-2 6-5 12-6z"/>' +
+          '<path class="wing-r" d="M34 14c8-2 18-10 28-6-8 2-14 8-16 12-2-2-6-5-12-6z"/>' +
+          '<ellipse cx="32" cy="15" rx="4.2" ry="5.2"/>' +
+          '<path d="M29.2 10.2 27 6.5 30.2 8.4zm5.6 0L37 6.5 33.8 8.4z"/>' +
+          "</svg>"
+        );
+      }
+
+      function clearBats() {
+        while (layer.firstChild) layer.removeChild(layer.firstChild);
+        flying = false;
+      }
+
+      function spawnBats(options) {
+        var opts = options || {};
+        if (flying && !opts.force) return;
+        clearBats();
+        flying = true;
+        if (!opts.skipCooldown) markFlown();
+
+        var finished = 0;
+
+        for (var i = 0; i < BAT_COUNT; i += 1) {
+          var bat = document.createElement("div");
+          bat.className = "halloween-bat";
+          bat.innerHTML = batSvg();
+
+          var ox = (Math.random() * 220 - 110).toFixed(0) + "px";
+          var oy = (-24 - Math.random() * 90).toFixed(0) + "px";
+          var duration = (2.1 + Math.random() * 0.5).toFixed(2) + "s";
+          var delay = (i * 0.18).toFixed(2) + "s";
+
+          bat.style.setProperty("--bat-ox", ox);
+          bat.style.setProperty("--bat-oy", oy);
+          bat.style.setProperty("--bat-duration", duration);
+          bat.style.setProperty("--bat-delay", delay);
+
+          layer.appendChild(bat);
+
+          (function (el) {
+            window.requestAnimationFrame(function () {
+              el.classList.add("is-flying");
+            });
+            el.addEventListener("animationend", function onEnd(event) {
+              if (event.animationName !== "bat-dive") return;
+              el.removeEventListener("animationend", onEnd);
+              if (el.parentNode) el.parentNode.removeChild(el);
+              finished += 1;
+              if (finished >= BAT_COUNT) flying = false;
+            });
+          })(bat);
+        }
+      }
+
+      /* Easter egg: press B to replay bats + sting */
+      document.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+        var tag = event.target && event.target.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA" || (event.target && event.target.isContentEditable)) {
+          return;
+        }
+        if (event.key === "b" || event.key === "B") {
+          spawnBats({ force: true, skipCooldown: true });
+          try {
+            var reviewSting = new Audio("../sounds/halloween-links.mp3");
+            reviewSting.currentTime = 0;
+            reviewSting.play().catch(function () {});
+          } catch (err) {}
+        }
+      });
+
+      if (canFly()) {
+        window.setTimeout(function () {
+          spawnBats();
+        }, 900);
+      }
+    })();
+
+    (function () {
+      var STING_KEY = "cpjr-links-sting-at";
+      var STING_COOLDOWN_MS = 3 * 60 * 60 * 1000;
+      var STING_SRC = "../sounds/halloween-links.mp3";
+
+      function canPlaySting() {
+        try {
+          var raw = localStorage.getItem(STING_KEY);
+          if (!raw) return true;
+          var lastAt = Number(raw);
+          if (!Number.isFinite(lastAt)) return true;
+          return Date.now() - lastAt >= STING_COOLDOWN_MS;
+        } catch (err) {
+          return true;
+        }
+      }
+
+      function markStingPlayed() {
+        try {
+          localStorage.setItem(STING_KEY, String(Date.now()));
+        } catch (err) {}
+      }
+
+      if (!canPlaySting()) return;
+
+      var audio = new Audio(STING_SRC);
+      audio.preload = "auto";
+      var started = false;
+
+      function playSting() {
+        if (started) return;
+        started = true;
+        var playPromise = audio.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise
+            .then(function () {
+              markStingPlayed();
+            })
+            .catch(function () {
+              started = false;
+              waitForGesture();
+            });
+        } else {
+          markStingPlayed();
+        }
+      }
+
+      function waitForGesture() {
+        function onGesture() {
+          document.removeEventListener("pointerdown", onGesture);
+          document.removeEventListener("keydown", onGesture);
+          document.removeEventListener("touchstart", onGesture);
+          playSting();
+        }
+
+        document.addEventListener("pointerdown", onGesture, { once: true });
+        document.addEventListener("keydown", onGesture, { once: true });
+        document.addEventListener("touchstart", onGesture, { once: true, passive: true });
+      }
+
+      playSting();
+    })();
+  </script>
+</body>
+</html>

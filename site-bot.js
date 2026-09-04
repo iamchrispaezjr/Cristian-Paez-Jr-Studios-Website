@@ -4,10 +4,12 @@
   window.__CPJR_BOT__ = true;
 
   function rootPrefix() {
-    var script = document.querySelector('script[src*="site-nav.js"]');
+    var script =
+      document.querySelector('script[src*="site-bot.js"]') ||
+      document.querySelector('script[src*="site-nav.js"]');
     var src = script && script.getAttribute("src");
     if (!src) return "";
-    return src.replace(/site-nav\.js.*$/, "");
+    return src.replace(/site-bot\.js.*$/, "").replace(/site-nav\.js.*$/, "");
   }
 
   var root = rootPrefix();
@@ -84,18 +86,23 @@
       }
     },
     {
-      keys: ["who", "cristian", "about", "you"],
-      answer:
-        "I’m Bloop — Cristian’s site assistant interface. He’s a creator/builder from Maryland. Read more on the <a href=\"" +
-        root +
-        "about/\">About</a> page."
-    },
-    {
-      keys: ["contact", "email", "hire", "collab", "work with"],
+      keys: ["contact", "email", "hire", "collab", "work with", "reach"],
       answer:
         "Want to reach Cristian? Head to <a href=\"" +
         root +
-        "contact/\">Contact</a> — that’s the best spot."
+        "contact/\">Contact Me</a> — that’s the best spot."
+    },
+    {
+      keys: ["who are you", "who're you", "who are", "who is bloop", "what are you"],
+      answer:
+        "I’m BLOOP — Buddy Linking Our Online Projects, Cristian’s site assistant. He’s a creator and builder from Maryland making web projects, stories, and more. Read more on the <a href=\"" +
+        root +
+        "about/\">About Me</a> page."
+    },
+    {
+      keys: ["who is cristian", "cristian", "about me", "about cristian"],
+      answer:
+        "Cristian Paez Jr is a creator and builder from Maryland. Explore his work on the <a href=\"https://www.iamchrispaezjr.com\">main site</a>."
     },
     {
       keys: ["store", "merch", "shop", "buy"],
@@ -263,29 +270,89 @@
     );
   }
 
+  function circularWavePath(radius, amplitude, cycles, samples) {
+    var d = "";
+    var i;
+    for (i = 0; i <= samples; i += 1) {
+      var t = (i / samples) * Math.PI * 2;
+      var r = radius + amplitude * Math.sin(cycles * t);
+      var x = 50 + r * Math.cos(t);
+      var y = 50 + r * Math.sin(t);
+      d += (i === 0 ? "M" : "L") + x.toFixed(2) + " " + y.toFixed(2) + " ";
+    }
+    return d + "Z";
+  }
+
+  function spectrumLines(count, innerR, outerBase) {
+    var html = "";
+    var i;
+    for (i = 0; i < count; i += 1) {
+      var t = (i / count) * Math.PI * 2;
+      var len = outerBase + (i % 5 === 0 ? 5.2 : i % 3 === 0 ? 3.4 : 2.1);
+      var x1 = 50 + innerR * Math.cos(t);
+      var y1 = 50 + innerR * Math.sin(t);
+      var x2 = 50 + (innerR + len) * Math.cos(t);
+      var y2 = 50 + (innerR + len) * Math.sin(t);
+      html +=
+        '<line x1="' +
+        x1.toFixed(2) +
+        '" y1="' +
+        y1.toFixed(2) +
+        '" x2="' +
+        x2.toFixed(2) +
+        '" y2="' +
+        y2.toFixed(2) +
+        '" />';
+    }
+    return html;
+  }
+
+  var waveHudSvg =
+    '<svg class="cpjr-bot-waves" viewBox="0 0 100 100" aria-hidden="true">' +
+    '  <g class="cpjr-bot-wave-spin cpjr-bot-wave-spin--outer cpjr-bot-spectrum">' +
+    spectrumLines(48, 38, 2.4) +
+    "  </g>" +
+    '  <g class="cpjr-bot-wave-spin cpjr-bot-wave-spin--mid">' +
+    '    <path class="cpjr-bot-wave cpjr-bot-wave--outer" d="' +
+    circularWavePath(41.5, 2.8, 14, 180) +
+    '" />' +
+    "  </g>" +
+    '  <g class="cpjr-bot-wave-spin cpjr-bot-wave-spin--mid">' +
+    '    <path class="cpjr-bot-wave cpjr-bot-wave--mid" d="' +
+    circularWavePath(32.5, 2.2, 10, 160) +
+    '" />' +
+    "  </g>" +
+    '  <g class="cpjr-bot-wave-spin cpjr-bot-wave-spin--inner">' +
+    '    <path class="cpjr-bot-wave cpjr-bot-wave--inner" d="' +
+    circularWavePath(24.5, 1.7, 8, 140) +
+    '" />' +
+    "  </g>" +
+    "</svg>";
+
   var wrap = document.createElement("div");
   wrap.className = "cpjr-bot";
   wrap.innerHTML =
     '<div class="cpjr-bot-panel" id="cpjrBotPanel" hidden>' +
     '  <div class="cpjr-bot-panel-head">' +
     "    <div>" +
-    "      <strong>Bloop</strong>" +
-    "      <span>Assistant interface · online</span>" +
+    "      <strong>BLOOP</strong>" +
+    "      <span>Buddy Linking Our Online Projects</span>" +
     "    </div>" +
     '    <button type="button" class="cpjr-bot-close" id="cpjrBotClose" aria-label="Close chat">×</button>' +
     "  </div>" +
     '  <div class="cpjr-bot-log" id="cpjrBotLog" aria-live="polite"></div>' +
     '  <div class="cpjr-bot-suggestions" id="cpjrBotSuggestions"></div>' +
     '  <form class="cpjr-bot-form" id="cpjrBotForm">' +
-    '    <label class="visually-hidden" for="cpjrBotInput">Ask Bloop</label>' +
+    '    <label class="visually-hidden" for="cpjrBotInput">Ask BLOOP</label>' +
     '    <input id="cpjrBotInput" type="text" maxlength="200" placeholder="Ask a question…" autocomplete="off" />' +
     '    <button type="submit">Send</button>' +
     "  </form>" +
     "</div>" +
-    '<aside class="cpjr-bot-bubble" id="cpjrBotBubble" role="complementary" aria-label="Bloop messages" hidden>' +
+    '<div class="cpjr-bot-dock">' +
+    '<aside class="cpjr-bot-bubble" id="cpjrBotBubble" role="complementary" aria-label="BLOOP messages" hidden>' +
     '  <button type="button" class="cpjr-bot-bubble-close" id="cpjrBotBubbleClose" aria-label="Dismiss messages">×</button>' +
     '  <div class="cpjr-bot-holo-msg" id="cpjrBotHoloGreet" data-holo-msg>' +
-    "    Hey there — welcome in. I’m Bloop, your site assistant." +
+    "    Hey there — welcome in. I’m BLOOP: Buddy Linking Our Online Projects." +
     "  </div>" +
     '  <div class="cpjr-bot-holo-msg cpjr-bot-holo-msg--project" id="cpjrBotHoloProject" data-holo-msg>' +
     '    <span class="cpjr-bot-holo-label">Incoming update</span>' +
@@ -294,14 +361,13 @@
     '    <a class="cpjr-bot-holo-cta" id="cpjrBotBubbleCta" href="#">Open project →</a>' +
     "  </div>" +
     "</aside>" +
-    '<button type="button" class="cpjr-bot-launcher" id="cpjrBotLauncher" aria-expanded="false" aria-controls="cpjrBotPanel" aria-label="Open Bloop assistant">' +
+    '<button type="button" class="cpjr-bot-launcher" id="cpjrBotLauncher" aria-expanded="false" aria-controls="cpjrBotPanel" aria-label="Open BLOOP — Buddy Linking Our Online Projects">' +
     '  <span class="cpjr-bot-hud" aria-hidden="true">' +
-    '    <span class="cpjr-bot-ring cpjr-bot-ring--outer"></span>' +
-    '    <span class="cpjr-bot-ring cpjr-bot-ring--mid"></span>' +
-    '    <span class="cpjr-bot-ring cpjr-bot-ring--inner"></span>' +
+    waveHudSvg +
     '    <span class="cpjr-bot-core"></span>' +
     "  </span>" +
-    "</button>";
+    "</button>" +
+    "</div>";
 
   document.body.appendChild(wrap);
 
@@ -389,7 +455,7 @@
         greeted = true;
         addMsg(
           "bot",
-          "Systems online. I’m Bloop — ask about projects, links, or what’s new."
+          "Systems online. I’m BLOOP — Buddy Linking Our Online Projects. Ask about projects, links, or what’s new."
         );
         addMsg("bot", announceHtml());
       }
@@ -417,8 +483,8 @@
   [
     "What’s new?",
     "The Loreman?",
-    "How do I contact you?",
-    "Where are the links?"
+    "Who are you?",
+    "How do I contact you?"
   ].forEach(function (label) {
     var chip = document.createElement("button");
     chip.type = "button";

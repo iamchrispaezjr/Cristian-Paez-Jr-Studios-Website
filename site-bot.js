@@ -56,6 +56,11 @@
 
   var FAQ = [
     {
+      keys: ["widget", "widgets", "elfsight", "adblock", "ad blocker", "ad-blocker", "whitelist"],
+      answer:
+        "Quick heads-up: some <strong>ad blockers</strong> block Elfsight widgets on this site (feeds, forms, and similar embeds). If something looks missing or blank, please <strong>disable your ad blocker</strong> for this site or <strong>whitelist iamchrispaezjr.com</strong> — then refresh. Thanks for helping the widgets load."
+    },
+    {
       keys: ["loreman", "spellbook", "spell"],
       answer:
         "The Loreman is Cristian’s newest web project — a living Spellbook. Open it at <a href=\"https://theloreman.com\" target=\"_blank\" rel=\"noopener noreferrer\">theloreman.com</a>."
@@ -146,7 +151,7 @@
     {
       keys: ["help", "what can", "commands"],
       answer:
-        "Try asking about The Loreman, Disease Imagined, Noisegoblin, contact, the store, or what’s newest."
+        "Try asking about The Loreman, Disease Imagined, Noisegoblin, contact, widgets / ad blockers, the store, or what’s newest."
     }
   ];
 
@@ -484,7 +489,8 @@
     "What’s new?",
     "The Loreman?",
     "Who are you?",
-    "How do I contact you?"
+    "How do I contact you?",
+    "Widgets?"
   ].forEach(function (label) {
     var chip = document.createElement("button");
     chip.type = "button";

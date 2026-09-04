@@ -38,6 +38,21 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
     }
   }
 
+  /* Floating blob companion (Bloop) */
+  (function loadSiteBot() {
+    if (document.querySelector('script[src*="site-bot.js"]')) return;
+    if (!document.querySelector('link[href*="site-bot.css"]')) {
+      var botCss = document.createElement("link");
+      botCss.rel = "stylesheet";
+      botCss.href = root + "site-bot.css";
+      document.head.appendChild(botCss);
+    }
+    var botJs = document.createElement("script");
+    botJs.src = root + "site-bot.js";
+    botJs.defer = true;
+    document.body.appendChild(botJs);
+  })();
+
   var modal = document.getElementById("fullMenuModal");
   var closeBtn = document.getElementById("fullMenuClose");
   if (!modal) return;
@@ -545,8 +560,9 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
   observer.observe(footer);
 })();
 
-/* Bottom-right announcement toast: after scroll + 3s */
+/* Bottom-right announcement toast — retired; Bloop HUD handles project announces */
 (function () {
+  return;
   var STORAGE_KEY = "cpjr-announce-state";
   var LEGACY_KEY = "cpjr-announce-dismissed";
   var ANNOUNCE_ID = "disease-imagined-2026";

@@ -1945,6 +1945,24 @@ html.site-night .announce-toast-cta {
       font-weight: 900;
     }
 
+    .full-menu-view-all {
+      display: inline-block;
+      margin-top: 0.85rem;
+      font-family: "Raleway", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.18s var(--ease);
+    }
+
+    .full-menu-view-all:hover,
+    .full-menu-view-all:focus-visible {
+      color: #fff;
+      outline: none;
+    }
+
     .full-menu-soon {
       display: inline-block;
       font-family: "Raleway", sans-serif;

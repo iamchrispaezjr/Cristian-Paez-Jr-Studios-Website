@@ -273,6 +273,11 @@
   overflow: visible;
 }
 
+html.site-night .cpjr-bot-hud {
+  background: transparent;
+  box-shadow: none;
+}
+
 .cpjr-bot-waves {
   position: absolute;
   inset: -12%;

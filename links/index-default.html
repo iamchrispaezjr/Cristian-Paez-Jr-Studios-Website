@@ -1245,11 +1245,13 @@
 
     (function () {
       var STING_KEY = "cpjr-links-sting-at";
-      var STING_COOLDOWN_MS = 3 * 60 * 60 * 1000;
-      var STING_SRC = "../sounds/i-love-you-3000.mp3";
+      var STING_SESSION_KEY = "cpjr-links-sting-session";
+      var STING_COOLDOWN_MS = 60 * 60 * 1000;
+      var STING_SRC = "../sounds/i-miss-you-t.mp3";
 
       function canPlaySting() {
         try {
+          if (sessionStorage.getItem(STING_SESSION_KEY) === "1") return false;
           var raw = localStorage.getItem(STING_KEY);
           if (!raw) return true;
           var lastAt = Number(raw);
@@ -1262,6 +1264,7 @@
 
       function markStingPlayed() {
         try {
+          sessionStorage.setItem(STING_SESSION_KEY, "1");
           localStorage.setItem(STING_KEY, String(Date.now()));
         } catch (err) {}
       }

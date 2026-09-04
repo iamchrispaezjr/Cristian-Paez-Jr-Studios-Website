@@ -120,7 +120,27 @@
         "You can support via <a href=\"https://www.patreon.com/cw/cristianpaezjr/membership\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a> or <a href=\"https://www.paypal.com/donate/?hosted_button_id=XRLVQFNNNTMAG\" target=\"_blank\" rel=\"noopener noreferrer\">PayPal</a>."
     },
     {
-      keys: ["link", "social", "instagram", "youtube", "tiktok"],
+      keys: [
+        "find me",
+        "where to find",
+        "socials",
+        "social",
+        "platforms",
+        "youtube",
+        "instagram",
+        "threads",
+        "tiktok",
+        "snapchat",
+        "pinterest",
+        "twitch",
+        "twitter",
+        "\\bx\\b"
+      ],
+      answer:
+        "You can find Cristian on YouTube, Instagram, Threads, X, TikTok, Snapchat, Pinterest, Twitch, & more."
+    },
+    {
+      keys: ["link", "links page", "link in bio", "link-in-bio"],
       answer:
         "All the socials and project links live on the <a href=\"" +
         root +
@@ -141,7 +161,7 @@
         "media-kit/\">Media Kit</a>."
     },
     {
-      keys: ["maryland", "where", "location", "from"],
+      keys: ["maryland", "where are you", "where.*from", "location", "based"],
       answer: "Cristian is based in the United States, Maryland. 📍"
     },
     {
@@ -151,7 +171,7 @@
     {
       keys: ["help", "what can", "commands"],
       answer:
-        "Try asking about The Loreman, Disease Imagined, Noisegoblin, contact, widgets / ad blockers, the store, or what’s newest."
+        "Try asking about The Loreman, Disease Imagined, Noisegoblin, contact, socials, widgets / ad blockers, the store, or what’s newest."
     }
   ];
 
@@ -490,6 +510,7 @@
     "The Loreman?",
     "Who are you?",
     "How do I contact you?",
+    "Socials?",
     "Widgets?"
   ].forEach(function (label) {
     var chip = document.createElement("button");

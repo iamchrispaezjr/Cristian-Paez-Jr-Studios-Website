@@ -386,10 +386,60 @@
     </header>
 
     <!--
-      Post list is filled from ../posts-data.js
-      Add new posts there (top of CPJR_POSTS) when you publish.
+      Static cards below are progressive enhancement: visible if JS fails.
+      Keep in sync with ../posts-data.js (CPJR_POSTS, newest first).
+      When you publish: add the post folder, add CPJR_POSTS entry, and mirror a card here.
     -->
-    <ul class="post-list" id="postList"></ul>
+    <ul class="post-list" id="postList">
+      <li>
+        <a class="post-link" href="../posts/building-a-command-center-menu/">
+          <div class="post-media">
+            <img src="../command-center-screenshot.jpg" alt="" width="240" height="150" decoding="async" />
+          </div>
+          <div class="post-copy">
+            <time class="post-date" datetime="2026-08-30">Aug 30, 2026</time>
+            <h2 class="post-title">Building a Command Center Menu</h2>
+            <p class="post-excerpt">Turning a basic drop-down into a full-on dashboard — social scroller, TagDiv-inspired layout, and what’s cooking next.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post-link" href="../posts/leveling-up-my-web-setup/">
+          <div class="post-media">
+            <img src="../blog-slide-screenshot.jpg" alt="" width="240" height="150" decoding="async" />
+          </div>
+          <div class="post-copy">
+            <time class="post-date" datetime="2026-08-16">Aug 16, 2026</time>
+            <h2 class="post-title">Leveling Up My Web Setup :D</h2>
+            <p class="post-excerpt">Custom hamburger menu, day/night shift, social links, and more — how the site finally started to feel right.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post-link" href="../posts/why-i-created-sounddrop/">
+          <div class="post-media">
+            <img src="../soundrop-screenshot.jpg" alt="" width="240" height="150" decoding="async" />
+          </div>
+          <div class="post-copy">
+            <time class="post-date" datetime="2026-08-14">Aug 14, 2026</time>
+            <h2 class="post-title">Why I Created SoundDrop (Official Name TBD)</h2>
+            <p class="post-excerpt">Boredom, memes, and a hate of complicated UIs — how my first web project soundboard came to life.</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="post-link" href="../posts/welcome-to-my-website/">
+          <div class="post-media">
+            <img src="../youtube-slide-screenshot.jpg" alt="" width="240" height="150" decoding="async" />
+          </div>
+          <div class="post-copy">
+            <time class="post-date" datetime="2026-08-12">Aug 12, 2026</time>
+            <h2 class="post-title">Welcome to My Website</h2>
+            <p class="post-excerpt">Why I left template sites behind and built this hub from scratch — plus what’s coming next.</p>
+          </div>
+        </a>
+      </li>
+    </ul>
 
     <p class="empty-state" id="emptyState" hidden>
       First update coming soon. Check back shortly.
@@ -418,60 +468,70 @@
       var empty = document.getElementById("emptyState");
       if (!list) return;
 
-      var posts = typeof window.CPJR_sortedPosts === "function"
-        ? window.CPJR_sortedPosts()
-        : [];
-
-      if (!posts.length) {
-        list.hidden = true;
-        if (empty) empty.hidden = false;
-        return;
+      function syncEmptyState() {
+        var hasCards = list.querySelectorAll("li").length > 0;
+        list.hidden = !hasCards;
+        if (empty) empty.hidden = hasCards;
       }
 
-      list.hidden = false;
-      if (empty) empty.hidden = true;
-      list.innerHTML = "";
+      var posts =
+        typeof window.CPJR_sortedPosts === "function"
+          ? window.CPJR_sortedPosts()
+          : [];
 
-      posts.forEach(function (post) {
-        var li = document.createElement("li");
-        var link = document.createElement("a");
-        link.className = "post-link";
-        link.href = window.CPJR_postHref(post.slug, "../");
+      /* Only rebuild when posts-data.js actually provided posts.
+         If it failed or returned [], keep the static <li> cards. */
+      if (posts.length) {
+        list.innerHTML = "";
+        list.hidden = false;
+        if (empty) empty.hidden = true;
 
-        var media = document.createElement("div");
-        media.className = "post-media";
-        var img = document.createElement("img");
-        img.src = window.CPJR_postImageSrc(post.image, "../");
-        img.alt = "";
-        img.width = 240;
-        img.height = 150;
-        img.decoding = "async";
-        media.appendChild(img);
+        posts.forEach(function (post) {
+          var li = document.createElement("li");
+          var link = document.createElement("a");
+          link.className = "post-link";
+          link.href = window.CPJR_postHref(post.slug, "../");
 
-        var copy = document.createElement("div");
-        copy.className = "post-copy";
+          var media = document.createElement("div");
+          media.className = "post-media";
+          var img = document.createElement("img");
+          img.src = window.CPJR_postImageSrc(post.image, "../");
+          img.alt = "";
+          img.width = 240;
+          img.height = 150;
+          img.decoding = "async";
+          media.appendChild(img);
 
-        var time = document.createElement("time");
-        time.className = "post-date";
-        time.setAttribute("datetime", post.date || "");
-        time.textContent = window.CPJR_formatPostDate(post.date);
+          var copy = document.createElement("div");
+          copy.className = "post-copy";
 
-        var title = document.createElement("h2");
-        title.className = "post-title";
-        title.textContent = post.title || "Untitled";
+          var time = document.createElement("time");
+          time.className = "post-date";
+          time.setAttribute("datetime", post.date || "");
+          time.textContent =
+            typeof window.CPJR_formatPostDate === "function"
+              ? window.CPJR_formatPostDate(post.date)
+              : post.date || "";
 
-        var excerpt = document.createElement("p");
-        excerpt.className = "post-excerpt";
-        excerpt.textContent = post.excerpt || "";
+          var title = document.createElement("h2");
+          title.className = "post-title";
+          title.textContent = post.title || "Untitled";
 
-        copy.appendChild(time);
-        copy.appendChild(title);
-        copy.appendChild(excerpt);
-        link.appendChild(media);
-        link.appendChild(copy);
-        li.appendChild(link);
-        list.appendChild(li);
-      });
+          var excerpt = document.createElement("p");
+          excerpt.className = "post-excerpt";
+          excerpt.textContent = post.excerpt || "";
+
+          copy.appendChild(time);
+          copy.appendChild(title);
+          copy.appendChild(excerpt);
+          link.appendChild(media);
+          link.appendChild(copy);
+          li.appendChild(link);
+          list.appendChild(li);
+        });
+      }
+
+      syncEmptyState();
     })();
   </script>
   <script src="../site-nav.js"></script>

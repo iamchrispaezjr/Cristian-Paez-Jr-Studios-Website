@@ -772,7 +772,161 @@ body.menu-open {
   }
 }
 
-/* Footer social: mobile scroll + left/right fades (same behavior as desktop header) */
+/* Footer social scroll fades (mobile + desktop) */
+.site-footer .social-links {
+  position: relative;
+}
+
+.site-footer .social-links.social-fade-right {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 36px),
+    rgba(0, 0, 0, 0.55) calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 calc(100% - 36px),
+    rgba(0, 0, 0, 0.55) calc(100% - 16px),
+    transparent 100%
+  );
+}
+
+.site-footer .social-links.social-fade-left {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 16px,
+    #000 36px,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 16px,
+    #000 36px,
+    #000 100%
+  );
+}
+
+.site-footer .social-links.social-fade-left.social-fade-right {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 16px,
+    #000 36px,
+    #000 calc(100% - 36px),
+    rgba(0, 0, 0, 0.55) calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 16px,
+    #000 36px,
+    #000 calc(100% - 36px),
+    rgba(0, 0, 0, 0.55) calc(100% - 16px),
+    transparent 100%
+  );
+}
+
+/* Extra edge wash so the scroll cue reads on light + night footers */
+.site-footer .social-links.social-fade-right::after,
+.site-footer .social-links.social-fade-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2.25rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.site-footer .social-links.social-fade-right::after {
+  right: 0;
+  background: linear-gradient(to right, transparent, var(--surface, #f4f4f5));
+}
+
+.site-footer .social-links.social-fade-left::before {
+  left: 0;
+  background: linear-gradient(to left, transparent, var(--surface, #f4f4f5));
+}
+
+.site-footer.footer-night .social-links.social-fade-right::after {
+  background: linear-gradient(to right, transparent, #14151a);
+}
+
+.site-footer.footer-night .social-links.social-fade-left::before {
+  background: linear-gradient(to left, transparent, #14151a);
+}
+
+@keyframes footer-social-peek-wiggle {
+  0%,
+  70%,
+  100% {
+    transform: translateX(0);
+  }
+
+  78% {
+    transform: translateX(-6px);
+  }
+
+  86% {
+    transform: translateX(3px);
+  }
+
+  92% {
+    transform: translateX(-2px);
+  }
+}
+
+@media (min-width: 901px) {
+  .site-footer .social-links.social-fade-right:not(.scroll-hint-dismissed) {
+    animation: footer-social-peek-wiggle 2.8s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .social-links.social-fade-right:not(.scroll-hint-dismissed) {
+    animation: none;
+  }
+}
+
+/* Footer social: desktop peek after Spotify */
+@media (min-width: 901px) {
+  .site-footer .footer-brand .social-links,
+  .site-footer .footer-bottom .social-links {
+    position: relative;
+    box-sizing: border-box;
+    /* YouTube → Spotify in view; Donate / later icons peek + scroll */
+    width: 586px;
+    max-width: min(100%, 586px);
+    flex: 0 0 auto;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .site-footer .footer-brand .social-links::-webkit-scrollbar,
+  .site-footer .footer-bottom .social-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-footer .footer-brand .social-links a,
+  .site-footer .footer-bottom .social-links a {
+    flex: 0 0 auto;
+  }
+}
+
+/* Footer social: mobile scroll + peeks */
 @media (max-width: 900px) {
   .site-footer .footer-brand {
     min-width: 0;
@@ -789,61 +943,6 @@ body.menu-open {
     touch-action: pan-x;
     overscroll-behavior-x: contain;
     transform: none;
-  }
-
-  .site-footer .social-links.social-fade-right {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 calc(100% - 18px),
-      rgba(0, 0, 0, 0.45) calc(100% - 8px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 calc(100% - 18px),
-      rgba(0, 0, 0, 0.45) calc(100% - 8px),
-      transparent 100%
-    );
-  }
-
-  .site-footer .social-links.social-fade-left {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.45) 8px,
-      #000 18px,
-      #000 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.45) 8px,
-      #000 18px,
-      #000 100%
-    );
-  }
-
-  .site-footer .social-links.social-fade-left.social-fade-right {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.45) 8px,
-      #000 18px,
-      #000 calc(100% - 18px),
-      rgba(0, 0, 0, 0.45) calc(100% - 8px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      rgba(0, 0, 0, 0.45) 8px,
-      #000 18px,
-      #000 calc(100% - 18px),
-      rgba(0, 0, 0, 0.45) calc(100% - 8px),
-      transparent 100%
-    );
   }
 
   .site-footer .footer-links {

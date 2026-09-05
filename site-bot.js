@@ -13,11 +13,18 @@
   }
 
   var root = rootPrefix();
+  var isLinksPage = /(?:^|\/)links(?:\/|$)/.test(
+    String(window.location.pathname || "").replace(/index\.html$/i, "")
+  );
   var ANNOUNCE_KEY = "cpjr-bot-announce-state";
   var ANNOUNCE_ID = "loreman-holo-2026-09";
   var ANNOUNCE_DELAY_MS = 2200;
   var ANNOUNCE_RESHOW_MS = 5 * 60 * 60 * 1000;
   var SOUND_COOLDOWN_MS = 10 * 60 * 60 * 1000;
+  var YT_SEEN_KEY = "cpjr-yt-seen-id";
+  var announceMode = "project";
+  var pendingYtId = "";
+  var ytAnnounceQueued = false;
 
   var PROJECTS = [
     {
@@ -230,6 +237,31 @@
     writeAnnounceState(state);
   }
 
+  function getYtSeenId() {
+    try {
+      return localStorage.getItem(YT_SEEN_KEY) || "";
+    } catch (err) {
+      return "";
+    }
+  }
+
+  function setYtSeenId(videoId) {
+    try {
+      localStorage.setItem(YT_SEEN_KEY, String(videoId || ""));
+    } catch (err) {}
+  }
+
+  function focusYoutubeSection() {
+    if (typeof window.CPJR_openYoutubeDrawer === "function") {
+      window.CPJR_openYoutubeDrawer();
+      return;
+    }
+    var section = document.getElementById("linksYoutube");
+    if (!section) return;
+    section.hidden = false;
+    section.classList.add("is-open");
+  }
+
   function playAnnounceSound() {
     if (!canPlayAnnounceSound()) return;
     try {
@@ -413,13 +445,7 @@
   var announceShown = false;
   var holoTimers = [];
 
-  bubbleTitle.textContent = FEATURED.title;
-  bubbleDesc.textContent = FEATURED.blurb;
-  bubbleCta.href = FEATURED.href;
-  if (FEATURED.external) {
-    bubbleCta.target = "_blank";
-    bubbleCta.rel = "noopener noreferrer";
-  }
+  fillProjectAnnounce();
 
   function clearHoloTimers() {
     holoTimers.forEach(function (id) {
@@ -430,7 +456,13 @@
 
   function hideAnnounceBubble(markDismissed) {
     if (!bubble.classList.contains("is-on") && bubble.hidden) return;
-    if (markDismissed !== false) markAnnounceDismissed();
+    if (markDismissed !== false) {
+      if (announceMode === "youtube" && pendingYtId) {
+        setYtSeenId(pendingYtId);
+      } else {
+        markAnnounceDismissed();
+      }
+    }
     clearHoloTimers();
     holoMsgs.forEach(function (msg) {
       msg.classList.remove("is-in");
@@ -441,9 +473,53 @@
     }, 320);
   }
 
+  function fillProjectAnnounce() {
+    announceMode = "project";
+    pendingYtId = "";
+    if (holoMsgs[0]) {
+      holoMsgs[0].textContent =
+        "Hey there — welcome in. I’m BLOOP: Buddy Linking Our Online Projects.";
+    }
+    bubbleTitle.textContent = FEATURED.title;
+    bubbleDesc.textContent = FEATURED.blurb;
+    bubbleCta.textContent = "Open project →";
+    bubbleCta.href = FEATURED.href;
+    if (FEATURED.external) {
+      bubbleCta.target = "_blank";
+      bubbleCta.rel = "noopener noreferrer";
+    } else {
+      bubbleCta.removeAttribute("target");
+      bubbleCta.removeAttribute("rel");
+    }
+    var label = wrap.querySelector(".cpjr-bot-holo-label");
+    if (label) label.textContent = "Incoming update";
+  }
+
+  function fillYoutubeAnnounce(data) {
+    announceMode = "youtube";
+    pendingYtId = data.videoId || "";
+    if (holoMsgs[0]) {
+      holoMsgs[0].textContent =
+        "🚨 New YouTube video alert — fresh upload on the channel.";
+    }
+    bubbleTitle.textContent = data.title || "New YouTube video";
+    bubbleDesc.textContent =
+      "Watch it in a slide-out player on this page.";
+    bubbleCta.textContent = "Watch now →";
+    bubbleCta.href = "#linksYoutube";
+    bubbleCta.removeAttribute("target");
+    bubbleCta.removeAttribute("rel");
+    var label = wrap.querySelector(".cpjr-bot-holo-label");
+    if (label) label.textContent = "YouTube alert";
+  }
+
   function showAnnounceBubble() {
-    if (announceShown || isAnnounceHidden()) return;
+    if (announceShown) return;
     if (wrap.classList.contains("is-open")) return;
+    if (announceMode === "project" && isAnnounceHidden()) return;
+    if (announceMode === "youtube") {
+      if (!pendingYtId || getYtSeenId() === pendingYtId) return;
+    }
     announceShown = true;
     clearHoloTimers();
     holoMsgs.forEach(function (msg) {
@@ -466,6 +542,17 @@
         );
       });
     });
+  }
+
+  function maybeAnnounceYoutube(data) {
+    if (!isLinksPage || !data || !data.videoId) return;
+    if (getYtSeenId() === data.videoId) return;
+    if (announceShown || ytAnnounceQueued || wrap.classList.contains("is-open")) return;
+    ytAnnounceQueued = true;
+    fillYoutubeAnnounce(data);
+    window.setTimeout(function () {
+      showAnnounceBubble();
+    }, ANNOUNCE_DELAY_MS);
   }
 
   function setOpen(open) {
@@ -502,6 +589,14 @@
     event.preventDefault();
     event.stopPropagation();
     hideAnnounceBubble();
+  });
+
+  bubbleCta.addEventListener("click", function (event) {
+    if (announceMode !== "youtube") return;
+    event.preventDefault();
+    event.stopPropagation();
+    hideAnnounceBubble(true);
+    focusYoutubeSection();
   });
 
   suggestions.innerHTML = "";
@@ -552,9 +647,30 @@
     }
   });
 
-  /* Visit announce: delay only, then holographic messages + SFX */
-  if (!isAnnounceHidden()) {
+  /* Visit announce: Loreman sitewide; YouTube new-video alert on Links only */
+  if (isLinksPage) {
+    function onYtLatest(data) {
+      maybeAnnounceYoutube(data);
+    }
+    if (window.CPJR_YOUTUBE_LATEST) {
+      onYtLatest(window.CPJR_YOUTUBE_LATEST);
+    }
+    document.addEventListener("cpjr-youtube-latest", function (event) {
+      onYtLatest(event.detail);
+    });
+    fetch(root + "youtube-latest.json", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("youtube-latest missing");
+        return res.json();
+      })
+      .then(function (data) {
+        window.CPJR_YOUTUBE_LATEST = data;
+        onYtLatest(data);
+      })
+      .catch(function () {});
+  } else if (!isAnnounceHidden()) {
     window.setTimeout(function () {
+      fillProjectAnnounce();
       showAnnounceBubble();
     }, ANNOUNCE_DELAY_MS);
   }

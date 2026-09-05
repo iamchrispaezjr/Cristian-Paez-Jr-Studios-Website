@@ -563,6 +563,174 @@
       margin-bottom: 0.15rem;
     }
 
+    .links-youtube-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(8, 12, 18, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s var(--ease);
+    }
+
+    .links-youtube-backdrop.is-on {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .links-youtube {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 96;
+      display: flex;
+      flex-direction: column;
+      width: min(26rem, calc(100vw - 1.25rem));
+      height: 100%;
+      max-height: 100dvh;
+      margin: 0;
+      padding: 1rem 1rem 1.15rem;
+      border: 0;
+      border-left: 1.5px solid #14151a;
+      border-radius: 1.25rem 0 0 1.25rem;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: -18px 0 40px rgba(20, 21, 26, 0.22);
+      transform: translateX(105%);
+      transition: transform 0.42s var(--ease);
+      pointer-events: none;
+    }
+
+    .links-youtube.is-open {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .links-youtube-toolbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .links-youtube-toolbar h2 {
+      margin: 0;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .links-youtube-title {
+      margin: 0.35rem 0 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .links-youtube-close {
+      flex: 0 0 auto;
+      width: 2.15rem;
+      height: 2.15rem;
+      border: 1.5px solid #14151a;
+      border-radius: 50%;
+      background: #fff;
+      color: #14151a;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .links-youtube-close:hover {
+      background: #14151a;
+      color: #fff;
+    }
+
+    .links-youtube-close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .links-youtube-frame-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 0.95rem;
+      background: #14151a;
+      border: 1px solid rgba(20, 21, 26, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .links-youtube-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .links-youtube-open {
+      display: inline-flex;
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #0b5f8a;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .links-youtube-open:hover {
+      color: #14151a;
+    }
+
+    .links-youtube-launch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 1.35rem;
+      margin-bottom: 0.35rem;
+      min-height: 3.1rem;
+      padding: 0.65rem 1.15rem;
+      border: 1.5px solid #14151a;
+      border-radius: var(--radius-pill);
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform 0.25s var(--ease),
+        box-shadow 0.25s var(--ease);
+    }
+
+    .links-youtube-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(20, 21, 26, 0.12);
+    }
+
+    .links-youtube-launch:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .links-youtube,
+      .links-youtube-backdrop {
+        transition: none;
+      }
+    }
+
+    body.links-youtube-open {
+      overflow: hidden;
+    }
+
     .link-btn {
       display: flex;
       align-items: center;
@@ -933,6 +1101,49 @@
         </span>
       </a>
     </section>
+
+    <button type="button" class="links-youtube-launch" id="linksYoutubeLaunch">
+      Latest on YouTube
+    </button>
+
+    <div class="links-youtube-backdrop" id="linksYoutubeBackdrop" hidden></div>
+    <aside
+      class="links-youtube"
+      id="linksYoutube"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="links-youtube-heading"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="links-youtube-toolbar">
+        <div>
+          <h2 id="links-youtube-heading">Latest on YouTube</h2>
+          <p class="links-youtube-title" id="linksYoutubeTitle">Loading…</p>
+        </div>
+        <button type="button" class="links-youtube-close" id="linksYoutubeClose" aria-label="Close YouTube player">
+          ×
+        </button>
+      </div>
+      <div class="links-youtube-frame-wrap">
+        <iframe
+          id="linksYoutubeFrame"
+          title="Latest YouTube video from Cristian Paez Jr"
+          src="about:blank"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+      <a
+        class="links-youtube-open"
+        id="linksYoutubeOpen"
+        href="https://www.youtube.com/@iamchrispaezjr"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Open on YouTube →</a>
+    </aside>
 
     <p class="links-foot"><a href="https://www.iamchrispaezjr.com">Cristian Paez Jr &amp; Co.</a></p>
   </main>
@@ -1307,6 +1518,120 @@
       }
 
       playSting();
+    })();
+  </script>
+  <script>
+    /* YouTube drawer: loads ../youtube-latest.json; opens from BLOOP alarm or launch button. */
+    (function () {
+      var UPLOADS_EMBED =
+        "https://www.youtube.com/embed?listType=playlist&list=UUWYtgKKmHAml5dol4--5GJQ";
+      var drawer = document.getElementById("linksYoutube");
+      var backdrop = document.getElementById("linksYoutubeBackdrop");
+      var titleEl = document.getElementById("linksYoutubeTitle");
+      var frame = document.getElementById("linksYoutubeFrame");
+      var openLink = document.getElementById("linksYoutubeOpen");
+      var closeBtn = document.getElementById("linksYoutubeClose");
+      var launchBtn = document.getElementById("linksYoutubeLaunch");
+      if (!drawer || !frame || !titleEl) return;
+
+      var embedSrc = UPLOADS_EMBED;
+      var openTimer = 0;
+
+      function apply(data) {
+        window.CPJR_YOUTUBE_LATEST = data || null;
+        var videoId = data && data.videoId ? String(data.videoId) : "";
+        var title = data && data.title ? String(data.title) : "";
+        var url =
+          data && data.url
+            ? String(data.url)
+            : videoId
+              ? "https://www.youtube.com/watch?v=" + videoId
+              : "https://www.youtube.com/@iamchrispaezjr";
+
+        if (videoId) {
+          embedSrc = "https://www.youtube.com/embed/" + encodeURIComponent(videoId);
+          titleEl.textContent = title || "Latest upload";
+        } else {
+          embedSrc = UPLOADS_EMBED;
+          titleEl.textContent = "Channel uploads";
+        }
+        if (openLink) openLink.href = url;
+        if (drawer.classList.contains("is-open")) {
+          frame.src = embedSrc;
+        }
+        document.dispatchEvent(
+          new CustomEvent("cpjr-youtube-latest", { detail: data || null })
+        );
+      }
+
+      function openDrawer() {
+        drawer.hidden = false;
+        if (backdrop) backdrop.hidden = false;
+        drawer.setAttribute("aria-hidden", "false");
+        document.body.classList.add("links-youtube-open");
+        if (!frame.src || frame.src === "about:blank" || frame.getAttribute("src") === "about:blank") {
+          frame.src = embedSrc;
+        } else if (frame.src.indexOf(embedSrc) === -1 && embedSrc) {
+          frame.src = embedSrc;
+        }
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () {
+            if (backdrop) backdrop.classList.add("is-on");
+            drawer.classList.add("is-open");
+          });
+        });
+        window.clearTimeout(openTimer);
+        openTimer = window.setTimeout(function () {
+          if (closeBtn) closeBtn.focus();
+        }, 420);
+      }
+
+      function closeDrawer() {
+        drawer.classList.remove("is-open");
+        if (backdrop) backdrop.classList.remove("is-on");
+        document.body.classList.remove("links-youtube-open");
+        drawer.setAttribute("aria-hidden", "true");
+        window.setTimeout(function () {
+          if (drawer.classList.contains("is-open")) return;
+          frame.src = "about:blank";
+          drawer.hidden = true;
+          if (backdrop) backdrop.hidden = true;
+        }, 420);
+      }
+
+      window.CPJR_openYoutubeDrawer = openDrawer;
+      window.CPJR_closeYoutubeDrawer = closeDrawer;
+
+      if (launchBtn) {
+        launchBtn.addEventListener("click", function () {
+          openDrawer();
+        });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+          closeDrawer();
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener("click", function () {
+          closeDrawer();
+        });
+      }
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && drawer.classList.contains("is-open")) {
+          closeDrawer();
+        }
+      });
+
+      fetch("../youtube-latest.json", { cache: "no-store" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("youtube-latest fetch failed");
+          return res.json();
+        })
+        .then(apply)
+        .catch(function () {
+          apply(null);
+        });
     })();
   </script>
   <link rel="stylesheet" href="../site-bot.css" />

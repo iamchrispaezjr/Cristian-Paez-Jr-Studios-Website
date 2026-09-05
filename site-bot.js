@@ -411,9 +411,6 @@
     "  </form>" +
     "</div>" +
     '<div class="cpjr-bot-dock">' +
-    (isLinksPage
-      ? '<button type="button" class="cpjr-bot-yt-trigger" id="cpjrBotYtTrigger" aria-label="Open latest YouTube video. Keyboard shortcut: Y" title="Latest YouTube (Y)">Y</button>'
-      : "") +
     '<aside class="cpjr-bot-bubble" id="cpjrBotBubble" role="complementary" aria-label="BLOOP messages" hidden>' +
     '  <button type="button" class="cpjr-bot-bubble-close" id="cpjrBotBubbleClose" aria-label="Dismiss messages">×</button>' +
     '  <div class="cpjr-bot-holo-msg" id="cpjrBotHoloGreet" data-holo-msg>' +
@@ -451,7 +448,6 @@
   var ytClose = document.getElementById("cpjrBotYtClose");
   var ytTitle = document.getElementById("cpjrBotYtTitle");
   var ytFrame = document.getElementById("cpjrBotYtFrame");
-  var ytTrigger = document.getElementById("cpjrBotYtTrigger");
   var ytEmbedSrc = "";
   var holoMsgs = wrap.querySelectorAll("[data-holo-msg]");
   var suggestions = document.getElementById("cpjrBotSuggestions");
@@ -468,17 +464,10 @@
     holoTimers = [];
   }
 
-  function setYtTriggerActive(active) {
-    if (!ytTrigger) return;
-    ytTrigger.classList.toggle("is-active", !!active);
-    ytTrigger.setAttribute("aria-pressed", active ? "true" : "false");
-  }
-
   function closeYoutubeHolo() {
     if (!ytPanel || !ytFrame) return;
     ytPanel.classList.remove("is-open");
     ytPanel.setAttribute("aria-hidden", "true");
-    setYtTriggerActive(false);
     window.setTimeout(function () {
       if (ytPanel.classList.contains("is-open")) return;
       ytFrame.src = "about:blank";
@@ -502,7 +491,6 @@
     ytPanel.hidden = false;
     ytPanel.setAttribute("aria-hidden", "false");
     ytFrame.src = ytEmbedSrc;
-    setYtTriggerActive(true);
     window.requestAnimationFrame(function () {
       window.requestAnimationFrame(function () {
         ytPanel.classList.add("is-open");
@@ -663,15 +651,6 @@
       event.preventDefault();
       event.stopPropagation();
       closeYoutubeHolo();
-    });
-  }
-
-  if (ytTrigger) {
-    ytTrigger.setAttribute("aria-pressed", "false");
-    ytTrigger.addEventListener("click", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      toggleYoutubeHolo();
     });
   }
 

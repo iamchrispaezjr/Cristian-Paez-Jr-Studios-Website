@@ -794,53 +794,6 @@ html.site-night .cpjr-bot-hud {
   border: 0;
 }
 
-.cpjr-bot-yt-trigger {
-  pointer-events: auto;
-  position: absolute;
-  right: 0.25rem;
-  bottom: calc(100% + 0.35rem);
-  z-index: 2;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid rgba(122, 215, 255, 0.5);
-  border-radius: 50%;
-  background:
-    linear-gradient(135deg, rgba(20, 50, 72, 0.7) 0%, rgba(8, 22, 36, 0.88) 100%);
-  color: var(--bot-cyan);
-  font-family: inherit;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow:
-    0 0 14px rgba(122, 215, 255, 0.28),
-    inset 0 0 12px rgba(122, 215, 255, 0.1);
-  backdrop-filter: blur(10px);
-  text-shadow: 0 0 8px rgba(122, 215, 255, 0.55);
-  transition:
-    transform 0.25s var(--bot-ease),
-    box-shadow 0.25s var(--bot-ease),
-    background 0.25s var(--bot-ease);
-}
-
-.cpjr-bot-yt-trigger:hover {
-  transform: translateY(-1px) scale(1.06);
-  box-shadow:
-    0 0 18px rgba(122, 215, 255, 0.45),
-    inset 0 0 14px rgba(122, 215, 255, 0.14);
-}
-
-.cpjr-bot-yt-trigger:focus-visible {
-  outline: 2px solid var(--bot-cyan);
-  outline-offset: 2px;
-}
-
-.cpjr-bot-yt-trigger.is-active {
-  background: rgba(122, 215, 255, 0.22);
-  color: #fff;
-}
-
 @keyframes cpjr-bot-holo-scan {
   0% {
     left: -45%;

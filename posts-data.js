@@ -9,7 +9,8 @@
    1. Add the post folder under /posts/your-slug/
    2. Add an entry at the TOP of CPJR_POSTS below
    3. Mirror a static card in updates/index.html #postList (for no-JS / crawlers)
-   Homepage (3 latest) and Updates both read from this file. */
+   Homepage latest posts, Updates, and the full-menu Updates carousel + New badge
+   all read from this file. */
 
 window.CPJR_POSTS = [
   {

@@ -252,14 +252,7 @@
   }
 
   function focusYoutubeSection() {
-    if (typeof window.CPJR_openYoutubeDrawer === "function") {
-      window.CPJR_openYoutubeDrawer();
-      return;
-    }
-    var section = document.getElementById("linksYoutube");
-    if (!section) return;
-    section.hidden = false;
-    section.classList.add("is-open");
+    openYoutubeHolo();
   }
 
   function playAnnounceSound() {
@@ -389,6 +382,18 @@
   var wrap = document.createElement("div");
   wrap.className = "cpjr-bot";
   wrap.innerHTML =
+    (isLinksPage
+      ? '<aside class="cpjr-bot-yt" id="cpjrBotYt" role="dialog" aria-label="Latest YouTube video" aria-hidden="true" hidden>' +
+        '  <div class="cpjr-bot-yt-toolbar">' +
+        '    <span class="cpjr-bot-holo-label">YouTube alert</span>' +
+        '    <button type="button" class="cpjr-bot-yt-close" id="cpjrBotYtClose" aria-label="Close YouTube player">×</button>' +
+        "  </div>" +
+        '  <p class="cpjr-bot-yt-title" id="cpjrBotYtTitle"></p>' +
+        '  <div class="cpjr-bot-yt-frame">' +
+        '    <iframe id="cpjrBotYtFrame" title="Latest YouTube video from Cristian Paez Jr" src="about:blank" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>' +
+        "  </div>" +
+        "</aside>"
+      : "") +
     '<div class="cpjr-bot-panel" id="cpjrBotPanel" hidden>' +
     '  <div class="cpjr-bot-panel-head">' +
     "    <div>" +
@@ -406,6 +411,9 @@
     "  </form>" +
     "</div>" +
     '<div class="cpjr-bot-dock">' +
+    (isLinksPage
+      ? '<button type="button" class="cpjr-bot-yt-trigger" id="cpjrBotYtTrigger" aria-label="Open latest YouTube video. Keyboard shortcut: Y" title="Latest YouTube (Y)">Y</button>'
+      : "") +
     '<aside class="cpjr-bot-bubble" id="cpjrBotBubble" role="complementary" aria-label="BLOOP messages" hidden>' +
     '  <button type="button" class="cpjr-bot-bubble-close" id="cpjrBotBubbleClose" aria-label="Dismiss messages">×</button>' +
     '  <div class="cpjr-bot-holo-msg" id="cpjrBotHoloGreet" data-holo-msg>' +
@@ -439,6 +447,12 @@
   var bubbleTitle = document.getElementById("cpjrBotBubbleTitle");
   var bubbleDesc = document.getElementById("cpjrBotBubbleDesc");
   var bubbleCta = document.getElementById("cpjrBotBubbleCta");
+  var ytPanel = document.getElementById("cpjrBotYt");
+  var ytClose = document.getElementById("cpjrBotYtClose");
+  var ytTitle = document.getElementById("cpjrBotYtTitle");
+  var ytFrame = document.getElementById("cpjrBotYtFrame");
+  var ytTrigger = document.getElementById("cpjrBotYtTrigger");
+  var ytEmbedSrc = "";
   var holoMsgs = wrap.querySelectorAll("[data-holo-msg]");
   var suggestions = document.getElementById("cpjrBotSuggestions");
   var greeted = false;
@@ -452,6 +466,60 @@
       window.clearTimeout(id);
     });
     holoTimers = [];
+  }
+
+  function setYtTriggerActive(active) {
+    if (!ytTrigger) return;
+    ytTrigger.classList.toggle("is-active", !!active);
+    ytTrigger.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+
+  function closeYoutubeHolo() {
+    if (!ytPanel || !ytFrame) return;
+    ytPanel.classList.remove("is-open");
+    ytPanel.setAttribute("aria-hidden", "true");
+    setYtTriggerActive(false);
+    window.setTimeout(function () {
+      if (ytPanel.classList.contains("is-open")) return;
+      ytFrame.src = "about:blank";
+      ytPanel.hidden = true;
+    }, 420);
+  }
+
+  function openYoutubeHolo() {
+    if (!isLinksPage || !ytPanel || !ytFrame) return;
+    var data = window.CPJR_YOUTUBE_LATEST || null;
+    var videoId = data && data.videoId ? String(data.videoId) : pendingYtId || "";
+    var title = data && data.title ? String(data.title) : "";
+    if (videoId) {
+      ytEmbedSrc = "https://www.youtube.com/embed/" + encodeURIComponent(videoId);
+      if (ytTitle) ytTitle.textContent = title || "Latest upload";
+    } else {
+      ytEmbedSrc =
+        "https://www.youtube.com/embed?listType=playlist&list=UUWYtgKKmHAml5dol4--5GJQ";
+      if (ytTitle) ytTitle.textContent = "Channel uploads";
+    }
+    ytPanel.hidden = false;
+    ytPanel.setAttribute("aria-hidden", "false");
+    ytFrame.src = ytEmbedSrc;
+    setYtTriggerActive(true);
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        ytPanel.classList.add("is-open");
+      });
+    });
+    window.setTimeout(function () {
+      if (ytClose) ytClose.focus();
+    }, 420);
+  }
+
+  function toggleYoutubeHolo() {
+    if (!isLinksPage || !ytPanel) return;
+    if (ytPanel.classList.contains("is-open")) {
+      closeYoutubeHolo();
+    } else {
+      openYoutubeHolo();
+    }
   }
 
   function hideAnnounceBubble(markDismissed) {
@@ -503,10 +571,9 @@
         "🚨 New YouTube video alert — fresh upload on the channel.";
     }
     bubbleTitle.textContent = data.title || "New YouTube video";
-    bubbleDesc.textContent =
-      "Watch it in a slide-out player on this page.";
+    bubbleDesc.textContent = "Watch it in BLOOP’s holographic player.";
     bubbleCta.textContent = "Watch now →";
-    bubbleCta.href = "#linksYoutube";
+    bubbleCta.href = "#cpjrBotYt";
     bubbleCta.removeAttribute("target");
     bubbleCta.removeAttribute("rel");
     var label = wrap.querySelector(".cpjr-bot-holo-label");
@@ -589,6 +656,44 @@
     event.preventDefault();
     event.stopPropagation();
     hideAnnounceBubble();
+  });
+
+  if (ytClose) {
+    ytClose.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeYoutubeHolo();
+    });
+  }
+
+  if (ytTrigger) {
+    ytTrigger.setAttribute("aria-pressed", "false");
+    ytTrigger.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleYoutubeHolo();
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && ytPanel && ytPanel.classList.contains("is-open")) {
+      closeYoutubeHolo();
+      return;
+    }
+    if (!isLinksPage) return;
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+    var key = event.key;
+    if (key !== "y" && key !== "Y") return;
+    var target = event.target;
+    if (
+      target &&
+      (target.isContentEditable ||
+        /^(INPUT|TEXTAREA|SELECT)$/i.test(target.tagName || ""))
+    ) {
+      return;
+    }
+    event.preventDefault();
+    toggleYoutubeHolo();
   });
 
   bubbleCta.addEventListener("click", function (event) {

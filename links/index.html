@@ -665,6 +665,17 @@
       color: var(--ink-muted);
     }
 
+    .link-btn.is-soon {
+      cursor: default;
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    body[data-site-mode="tech"] [data-links-mode="creative"],
+    body[data-site-mode="creative"] [data-links-mode="tech"] {
+      display: none;
+    }
+
     .links-foot {
       margin-top: 2.25rem;
       text-align: center;
@@ -759,7 +770,7 @@
     }
   </style>
 </head>
-<body>
+<body data-site-mode="tech">
   <div class="links-bg" aria-hidden="true">
     <span class="links-blob links-blob-a"></span>
     <span class="links-blob links-blob-b"></span>
@@ -885,7 +896,7 @@
       </a>
     </section>
 
-    <section class="link-group" aria-labelledby="links-web">
+    <section class="link-group" data-links-mode="tech" aria-labelledby="links-web">
       <h2 id="links-web">Web Projects</h2>
       <a
         class="link-btn"
@@ -932,6 +943,58 @@
           <small>diseaseimagined.com · Disease Visualizer</small>
         </span>
       </a>
+    </section>
+
+    <section class="link-group" data-links-mode="creative" aria-labelledby="links-creative">
+      <h2 id="links-creative">Creative</h2>
+      <a
+        class="link-btn"
+        href="https://www.youtube.com/@iamchrispaezjr"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="YouTube"
+      >
+        <span class="link-btn-icon" aria-hidden="true">
+          <img src="../youtube-slide-screenshot.jpg" alt="" width="40" height="40" />
+        </span>
+        <span class="link-btn-text">
+          <strong>YouTube</strong>
+          <small>@iamchrispaezjr · Films &amp; shorts</small>
+        </span>
+      </a>
+      <a
+        class="link-btn"
+        href="https://www.webtoons.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WEBTOON"
+      >
+        <span class="link-btn-icon" aria-hidden="true">
+          <img src="../icons/webtoon.png?v=1" alt="" width="40" height="40" />
+        </span>
+        <span class="link-btn-text">
+          <strong>WEBTOON</strong>
+          <small>Comics · more coming soon</small>
+        </span>
+      </a>
+      <div class="link-btn is-soon" aria-label="TBD Book, coming soon">
+        <span class="link-btn-icon" aria-hidden="true">
+          <img src="../icons/apple-books.png?v=1" alt="" width="40" height="40" />
+        </span>
+        <span class="link-btn-text">
+          <strong>TBD Book</strong>
+          <small>Coming soon</small>
+        </span>
+      </div>
+      <div class="link-btn is-soon" aria-label="Short Film, coming soon">
+        <span class="link-btn-icon" aria-hidden="true">
+          <img src="../youtube-slide-screenshot.jpg" alt="" width="40" height="40" />
+        </span>
+        <span class="link-btn-text">
+          <strong>Short Film</strong>
+          <small>Coming soon</small>
+        </span>
+      </div>
     </section>
 
     <p class="links-foot"><a href="https://www.iamchrispaezjr.com">Cristian Paez Jr &amp; Co.</a></p>

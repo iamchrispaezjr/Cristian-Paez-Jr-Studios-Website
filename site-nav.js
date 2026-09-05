@@ -1229,18 +1229,29 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
         if (id === "home") refreshHomeProjectRows();
       }
 
-      function showMode(id) {
-        body.setAttribute("data-active-mode", id);
+      function showMode(id, opts) {
+        var next = id === "tech" ? "tech" : "creative";
+        body.setAttribute("data-active-mode", next);
         modes.forEach(function (btn) {
-          var on = btn.getAttribute("data-menu-mode") === id;
+          var on = btn.getAttribute("data-menu-mode") === next;
           btn.classList.toggle("is-selected", on);
           btn.setAttribute("aria-pressed", on ? "true" : "false");
         });
 
+        try {
+          localStorage.setItem("cpjr-site-mode", next);
+        } catch (err) {}
+
+        if (!opts || opts.emit !== false) {
+          document.dispatchEvent(
+            new CustomEvent("cpjr-site-mode", { detail: { mode: next } })
+          );
+        }
+
         var selected = document.querySelector(".full-menu-cats [data-menu-cat].is-selected");
         if (!selected) return;
         var catMode = selected.getAttribute("data-menu-cat-mode");
-        if (catMode && catMode !== id) {
+        if (catMode && catMode !== next) {
           showCat("home");
         } else if (selected.getAttribute("data-menu-cat") === "home") {
           refreshHomeProjectRows();
@@ -1266,11 +1277,29 @@ var FULL_MENU_HTML = "<!-- Full-page menu modal -->\n  <div\n    class=\"full-me
 
       refreshHomeProjectRows();
 
+      var savedMode = "creative";
+      try {
+        var stored = localStorage.getItem("cpjr-site-mode");
+        if (stored === "creative" || stored === "tech") savedMode = stored;
+      } catch (err) {}
+      showMode(savedMode, { emit: false });
+
+      document.addEventListener("cpjr-site-mode", function (event) {
+        var mode = event && event.detail && event.detail.mode;
+        if (!mode || mode === body.getAttribute("data-active-mode")) return;
+        showMode(mode, { emit: false });
+      });
+
       if (modal) {
         var observer = new MutationObserver(function () {
           if (modal.classList.contains("is-open")) {
             showCat("home");
-            showMode("creative");
+            var modeNow = "creative";
+            try {
+              var value = localStorage.getItem("cpjr-site-mode");
+              if (value === "creative" || value === "tech") modeNow = value;
+            } catch (err) {}
+            showMode(modeNow, { emit: false });
           }
         });
         observer.observe(modal, { attributes: true, attributeFilter: ["class"] });

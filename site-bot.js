@@ -21,10 +21,48 @@
   var ANNOUNCE_DELAY_MS = 2200;
   var ANNOUNCE_RESHOW_MS = 5 * 60 * 60 * 1000;
   var SOUND_COOLDOWN_MS = 10 * 60 * 60 * 1000;
+  var SITE_MODE_KEY = "cpjr-site-mode";
   var announceMode = "project";
   var pendingYtId = "";
   var ytAnnounceQueued = false;
   var ytDismissedThisVisit = false;
+
+  function readSiteMode() {
+    try {
+      var mode = localStorage.getItem(SITE_MODE_KEY);
+      if (mode === "creative" || mode === "tech") return mode;
+    } catch (err) {}
+    return "tech";
+  }
+
+  function writeSiteMode(mode) {
+    if (mode !== "creative" && mode !== "tech") return;
+    try {
+      localStorage.setItem(SITE_MODE_KEY, mode);
+    } catch (err) {}
+  }
+
+  function applySiteMode(mode, opts) {
+    var next = mode === "creative" ? "creative" : "tech";
+    document.body.setAttribute("data-site-mode", next);
+    writeSiteMode(next);
+    var buttons = document.querySelectorAll("[data-cpjr-mode]");
+    buttons.forEach(function (btn) {
+      var on = btn.getAttribute("data-cpjr-mode") === next;
+      btn.classList.toggle("is-selected", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    if (!opts || opts.emit !== false) {
+      document.dispatchEvent(
+        new CustomEvent("cpjr-site-mode", { detail: { mode: next } })
+      );
+    }
+  }
+
+  window.CPJR_getSiteMode = readSiteMode;
+  window.CPJR_setSiteMode = function (mode) {
+    applySiteMode(mode);
+  };
 
   var PROJECTS = [
     {
@@ -388,6 +426,12 @@
     "    </div>" +
     '    <button type="button" class="cpjr-bot-close" id="cpjrBotClose" aria-label="Close chat">×</button>' +
     "  </div>" +
+    (isLinksPage
+      ? '<div class="cpjr-bot-mode" id="cpjrBotMode" role="group" aria-label="Creative or Tech">' +
+        '  <button type="button" data-cpjr-mode="creative" aria-pressed="false">Creative</button>' +
+        '  <button type="button" data-cpjr-mode="tech" class="is-selected" aria-pressed="true">Tech</button>' +
+        "</div>"
+      : "") +
     '  <div class="cpjr-bot-log" id="cpjrBotLog" aria-live="polite"></div>' +
     '  <div class="cpjr-bot-suggestions" id="cpjrBotSuggestions"></div>' +
     '  <form class="cpjr-bot-form" id="cpjrBotForm">' +
@@ -435,6 +479,7 @@
   var ytTitle = document.getElementById("cpjrBotYtTitle");
   var ytFrame = document.getElementById("cpjrBotYtFrame");
   var ytEmbedSrc = "";
+  var modeGroup = document.getElementById("cpjrBotMode");
   var holoMsgs = wrap.querySelectorAll("[data-holo-msg]");
   var suggestions = document.getElementById("cpjrBotSuggestions");
   var greeted = false;
@@ -442,6 +487,21 @@
   var holoTimers = [];
 
   fillProjectAnnounce();
+  applySiteMode(readSiteMode(), { emit: false });
+
+  if (modeGroup) {
+    modeGroup.querySelectorAll("[data-cpjr-mode]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applySiteMode(btn.getAttribute("data-cpjr-mode"));
+      });
+    });
+  }
+
+  document.addEventListener("cpjr-site-mode", function (event) {
+    var mode = event && event.detail && event.detail.mode;
+    if (!mode || mode === document.body.getAttribute("data-site-mode")) return;
+    applySiteMode(mode, { emit: false });
+  });
 
   function clearHoloTimers() {
     holoTimers.forEach(function (id) {

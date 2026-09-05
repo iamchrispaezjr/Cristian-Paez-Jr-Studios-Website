@@ -145,6 +145,49 @@
   color: rgba(215, 244, 255, 0.72);
 }
 
+.cpjr-bot-mode {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.25rem;
+  margin: 0.55rem 0.7rem 0;
+  padding: 0.22rem;
+  border: 1px solid rgba(122, 215, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(8, 18, 30, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.cpjr-bot-mode[hidden] {
+  display: none !important;
+}
+
+.cpjr-bot-mode button {
+  flex: 1 1 0;
+  min-height: 1.7rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(215, 244, 255, 0.72);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cpjr-bot-mode button.is-selected {
+  background: rgba(122, 215, 255, 0.22);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(122, 215, 255, 0.28);
+}
+
+.cpjr-bot-mode button:focus-visible {
+  outline: 2px solid var(--bot-cyan);
+  outline-offset: 1px;
+}
+
 .cpjr-bot-close {
   width: 2rem;
   height: 2rem;

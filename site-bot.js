@@ -27,7 +27,12 @@
   var ytAnnounceQueued = false;
   var ytDismissedThisVisit = false;
 
+  function isCreativeLocked() {
+    return document.body.getAttribute("data-creative-locked") === "true";
+  }
+
   function readSiteMode() {
+    if (isCreativeLocked()) return "tech";
     try {
       var mode = localStorage.getItem(SITE_MODE_KEY);
       if (mode === "creative" || mode === "tech") return mode;
@@ -37,6 +42,7 @@
 
   function writeSiteMode(mode) {
     if (mode !== "creative" && mode !== "tech") return;
+    if (isCreativeLocked() && mode === "creative") return;
     try {
       localStorage.setItem(SITE_MODE_KEY, mode);
     } catch (err) {}
@@ -44,6 +50,7 @@
 
   function applySiteMode(mode, opts) {
     var next = mode === "creative" ? "creative" : "tech";
+    if (isCreativeLocked()) next = "tech";
     document.body.setAttribute("data-site-mode", next);
     writeSiteMode(next);
     var buttons = document.querySelectorAll("[data-cpjr-mode]");
@@ -428,7 +435,14 @@
     "  </div>" +
     (isLinksPage
       ? '<div class="cpjr-bot-mode" id="cpjrBotMode" role="group" aria-label="Creative or Tech">' +
-        '  <button type="button" data-cpjr-mode="creative" aria-pressed="false">Creative</button>' +
+        (isCreativeLocked()
+          ? '  <button type="button" data-cpjr-mode="creative" class="is-locked" aria-pressed="false" aria-disabled="true" disabled title="Creative coming soon">' +
+            '    <svg class="cpjr-bot-mode-lock" viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" focusable="false">' +
+            '      <path fill="currentColor" d="M8 1.5A2.75 2.75 0 0 0 5.25 4.25V6H4.5A1.5 1.5 0 0 0 3 7.5v5A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 6h-.75V4.25A2.75 2.75 0 0 0 8 1.5zm-1.25 2.75A1.25 1.25 0 0 1 8 3a1.25 1.25 0 0 1 1.25 1.25V6h-2.5V4.25z"/>' +
+            "    </svg>" +
+            "    Creative" +
+            "  </button>"
+          : '  <button type="button" data-cpjr-mode="creative" aria-pressed="false">Creative</button>') +
         '  <button type="button" data-cpjr-mode="tech" class="is-selected" aria-pressed="true">Tech</button>' +
         "</div>"
       : "") +
@@ -492,6 +506,13 @@
   if (modeGroup) {
     modeGroup.querySelectorAll("[data-cpjr-mode]").forEach(function (btn) {
       btn.addEventListener("click", function () {
+        if (btn.disabled || btn.classList.contains("is-locked")) return;
+        if (
+          btn.getAttribute("data-cpjr-mode") === "creative" &&
+          isCreativeLocked()
+        ) {
+          return;
+        }
         applySiteMode(btn.getAttribute("data-cpjr-mode"));
       });
     });
@@ -500,6 +521,7 @@
   document.addEventListener("cpjr-site-mode", function (event) {
     var mode = event && event.detail && event.detail.mode;
     if (!mode || mode === document.body.getAttribute("data-site-mode")) return;
+    if (isCreativeLocked() && mode === "creative") return;
     applySiteMode(mode, { emit: false });
   });
 

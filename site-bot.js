@@ -21,10 +21,10 @@
   var ANNOUNCE_DELAY_MS = 2200;
   var ANNOUNCE_RESHOW_MS = 5 * 60 * 60 * 1000;
   var SOUND_COOLDOWN_MS = 10 * 60 * 60 * 1000;
-  var YT_SEEN_KEY = "cpjr-yt-seen-id";
   var announceMode = "project";
   var pendingYtId = "";
   var ytAnnounceQueued = false;
+  var ytDismissedThisVisit = false;
 
   var PROJECTS = [
     {
@@ -235,20 +235,6 @@
     var state = readAnnounceState();
     state.soundAt = Date.now();
     writeAnnounceState(state);
-  }
-
-  function getYtSeenId() {
-    try {
-      return localStorage.getItem(YT_SEEN_KEY) || "";
-    } catch (err) {
-      return "";
-    }
-  }
-
-  function setYtSeenId(videoId) {
-    try {
-      localStorage.setItem(YT_SEEN_KEY, String(videoId || ""));
-    } catch (err) {}
   }
 
   function focusYoutubeSection() {
@@ -513,8 +499,8 @@
   function hideAnnounceBubble(markDismissed) {
     if (!bubble.classList.contains("is-on") && bubble.hidden) return;
     if (markDismissed !== false) {
-      if (announceMode === "youtube" && pendingYtId) {
-        setYtSeenId(pendingYtId);
+      if (announceMode === "youtube") {
+        ytDismissedThisVisit = true;
       } else {
         markAnnounceDismissed();
       }
@@ -573,7 +559,7 @@
     if (wrap.classList.contains("is-open")) return;
     if (announceMode === "project" && isAnnounceHidden()) return;
     if (announceMode === "youtube") {
-      if (!pendingYtId || getYtSeenId() === pendingYtId) return;
+      if (!pendingYtId || ytDismissedThisVisit) return;
     }
     announceShown = true;
     clearHoloTimers();
@@ -601,7 +587,7 @@
 
   function maybeAnnounceYoutube(data) {
     if (!isLinksPage || !data || !data.videoId) return;
-    if (getYtSeenId() === data.videoId) return;
+    if (ytDismissedThisVisit) return;
     if (announceShown || ytAnnounceQueued || wrap.classList.contains("is-open")) return;
     ytAnnounceQueued = true;
     fillYoutubeAnnounce(data);

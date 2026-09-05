@@ -1,5 +1,6 @@
 /* Central blog post list — newest first.
    Published dates from each post’s <time data-published>:
+   - i-got-lazy-with-the-soundboard: 2026-09-04
    - building-a-command-center-menu: 2026-08-30
    - leveling-up-my-web-setup: 2026-08-16
    - why-i-created-sounddrop: 2026-08-14
@@ -11,6 +12,14 @@
    Homepage (3 latest) and Updates both read from this file. */
 
 window.CPJR_POSTS = [
+  {
+    slug: "i-got-lazy-with-the-soundboard",
+    title: "I Got Lazy With The Soundboard lol (Kind Of)",
+    date: "2026-09-04",
+    image: "noisegoblin-screenshot.jpg",
+    excerpt:
+      "How Noisegoblin went from a meme soundboard idea to a DIY remote — your sounds, your device, no lawsuit roulette."
+  },
   {
     slug: "building-a-command-center-menu",
     title: "Building a Command Center Menu",
